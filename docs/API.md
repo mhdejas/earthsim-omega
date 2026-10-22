@@ -25,3 +25,17 @@ Example:
 curl -s localhost:8000/api/layers/hand/value?lon=75.80&lat=11.25
 curl -s -X POST localhost:8000/api/jobs -H 'content-type: application/json' -d '{"stage":"flood_obs"}'
 ```
+
+## Experimental forecast
+
+These endpoints are read-only. Cycles are started by `earthsim forecast run` or `scripts/forecast_scheduler.py`, not over HTTP.
+
+| Method | Path | Returns |
+|---|---|---|
+| GET | `/api/forecast/latest` | `alert.json` of the latest *successful* cycle (404 before the first one) |
+| GET | `/api/forecast/runs` | Up to 50 cycles, newest first: `run_id`, `status` (OK/FAILED), level, wall time, error |
+| GET | `/api/forecast/{run_id}/outlook.png` | Outlook figure of one cycle (run ids are validated: letters, digits, `_`, `-`) |
+
+`alert.json` includes `disclaimer` (always present), `issued_ist`, `overall_level_next_72h` (GREEN / YELLOW / ORANGE / RED) and `rain_outlook.days[]` (deterministic mm, ensemble p10/p50/p90, probabilities of IMD heavy, very heavy and extremely heavy rain, and the level with its reasons). It also includes `flood_scenarios.members` (wet km², OSM buildings, schools and hospitals, and major-road km at +24/+48/+72 h for four rain scenarios) and `verified_skill` (held-out trigger scores).
+
+CLI equivalents: `earthsim forecast run [--no-hydraulics] [--workers N]`, `earthsim forecast latest` and `earthsim forecast verify-triggers`.

@@ -49,3 +49,25 @@
 See `docs/METHODOLOGY.md` §6–7 and `docs/REPORT.md` for the results and the evaluation against the
 2019-08-10 SAR extent. The hindcast is a simulation driven by uniform ERA5 rainfall with an assumed runoff
 coefficient. It has no infiltration, channel bathymetry, tides or dams, and it has not been calibrated.
+
+## Calibrated rain-on-grid flood model (used by the forecast cycle)
+
+- **What it is.** The same 240 m local-inertial solver, with runoff C 0.9, land Manning's n 0.16 and a 2.0 m depth threshold. These were chosen by a rule pre-registered before any run, scoring 12 runs against the Sentinel-1 flood map of 14 Aug 2018 (`docs/CALIBRATION.md`).
+- **Held-out skill.**
+  - 10 Aug 2019: CSI 0.019 (95% block bootstrap 0.001–0.036), hit rate 0.87, false-alarm ratio 0.98. That compares with 0.014 for the default settings, 0.015 for HAND ≤ 0.5 m and 0.023 for the KSDMA map.
+  - 9 Aug 2018: CSI 0.003, the worst of the four methods.
+- **Known weaknesses.**
+  - The response surface is flat (equifinal), and all three chosen values sit at the grid edge.
+  - The choice is unstable across spatial halves.
+  - The 2.0 m threshold suits a large peak flood but misses smaller ones.
+  - It still has uniform rain, no infiltration, no channel bathymetry, and no tides or dams.
+- **Intended use.** Showing *where* water is likely to pond and *what is exposed* under a given rain scenario. It is not a depth forecast, and it does not set the alert level.
+
+## Rain trigger (sets the experimental alert level)
+
+- **What it is.** The day-to-08:30 IST district-mean rain from the ECMWF IFS 0.25° deterministic forecast and the 51-member ensemble (Open-Meteo), compared against IMD intensity categories and a 50 mm deterministic trigger.
+- **Verified skill.** Checked against ERA5 on 366 June–September days in 2024–2026, with 15 heavy-rain days. In leave-one-monsoon-out validation at 1 day ahead: hit rate 0.60 (9 of 15), false-alarm ratio 0.67, CSI 0.27.
+- **Known weaknesses.**
+  - The ensemble-based ORANGE and RED rules are unverified, because no past ensembles are archived.
+  - Gridded rain smooths local cloudbursts. On 30 Jul 2024 (Vilangad landslides) the 1-day-ahead forecast was 29 mm against 69 mm in ERA5.
+  - Fifteen events is a small sample.
