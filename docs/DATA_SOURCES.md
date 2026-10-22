@@ -15,7 +15,7 @@ parameters, software versions and the git state.
 | `era5_rain_kozhikode_2018_2019` | Hourly precipitation, Aug 2018 and Aug 2019, 5 points that resolve to 2 ERA5 cells | [Open-Meteo archive API](https://archive-api.open-meteo.com/v1/archive) (`models=era5`) | reanalysis (model) | ERA5 Copernicus licence (Hersbach et al. 2023); Open-Meteo CC BY 4.0 |
 | `osm_kozhikode` | 3565 road ways, 3520 facilities, 240,990 building centroids | Overpass API | volunteered observation | ODbL 1.0; © OpenStreetMap contributors |
 | `ksdma_flood_hazard` | 10/25/50-yr flood hazard rasters (about 90 m, units undocumented) | Local copy from earlier Kozhikode work (KSDMA) | **external model** | Terms not stated. Internal research use only; do not redistribute |
-| `landsat_ndvi_1990_2025` | 12 three-year Landsat NDVI composites | Earlier project `/workspace/kozhikode_longterm` | observation-derived | USGS Landsat, public domain |
+| `landsat_ndvi_1990_2025` | 12 three-year Landsat NDVI composites | Earlier project `kozhikode_longterm` (local folder, see `EARTHSIM_LOCAL_DATA`) | observation-derived | USGS Landsat, public domain |
 
 External reference values used for validation:
 
