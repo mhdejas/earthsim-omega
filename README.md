@@ -3,7 +3,9 @@
 EARTHSIM-Ω is a research prototype that builds a working, evidence-backed geospatial "digital twin" of
 Kozhikode district, Kerala. It covers terrain and hydrology, Sentinel-2 indices, land cover, Sentinel-1
 flood observation, a baseline flood-susceptibility workflow, a 2-D hydraulic solver with a regional hindcast,
-and an API with a web map. Every result is computed from real public data with recorded provenance.
+a pre-registered calibration with a held-out test, an experimental flood early-warning cycle on the live
+ECMWF forecast, and an API with a web map. Every result is computed from real public data with recorded
+provenance.
 
 **Status.** This is a first working release, not a finished platform. Read
 [`docs/REPORT.md`](docs/REPORT.md) for the status of each feature and the supporting evidence. It is
@@ -51,6 +53,32 @@ This is the maximum depth from the 2-D local-inertial solver, driven by ERA5 rai
 closes to about 1e-15. Against radar on 2019-08-10 it scores CSI 0.014 with recall 0.91. That does not beat the
 HAND rule or the KSDMA map on the same pixels.
 
+### Does calibration help? (SIMULATED, held-out test)
+
+![Held-out flood scores: calibrated solver vs baselines](figures/phone/04_calibration_heldout_SIMULATED.png)
+
+Twelve solver runs were scored against the 14 Aug 2018 radar map, using a selection rule committed before the
+first run. On the held-out year (10 Aug 2019), the chosen setting raises CSI from 0.014 to 0.019 (95% block
+bootstrap 0.001–0.036). That gain is within the noise, and the KSDMA map still scores best (0.023). Details are
+in [`docs/CALIBRATION.md`](docs/CALIBRATION.md).
+
+### Rain trigger replay, three monsoons (OBSERVED vs FORECAST)
+
+![Archived ECMWF 1-day-ahead forecasts vs ERA5 rain, monsoons 2024-2026](figures/phone/05_rain_trigger_replay_OBSERVED_vs_FORECAST.png)
+
+Archived ECMWF forecasts were checked against ERA5 on 366 June–September days with 15 heavy-rain days. Scored
+out of sample, the 1-day-ahead trigger has hit rate 0.60, false-alarm ratio 0.67 and CSI 0.27. It missed the
+30 Jul 2024 Vilangad landslide night (forecast 29 mm, ERA5 69 mm). Details are in
+[`docs/EARLY_WARNING.md`](docs/EARLY_WARNING.md).
+
+### Live experimental outlook, 23 Oct 2026 (FORECAST + SIMULATED)
+
+![Experimental flood outlook from the live ECMWF ensemble, 23 Oct 2026](figures/phone/06_live_outlook_2026-10-23_FORECAST.png)
+
+One end-to-end cycle took 476 s and used the ECMWF ensemble from 22 Oct. It gave the experimental level
+**YELLOW**. This is **not an official warning**: IMD, CWC and KSDMA issue those. The flood footprints
+over-predict radar extent about 9×.
+
 ### Web map (served from the API)
 
 ![Web map showing the observed 2018 radar flood layer](figures/webmap_sar2018.png)
@@ -94,6 +122,10 @@ earthsim run flood_obs                      # Sentinel-1 change-detection flood 
 earthsim run flood_susceptibility           # baseline susceptibility, leakage-safe evaluation
 earthsim run hindcast --tag base            # Aug-2019 rain-on-grid hindcast (about 3.5 min on 8 vCPUs)
 earthsim run hindcast_eval                  # score hindcast runs vs SAR 2019-08-10
+earthsim calibrate terrain|select|test      # pre-registered calibration (runs: docs/CALIBRATION.md)
+earthsim forecast verify-triggers           # archived ECMWF vs ERA5 replay, 2024-2026 monsoons
+earthsim forecast run                       # one live forecast cycle -> data/forecast/runs/<id>/
+python scripts/forecast_scheduler.py        # run a cycle whenever a new ECMWF run appears
 earthsim run benchmarks                     # solver correctness + scaling (run on an idle machine)
 earthsim serve                              # API + web map at http://127.0.0.1:8000
 ```
@@ -106,7 +138,8 @@ variables. Experiment configurations used for the reported results are in `confi
 
 ```
 src/earthsim/      package: config, hardware, provenance, geo, catalog, remote_sensing, hydro_core,
-                   hydrology, landcover, sar, floodsus, hydraulics, scenario, benchmarks, viz, api, cli
+                   hydrology, landcover, sar, floodsus, hydraulics, scenario, calibration, rain_trigger,
+                   forecast, benchmarks, viz, api, cli
 configs/           default.yaml, datasets.yaml (dataset manifest), experiments/*.yaml
 tests/             unit tests + synthetic fixtures (no network)
 web/               Leaflet web map served by the API

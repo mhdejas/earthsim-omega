@@ -66,3 +66,39 @@ Sentinel-1 RTC on Planetary Computer (https://planetarycomputer.microsoft.com/ap
 - Git: local commit 0a66d6b on main (70 files; logs/ and data/ excluded; secret/SAS scan clean). The GitHub connector (GitHub App, user mhdejas id 286408735) gets 403 on repo creation (GraphQL createRepository and REST POST user/repos). It has ADMIN on existing repos. Plain gh is not logged in.
 - 02:33 IST: GitHub push via connector denied (app not granted on the new repo). Repo created in the signed-in browser at https://github.com/mhdejas/earthsim-omega (public). Uploading folder by folder via the web uploader: done root, docs, src/earthsim, tests/unit, tests/fixtures; tests/__init__ pending; then configs, configs/experiments, scripts, web, figures, figures/phone, experiments/results, benchmarks/results. Owner asked for result images in the README.
 - 02:37 IST upload progress (browser web uploader, repo https://github.com/mhdejas/earthsim-omega): committed root, docs, src/earthsim, tests, tests/unit, tests/fixtures, configs, configs/experiments, scripts, web, figures, figures/phone; .gitignore and .dockerignore deleted from the public repo per owner (rules kept locally in .git/info/exclude). Pending: benchmarks/results (upload in progress), experiments/results (11 files), then re-upload README.md (results gallery) and PROJECT_STATUS.md at root. Owner: README must embed project images; LinkedIn on hold, do not prepare or post.
+- 02:42 IST: public repo verified. 68 files, byte-identical to local HEAD (fresh clone + cmp), 0 private-path/email/token hits, 8/8 README images render. Screenshot: ../earthsim-omega-shots/github_repo_page.png (local only).
+## Update 02:47 IST: calibration + decision-support phase (owner approved)
+- Owner: calibrate against 2018/2019 SAR floods with a held-out event; then make it as warning-ready as data allow, labelled EXPERIMENTAL decision support (official warnings: IMD, CWC, KSDMA). Snapshots to ../earthsim-omega-shots/. LinkedIn on hold.
+- Protocol pre-registered: configs/experiments/flood_calibration.yaml (commit 4b2fb2d, 02:46:10 IST, before any run). Calibrate 2018-08-14 (orbit 63, full district, 2.26 km2 SAR flood); secondary validation 2018-08-09 (orbit 165, 14% coverage, 0.18 km2); held-out test 2019-08-10 (orbit 165, 14%, 0.28 km2).
+- Overpasses (from scene IDs): 2018-08-09 00:40 UTC = 06:10 IST; 2018-08-14 00:48 UTC = 06:18 IST; 2019-08-10 00:39 UTC = 06:10 IST.
+- ERA5 daily (two 0.25 deg cells): 2018 Aug 7-8 ~30-42 mm/d, Aug 13 26-32, Aug 14 74-84, Aug 15 97-100, Aug 16 89-103 (14 Aug SAR pass is BEFORE the 15-16 Aug peak). 2019 Aug 5-10 40-101 mm/d.
+- 02:56 IST sources/results:
+  - IMD 24 h terminology (IMD Pune hazard atlas https://imdpune.gov.in/hazardatlas/extreme.pdf): heavy 64.5-115.5, very heavy 115.6-204.4, extremely heavy >=204.5 mm.
+  - Open-Meteo endpoints verified live: api.open-meteo.com/v1/forecast (models=ecmwf_ifs025, past_days), ensemble-api.open-meteo.com/v1/ensemble (ecmwf_ifs025, 51 members), previous-runs-api.open-meteo.com (precipitation_previous_dayN; data from 2024 only, 2021-2023 empty), historical-forecast-api, archive-api (era5).
+  - Rain-trigger verification (data/processed/warning/rain_trigger_verification.json): JJAS 2024-2026, 366 days, 15 ERA5 district-mean (2 cells) heavy days. IMD 64.5 threshold on forecast: day1 POD 0.40 FAR 0.54 CSI 0.27; day3 POD 0.53 FAR 0.50 CSI 0.35. LOYO-tuned trigger (pooled held-out): day1 POD 0.60 FAR 0.67 CSI 0.27 POFD 0.051 (T folds 35/50/50); day2 POD 0.47 FAR 0.77 CSI 0.18; day3 POD 0.60 FAR 0.57 CSI 0.33. Deploy T = 50 mm all leads. 2024-07-30 (Vilangad/Wayanad day): ERA5 69 mm, day1 fc 29 mm, day0 94 mm.
+  - OSM exposure: 240,990 buildings, 3,520 facilities (2,307 schools, 719 hospitals, 285 clinics, 209 colleges), 3,565 major road ways.
+  - First live cycle 20261023T0254_IST rain-only: YELLOW (25 Oct P(heavy) 28%). 
+- Code: src/earthsim/calibration.py, rain_trigger.py, forecast.py, viz.forecast_figure; calibration 12 runs launched 02:48 (logs/calibration/).
+  - Vilangad landslide night of 30 Jul 2024 confirmed: The Hindu https://www.thehindu.com/news/national/kerala/a-year-after-vilangad-landslip-scars-remain/article69874181.ece
+
+## Update 03:32 IST: calibration results (pre-registered protocol)
+- chosen C 0.9, n_land 0.16, thr 2.0 m (all at grid edge); 2018-08-14 CSI 0.0195 POD 0.196 FAR 0.979; best CSI per (C,n) 0.0145-0.0195 (flat, equifinal)
+- checkerboard: select A -> (0.7,0.08,1.0) scores B 0.0208; select B -> (0.9,0.16,2.0) scores A 0.0084
+
+
+## Update 03:32 IST: calibration results (pre-registered protocol, configs/experiments/flood_calibration.yaml)
+- Chosen on 2018-08-14: C 0.9, n_land 0.16, threshold 2.0 m (all three at the grid edge). CSI 0.0195, POD 0.196, FAR 0.979.
+- Best CSI per (C, n) pair spans only 0.0145-0.0195: the response surface is flat (equifinal); gains come mostly from the depth threshold.
+- Checkerboard stability: select on half A -> (0.7, 0.08, 1.0 m) scores 0.0208 on B; select on B -> (0.9, 0.16, 2.0 m) scores 0.0084 on A. Unstable.
+- Held-out 2019-08-10 (369,017 ref px, 0.279 km2 observed): calibrated CSI 0.0187 [95% 5-km block bootstrap 0.0006-0.0355], POD 0.874, FAR 0.981;
+  uncalibrated default 0.0139; HAND<=0.5 m 0.0147; KSDMA-25 footprint 0.0233; all-dry 0.
+- Secondary 2018-08-09 (0.176 km2 observed): calibrated 0.0031; uncalibrated 0.0050; HAND 0.0097; KSDMA 0.0152.
+- Verdict: calibration gives a small, statistically unresolved gain over the uncalibrated run and HAND on 2019; still below KSDMA; worse on 2018-08-09.
+
+## Update 03:44 IST: first live decision-support cycle (run 20261023T0331_IST)
+- Inputs: ECMWF IFS 0.25 deterministic init 2026-10-22T12:00Z (available 21:41Z) + 51-member ENS init 2026-10-22T06:00Z, via Open-Meteo (URLs + SHA-256 in manifest). Fetched 2026-10-22T22:01Z.
+- Wall 476 s (fetch 11.6 s, 4 hydraulic members 463 s, 4 workers x 2 threads). Status OK; `latest` moved.
+- Level YELLOW: 25 Oct 28% members >=64.5 mm (det 44.2, p90 108.8); 26 Oct det 62.1 mm (>=50 trigger). Antecedent 5-day rain 67.4 mm.
+- Flood scenarios (C 0.9, n 0.16, >=2.0 m, district-masked, peak of +24/48/72 h): det 142 mm/72 h -> 62.1 km2, 1,122 OSM buildings, 42.6 km major roads, 17 schools / 4 hospitals; p10 48 mm -> 21.0 km2; p50 93 mm -> 45.3 km2; p90 227 mm -> 113.0 km2, 2,252 buildings.
+- Independent recheck: det +72 h 62.1 km2 wet of which 8.9 km2 on >=50% WorldCover water, 35.9 km2 on <10% water (i.e. mostly land).
+- Caveat: model over-predicts ~9x vs radar on calibration event; season outside verified JJAS window.
