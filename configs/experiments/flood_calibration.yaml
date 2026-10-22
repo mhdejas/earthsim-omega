@@ -1,0 +1,46 @@
+# Pre-registered calibration protocol for the regional flood hindcast.
+# Written and committed BEFORE any calibration run was executed; the selection rule
+# below is applied mechanically by `earthsim.calibration` and is not tuned afterwards.
+experiment: flood_calibration_v1
+model: local-inertial 2-D solver, rain-on-grid, channel-preserving 240 m terrain (factor 8)
+forcing: ERA5 hourly precipitation (Open-Meteo archive), mean of distinct ERA5 cells, spatially uniform
+reference: Sentinel-1 RTC change detection (VV < -15 dB and >= 3 dB drop vs dry-season same-orbit
+  reference), district pixels only, permanent water excluded
+
+seasons:
+  "2018":
+    rain_file: era5_precip_2018-08-01_2018-08-31.json
+    start_ist: "2018-08-01T00:00"
+    events: ["2018-08-09", "2018-08-14"]
+  "2019":
+    rain_file: era5_precip_2019-08-01_2019-08-31.json
+    start_ist: "2019-08-01T00:00"
+    events: ["2019-08-10"]
+
+events:
+  "2018-08-14": {overpass_ist: "2018-08-14T06:18", orbit: 63, coverage: full district, role: calibration}
+  "2018-08-09": {overpass_ist: "2018-08-09T06:10", orbit: 165, coverage: eastern ~14%, role: secondary validation (same season as calibration, weakly independent)}
+  "2019-08-10": {overpass_ist: "2019-08-10T06:10", orbit: 165, coverage: eastern ~14%, role: held-out test (different year, never used for selection)}
+
+parameters:            # full factorial, 12 hydraulic runs on the calibration season
+  runoff_c: [0.3, 0.5, 0.7, 0.9]
+  n_land: [0.04, 0.08, 0.16]
+  n_channel: 0.04      # fixed
+wet_depth_threshold_m: [0.05, 0.1, 0.2, 0.3, 0.5, 0.75, 1.0, 1.5, 2.0]   # post-processing, depth at overpass
+
+selection_rule: >-
+  Choose (runoff_c, n_land, threshold) maximising CSI on 2018-08-14 over all reference pixels.
+  Ties within 0.001 CSI go to the run closest to the prior (runoff_c 0.7, n_land 0.08), then the
+  larger threshold. The 2019-08-10 event is scored once, after selection, with the chosen setting.
+
+spatial_check: >-
+  10 km checkerboard blocks on the district grid (EPSG:32643). Select on block set A, score on B,
+  and vice versa, to show how stable the selection is inside the calibration event.
+
+metrics: [CSI, POD (hit rate), FAR (false alarm ratio), frequency bias, false-alarm area km2]
+uncertainty: 1000 block-bootstrap resamples (5 km blocks) for CSI/POD/FAR on the test event
+baselines_on_test: [uncalibrated default (C 0.7, n_land 0.08, 0.3 m), "HAND <= 0.5 m", "KSDMA 25-yr footprint"]
+known_reference_limits: >-
+  SAR open-water detection misses flooding under canopy and in built-up areas, so observed extents
+  are lower bounds; 2019-08-10 and 2018-08-09 cover only ~14% of the district; flooded pixels are
+  few (310 in 2019), so test scores carry wide uncertainty.
