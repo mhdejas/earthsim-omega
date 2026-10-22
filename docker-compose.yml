@@ -1,0 +1,8 @@
+# Untested (no Docker in the development sandbox). Binds to localhost only.
+services:
+  earthsim:
+    build: .
+    ports: ["127.0.0.1:8000:8000"]
+    volumes: ["./data:/app/data"]
+    environment:
+      EARTHSIM_COMPUTE__WORKERS: "4"

@@ -1,0 +1,63 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "earthsim"
+version = "0.1.0"
+description = "EARTHSIM-Omega: regional geospatial digital-twin prototype for Kozhikode district, Kerala"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+# Versions below are the exact versions installed and tested in the documented
+# environment (Ubuntu, Python 3.12.3, CPU only). See requirements-lock.txt.
+dependencies = [
+  "numpy==2.5.4",
+  "scipy==1.18.1",
+  "pandas==3.1.0",
+  "rasterio==1.5.2",
+  "geopandas==1.2.0",
+  "shapely==2.2.0",
+  "pyproj==3.8.0",
+  "pyarrow==26.0.0",
+  "pydantic==2.14.1",
+  "pyyaml==6.0.3",
+  "click==8.5.0",
+  "psutil==7.2.2",
+  "httpx==0.28.1",
+  "matplotlib==3.11.2",
+  "numba==0.68.0",
+  "affine==3.0.1",
+  "pillow==13.0.0",
+  "scikit-learn==1.9.1",
+]
+
+[project.optional-dependencies]
+ml = ["torch==2.14.1"]  # reported by `earthsim doctor`; no torch model in this release
+api = ["fastapi==0.161.0", "uvicorn==0.54.0", "python-multipart==0.0.32"]
+download = ["pystac-client==0.9.1", "planetary-computer==1.0.0", "requests==2.34.2"]
+crosscheck = ["pysheds==0.5"]
+dev = ["pytest==9.1.1", "ruff==0.17.2", "fastapi==0.161.0", "uvicorn==0.54.0"]
+all = ["earthsim[api,download,crosscheck,dev]"]
+
+[project.scripts]
+earthsim = "earthsim.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+  "external: requires network access or downloaded real data (deselected by default)",
+  "slow: long-running test",
+]
+addopts = "-m 'not external'"
+
+[tool.ruff]
+line-length = 110
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "W", "I", "B", "UP"]
+ignore = ["E501", "B008"]
