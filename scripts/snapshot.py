@@ -22,7 +22,8 @@ matplotlib.use("Agg")
 import matplotlib.image as mpimg  # noqa: E402
 import matplotlib.pyplot as plt  # noqa: E402
 
-SHOTS = Path("/workspace/earthsim-omega-shots")
+ROOT = Path(__file__).resolve().parents[1]
+SHOTS = ROOT.parent / f"{ROOT.name}-shots"
 
 
 def main() -> None:
@@ -37,7 +38,7 @@ def main() -> None:
 
     chunks = []
     for c in a.cmd:
-        r = subprocess.run(c, shell=True, capture_output=True, text=True, cwd="/workspace/earthsim-omega",
+        r = subprocess.run(c, shell=True, capture_output=True, text=True, cwd=str(ROOT),
                            executable="/bin/bash")
         chunks.append(f"$ {c}\n{r.stdout}{r.stderr}".rstrip() + f"\n[exit {r.returncode}]")
     for lf in a.log:
