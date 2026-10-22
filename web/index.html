@@ -38,6 +38,8 @@
   <div id="probe">Click the map to read every available layer at that point.</div>
   <h3>Held-out flood scores</h3>
   <div id="metrics">loading…</div>
+  <h3>Experimental 3-day outlook</h3>
+  <div id="forecast">no forecast run yet</div>
 </aside>
 <div id="map"></div>
 <script>
@@ -85,6 +87,29 @@ fetch('/api/metrics').then(r => r.json()).then(m => {
           <td>${(100*cv[k].predicted_fraction).toFixed(1)}%</td><td>${t[k].csi.toFixed(3)}</td></tr>`;
   }
   el.innerHTML = h + '</table>';
+});
+</script>
+<script>
+fetch('/api/forecast/latest').then(r => r.ok ? r.json() : null).then(a => {
+  if (!a) return;
+  const col = {GREEN: '#2e7d32', YELLOW: '#f9a825', ORANGE: '#ef6c00', RED: '#c62828'};
+  let h = `<div class="warn">${a.disclaimer}</div>
+    <div>Issued ${a.issued_ist} IST · level <b style="color:${col[a.overall_level_next_72h]}">${a.overall_level_next_72h}</b></div>
+    <table><tr><th>Day to 08:30</th><th>Det. mm</th><th>Ens. p10–p90</th><th>P(heavy)</th></tr>`;
+  a.rain_outlook.days.slice(0, 5).forEach(d => {
+    const e = d.ensemble_p10_p50_p90_mm;
+    h += `<tr><td>${d.day_ending_0830_ist}${d.in_progress ? '*' : ''}</td><td>${d.deterministic_mm}</td>
+      <td>${e[0]}–${e[2]}</td><td>${Math.round(100 * d.prob_heavy)}%</td></tr>`;
+  });
+  h += '</table>';
+  const f = a.flood_scenarios || {};
+  if (f.run) {
+    const m = f.members.deterministic;
+    if (m) h += `<div class="meta">Flood model (deterministic rain): ${m.peak_of_snapshots.wet_km2} km² wet,
+      ${m.peak_of_snapshots.buildings} OSM buildings in wet cells.</div>`;
+  }
+  h += `<div class="meta"><a href="/api/forecast/${a.run_id}/outlook.png" target="_blank">outlook figure</a> · * = day in progress</div>`;
+  document.getElementById('forecast').innerHTML = h;
 });
 </script>
 </body>
