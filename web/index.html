@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>EARTHSIM-Ω · Kozhikode digital twin (prototype)</title>
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
+<style>
+  :root { --ink:#14212b; --muted:#5b6b78; --line:#d7dee4; --obs:#1b7f3b; --mod:#8a5a00; --sim:#1f4fbf; }
+  * { box-sizing: border-box; }
+  body { margin:0; font:14px/1.4 system-ui, -apple-system, "Segoe UI", sans-serif; color:var(--ink); display:grid;
+         grid-template-columns: 340px 1fr; height:100vh; }
+  aside { border-right:1px solid var(--line); overflow:auto; padding:14px 16px; background:#fbfcfd; }
+  h1 { font-size:17px; margin:0 0 2px; } .sub { color:var(--muted); font-size:12px; margin-bottom:12px; }
+  .layer { border:1px solid var(--line); border-radius:8px; padding:8px 10px; margin:8px 0; background:#fff; }
+  .layer label { display:flex; gap:8px; align-items:flex-start; cursor:pointer; }
+  .tag { font-size:10.5px; font-weight:600; text-transform:uppercase; letter-spacing:.04em; padding:1px 6px;
+         border-radius:10px; color:#fff; white-space:nowrap; }
+  .t-observation, .t-observation-derived { background:var(--obs); } .t-model-derived { background:var(--mod); }
+  .t-simulation { background:var(--sim); }
+  .meta { color:var(--muted); font-size:12px; margin-top:4px; } input[type=range]{ width:100%; }
+  #map { height:100vh; } #probe { font-size:12px; white-space:pre-wrap; background:#fff; border:1px solid var(--line);
+         border-radius:8px; padding:8px; min-height:40px; }
+  .warn { font-size:12px; color:#6b4b00; background:#fff6e0; border:1px solid #f1d58a; border-radius:8px; padding:8px; }
+  table { border-collapse:collapse; font-size:12px; width:100%; } td,th { border-bottom:1px solid var(--line); padding:3px 4px; text-align:right; }
+  td:first-child, th:first-child { text-align:left; }
+</style>
+</head>
+<body>
+<aside>
+  <h1>EARTHSIM-Ω · Kozhikode</h1>
+  <div class="sub">Research prototype. Every layer is labelled as <b>observation</b>, <b>model-derived</b> or <b>simulation</b>.</div>
+  <div class="warn">Not for emergency decisions. Susceptibility is a relative score, not a probability. The hindcast is an uncalibrated experiment driven by ERA5 reanalysis rain.</div>
+  <h3>Layers</h3>
+  <div id="layers">loading…</div>
+  <h3>Point query</h3>
+  <div id="probe">Click the map to read every available layer at that point.</div>
+  <h3>Held-out flood scores</h3>
+  <div id="metrics">loading…</div>
+</aside>
+<div id="map"></div>
+<script>
+const map = L.map('map').setView([11.40, 75.85], 10);
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {maxZoom: 18,
+  attribution: '&copy; OpenStreetMap contributors · Copernicus DEM/Sentinel (modified) · ESA WorldCover · KSDMA'}).addTo(map);
+const overlays = {};
+fetch('/api/layers').then(r => r.json()).then(layers => {
+  const box = document.getElementById('layers'); box.innerHTML = '';
+  layers.forEach(l => {
+    const d = document.createElement('div'); d.className = 'layer';
+    const ok = l.available && l.bounds;
+    d.innerHTML = `<label><input type="checkbox" ${ok ? '' : 'disabled'} data-id="${l.id}">
+      <span><b>${l.title}</b><br><span class="tag t-${l.data_class}">${l.data_class}</span>
+      <span class="meta">${l.units}${ok ? '' : ' · not produced yet'}</span></span></label>
+      <input type="range" min="0" max="1" step="0.05" value="0.8" data-op="${l.id}" ${ok ? '' : 'disabled'}>`;
+    box.appendChild(d);
+    if (ok) overlays[l.id] = L.imageOverlay(`/api/layers/${l.id}.png`, l.bounds, {opacity: 0.8});
+  });
+  box.addEventListener('change', e => {
+    const id = e.target.dataset.id; if (!id) return;
+    e.target.checked ? overlays[id].addTo(map) : map.removeLayer(overlays[id]);
+  });
+  box.addEventListener('input', e => { const id = e.target.dataset.op; if (id) overlays[id].setOpacity(+e.target.value); });
+  const want = (new URLSearchParams(location.search).get('layers') || 'sar_2018_08_14').split(',');
+  want.forEach(id => { if (overlays[id]) { box.querySelector(`[data-id="${id}"]`).checked = true; overlays[id].addTo(map); } });
+  map.on('click', ev => {
+    const {lat, lng} = ev.latlng; const p = document.getElementById('probe');
+    p.textContent = `lat ${lat.toFixed(5)}, lon ${lng.toFixed(5)}\n`;
+    layers.filter(l => l.available).forEach(l =>
+      fetch(`/api/layers/${l.id}/value?lon=${lng}&lat=${lat}`).then(r => r.json()).then(v => {
+        const val = v.value === null || v.value === undefined ? '—' : (+v.value).toFixed(3);
+        p.textContent += `${l.id}: ${val} ${l.units} [${l.data_class}]\n`;
+      }));
+  });
+});
+fetch('/api/metrics').then(r => r.json()).then(m => {
+  const el = document.getElementById('metrics');
+  const fs = m.flood_susceptibility; if (!fs) { el.textContent = 'not available'; return; }
+  const ev = Object.keys(fs.tests)[0]; const t = fs.tests[ev].test, cv = fs.tests[ev].calibration_event_spatial_cv;
+  let h = `<div class="meta">Spatial CV on 2018-08-14 (5 km blocks) · temporal test ${ev}. Reference = SAR open water (incomplete).</div>
+           <table><tr><th>method</th><th>CSI cv</th><th>recall cv</th><th>flagged</th><th>CSI ${ev.slice(0,4)}</th></tr>`;
+  for (const k of Object.keys(t)) {
+    h += `<tr><td>${k.replace('_footprint','')}</td><td>${cv[k].csi.toFixed(3)}</td><td>${cv[k].recall.toFixed(2)}</td>
+          <td>${(100*cv[k].predicted_fraction).toFixed(1)}%</td><td>${t[k].csi.toFixed(3)}</td></tr>`;
+  }
+  el.innerHTML = h + '</table>';
+});
+</script>
+</body>
+</html>
