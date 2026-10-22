@@ -1,0 +1,9 @@
+# Reproduces data/processed/landcover/landcover_summary.json
+experiment: landcover_rf_2025
+command: earthsim run landcover
+features: [blue, green, red, nir, swir16, swir22, ndvi, mndwi, ndbi, ndwi, elevation, slope]
+labels: ESA WorldCover 2021 v200 (mode-resampled to the 20 m grid). Labels are a product, not ground truth.
+sample: 300000 pixels drawn uniformly at random from valid district pixels (numpy default_rng, seed 42)
+split: GroupKFold, 5 km blocks, k=5
+baselines: [majority_class, index_rules]
+model: RandomForestClassifier(n_estimators=150, min_samples_leaf=2, max_features=sqrt, class_weight=balanced_subsample, random_state=42+fold)

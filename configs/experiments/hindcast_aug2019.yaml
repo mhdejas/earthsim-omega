@@ -1,0 +1,10 @@
+# Reproduces data/processed/hydraulics/{base,c050,c090}_*
+experiment: hindcast_aug2019
+command: earthsim run hindcast --tag base   # add --runoff-c 0.5 --tag c050 / --runoff-c 0.9 --tag c090
+period_ist: [2019-08-01T00:00, 2019-08-10T06:10]   # ends at the Sentinel-1B overpass (00:40 UTC)
+forcing: ERA5 hourly precipitation via Open-Meteo archive (models=era5), mean of 2 distinct ERA5 cells, spatially uniform
+runoff_coefficient: 0.7     # sensitivity 0.5, 0.9
+terrain: Copernicus GLO-30 DSM aggregated x8 to 240 m, channel-preserving, Priority-Flood+eps
+manning_n: {channel (upstream >= 25 km2): 0.04, land: 0.08}
+solver: local-inertial (Bates et al. 2010), alpha=0.7, dt_max=30 s, open domain edges (critical-depth outflow), ocean = sink
+evaluation: depth at overpass >= 0.1 / 0.3 m vs Sentinel-1 observed flood extent 2019-08-10 (valid SAR pixels in district)

@@ -1,0 +1,16 @@
+# Reproduces data/processed/flood/flood_susceptibility_eval.json
+experiment: flood_susceptibility_v1
+command: earthsim run flood_susceptibility
+inputs:
+  calibration_event: 2018-08-14      # Sentinel-1A orbit 63, full district coverage
+  temporal_test_event: 2019-08-10    # Sentinel-1B orbit 165, eastern 14% of district only
+  terrain: data/processed/terrain (Copernicus GLO-30 DSM, 30 m, EPSG:32643)
+  comparators: KSDMA 10/25/50-yr hazard rasters as binary footprints (external model, not observation)
+split:
+  type: GroupKFold on square spatial blocks
+  block_m: 5000
+  k: 5
+  exclusions: permanent water on any date; missing terrain; outside district; SAR invalid
+models: [hand_threshold, distance_threshold, logistic(hand, log_upstream_km2, slope_deg, elevation, dist_to_stream_m)]
+threshold_selection: maximise CSI on training blocks of the calibration event only
+seed: 42
