@@ -14,7 +14,7 @@ datasets:
     data_class: reference_product
     adapter: geoboundaries
     urls: ["https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IND/ADM2/geoBoundaries-IND-ADM2.geojson"]
-    local_candidates: ["/workspace/kozhikode/india_adm2.geojson"]
+    local_candidates: ["${EARTHSIM_LOCAL_DATA}/kozhikode/india_adm2.geojson"]
     expected_sha256: 8bef6929fd65432e7dc775e7c44473e84efff064ebddbfd6b834e6291546db40
     select: {field: shapeName, value: Kozhikode}
     license: ODbL 1.0
@@ -101,9 +101,9 @@ datasets:
     data_class: external_model
     adapter: local
     local_candidates:
-      - "/workspace/kozhikode_flood/raster/1. Flood Return Probability History (10, 25, 50 years)/Kerala_Flood_10_yr_Historical.tif"
-      - "/workspace/kozhikode_flood/raster/1. Flood Return Probability History (10, 25, 50 years)/Kerala_Flood_25_yr_Historical.tif"
-      - "/workspace/kozhikode_flood/raster/1. Flood Return Probability History (10, 25, 50 years)/Kerala_Flood_50_yr_Historical.tif"
+      - "${EARTHSIM_LOCAL_DATA}/kozhikode_flood/raster/1. Flood Return Probability History (10, 25, 50 years)/Kerala_Flood_10_yr_Historical.tif"
+      - "${EARTHSIM_LOCAL_DATA}/kozhikode_flood/raster/1. Flood Return Probability History (10, 25, 50 years)/Kerala_Flood_25_yr_Historical.tif"
+      - "${EARTHSIM_LOCAL_DATA}/kozhikode_flood/raster/1. Flood Return Probability History (10, 25, 50 years)/Kerala_Flood_50_yr_Historical.tif"
     license: "Government of Kerala / KSDMA - terms not stated in the files; internal research use only"
     attribution: "Kerala State Disaster Management Authority"
     crs: EPSG:4326
@@ -113,14 +113,14 @@ datasets:
 
   - id: landsat_ndvi_1990_2025
     title: Landsat 5/7/8/9 three-year NDVI composites 1990-2025 (earlier workspace project)
-    provider: USGS Landsat Collection 2 Level-2 (processed in /workspace/kozhikode_longterm)
+    provider: USGS Landsat Collection 2 Level-2 (processed in ${EARTHSIM_LOCAL_DATA}/kozhikode_longterm)
     data_class: derived
     adapter: local
-    local_candidates: ["/workspace/kozhikode_longterm"]
+    local_candidates: ["${EARTHSIM_LOCAL_DATA}/kozhikode_longterm"]
     glob: "NDVI_[12]*-[12]*.tif"
     license: "Landsat data public domain (USGS)"
     attribution: "Landsat imagery courtesy of the U.S. Geological Survey"
-    provenance_file: /workspace/kozhikode_longterm/provenance.json
+    provenance_file: ${EARTHSIM_LOCAL_DATA}/kozhikode_longterm/provenance.json
 
   - id: sentinel1_rtc_floods
     title: Sentinel-1 GRD radiometrically terrain-corrected (gamma0) VV/VH, flood events 2018-2019 and dry-season references
