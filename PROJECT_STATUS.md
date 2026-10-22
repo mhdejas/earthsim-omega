@@ -1,6 +1,6 @@
 # EARTHSIM-Ω project status (running log)
 
-Last updated: 2026-10-23 ~00:58 IST. Project root: /workspace/earthsim-omega. Evidence PNGs: /workspace/earthsim-omega-shots/
+Last updated: 2026-10-23 ~00:58 IST. Project root: repository root. Evidence PNGs: ../earthsim-omega-shots/ (local only)
 
 ## Environment (measured by `earthsim doctor`)
 - Ubuntu 24.04 on KVM. 8 vCPUs (4 reported cores × 2 threads). Family 6 / model 85 / stepping 7, inferred Cascade Lake (AVX512_VNNI present, no BF16/AMX). The model string "Intel Xeon Processor @ 2.50GHz" comes from the hypervisor; the host SKU and sustained clock are unknown. L3 35.8 MiB.
@@ -15,7 +15,7 @@ Last updated: 2026-10-23 ~00:58 IST. Project root: /workspace/earthsim-omega. Ev
 - era5_rain: Open-Meteo archive API (models=era5), 5 points, Aug 2018 and Aug 2019, hourly mm.
 - osm_kozhikode: Overpass (overpass-api.de, needs a User-Agent header; the default client got 406 / disconnect). 3565 road ways, 3520 facilities, 240,990 building centroids. OSM base 2026-10-22T19:2x Z.
 - ksdma_flood_hazard: local KSDMA 10/25/50-year rasters (EPSG:4326, about 90 m, units undocumented). Used only as a binary footprint; it is an external model, not an observation.
-- landsat_ndvi_1990_2025: 12 three-year NDVI composites from /workspace/kozhikode_longterm.
+- landsat_ndvi_1990_2025: 12 three-year NDVI composites from the earlier local kozhikode_longterm project.
 - sentinel2_l2a_2025q1: Earth Search sentinel-2-c1-l2a, 2025-01-01/2025-03-31, cloud below 30%. 62 items found, 12 selected (3 lowest-cloud per tile: 43PEN, 43PEP, 43PFN, 43PFP), baseline 05.11. Stored on the 20 m UTM43 grid as float reflectance plus SCL.
 
 ## Results so far
@@ -64,3 +64,5 @@ Sentinel-1 RTC on Planetary Computer (https://planetarycomputer.microsoft.com/ap
 - Tests: 42 passed in 9.62 s.
 - docs/REPORT.md written (section-29 format). Phone figures in figures/phone/; web map screenshots figures/webmap_sar2018.png and figures/webmap_hindcast.png (headless Chrome against the live server, real OSM tiles).
 - Git: local commit 0a66d6b on main (70 files; logs/ and data/ excluded; secret/SAS scan clean). The GitHub connector (GitHub App, user mhdejas id 286408735) gets 403 on repo creation (GraphQL createRepository and REST POST user/repos). It has ADMIN on existing repos. Plain gh is not logged in.
+- 02:33 IST: GitHub push via connector denied (app not granted on the new repo). Repo created in the signed-in browser at https://github.com/mhdejas/earthsim-omega (public). Uploading folder by folder via the web uploader: done root, docs, src/earthsim, tests/unit, tests/fixtures; tests/__init__ pending; then configs, configs/experiments, scripts, web, figures, figures/phone, experiments/results, benchmarks/results. Owner asked for result images in the README.
+- 02:37 IST upload progress (browser web uploader, repo https://github.com/mhdejas/earthsim-omega): committed root, docs, src/earthsim, tests, tests/unit, tests/fixtures, configs, configs/experiments, scripts, web, figures, figures/phone; .gitignore and .dockerignore deleted from the public repo per owner (rules kept locally in .git/info/exclude). Pending: benchmarks/results (upload in progress), experiments/results (11 files), then re-upload README.md (results gallery) and PROJECT_STATUS.md at root. Owner: README must embed project images; LinkedIn on hold, do not prepare or post.

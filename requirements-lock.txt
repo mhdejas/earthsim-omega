@@ -10,7 +10,7 @@ cloudpickle==3.1.2
 contourpy==1.4.0
 cycler==0.12.1
 dask==2026.8.0
--e file:///workspace/earthsim-omega
+-e .
 fastapi==0.161.0
 filelock==3.32.3
 fonttools==4.67.0
