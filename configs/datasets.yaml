@@ -1,0 +1,139 @@
+# EARTHSIM-Omega dataset manifest (schema earthsim.manifest/1.0)
+# data_class values:
+#   observation        - direct sensor observation (satellite imagery)
+#   reference_product  - published product derived by others (DEM, land cover, boundary)
+#   reanalysis         - model-assimilated historical estimate (not a gauge observation)
+#   external_model     - another agency's model output (used as reference, not truth)
+#   crowdsourced       - volunteered geographic information (OSM)
+#   derived            - produced by an earlier project run in this workspace
+schema: earthsim.manifest/1.0
+datasets:
+  - id: aoi_kozhikode_geoboundaries
+    title: Kozhikode district boundary (geoBoundaries gbOpen IND ADM2, boundaryID IND-ADM2-76128533)
+    provider: geoBoundaries (William & Mary geoLab); declared authority Pathways Data Pvt. Ltd., lgdirectory.gov.in
+    data_class: reference_product
+    adapter: geoboundaries
+    urls: ["https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/IND/ADM2/geoBoundaries-IND-ADM2.geojson"]
+    local_candidates: ["/workspace/kozhikode/india_adm2.geojson"]
+    expected_sha256: 8bef6929fd65432e7dc775e7c44473e84efff064ebddbfd6b834e6291546db40
+    select: {field: shapeName, value: Kozhikode}
+    license: ODbL 1.0
+    attribution: "geoBoundaries (Runfola et al. 2020), gbOpen IND ADM2, commit 9469f09"
+    crs: EPSG:4326
+    observation_time: "boundary year represented 2021"
+    processing_level: vector polygons
+
+  - id: copernicus_dem_glo30
+    title: Copernicus DEM GLO-30 (DSM), tiles N11 E075 and N11 E076
+    provider: ESA / Copernicus, distributed via AWS Open Data (s3://copernicus-dem-30m)
+    data_class: reference_product
+    adapter: http_files
+    urls:
+      - https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N11_00_E075_00_DEM/Copernicus_DSM_COG_10_N11_00_E075_00_DEM.tif
+      - https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N11_00_E076_00_DEM/Copernicus_DSM_COG_10_N11_00_E076_00_DEM.tif
+      - https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N10_00_E075_00_DEM/Copernicus_DSM_COG_10_N10_00_E075_00_DEM.tif
+      - https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N10_00_E076_00_DEM/Copernicus_DSM_COG_10_N10_00_E076_00_DEM.tif
+      - https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N12_00_E075_00_DEM/Copernicus_DSM_COG_10_N12_00_E075_00_DEM.tif
+      - https://copernicus-dem-30m.s3.amazonaws.com/Copernicus_DSM_COG_10_N12_00_E076_00_DEM/Copernicus_DSM_COG_10_N12_00_E076_00_DEM.tif
+    license: "Copernicus DEM licence (free of charge, worldwide, non-exclusive; GLO-30 public)"
+    attribution: "© DLR e.V. 2010-2014 and © Airbus Defence and Space GmbH 2014-2018 provided under COPERNICUS by the European Union and ESA; all rights reserved"
+    crs: EPSG:4326 (horizontal), EGM2008 geoid heights (vertical), metres
+    resolution: 1 arc-second (~30 m)
+    bands: [{name: elevation, units: m}]
+    observation_time: "TanDEM-X acquisitions 2011-2015"
+    processing_level: DSM (surface heights incl. canopy and buildings - NOT a bare-earth DTM)
+
+  - id: esa_worldcover_2021
+    title: ESA WorldCover 10 m 2021 v200, tile N09E075
+    provider: ESA WorldCover consortium, AWS Open Data (s3://esa-worldcover)
+    data_class: reference_product
+    adapter: http_files
+    urls: ["https://esa-worldcover.s3.eu-central-1.amazonaws.com/v200/2021/map/ESA_WorldCover_10m_2021_v200_N09E075_Map.tif"]
+    license: CC BY 4.0
+    attribution: "© ESA WorldCover project 2021 / Contains modified Copernicus Sentinel data (2021) processed by ESA WorldCover consortium"
+    crs: EPSG:4326
+    resolution: 10 m (1/12000 deg)
+    nodata: 0
+    bands: [{name: Map, units: class code (10 tree, 20 shrub, 30 grass, 40 crop, 50 built, 60 bare, 70 snow, 80 water, 90 herb. wetland, 95 mangrove, 100 moss)}]
+    observation_time: "2021-01-01/2021-12-31"
+    processing_level: classified map (reported global overall accuracy ~76.7%, v200 validation report)
+
+  - id: sentinel2_l2a_2025q1
+    title: Sentinel-2 L2A Collection 1 surface reflectance, Jan-Mar 2025, Kozhikode tiles
+    provider: ESA Copernicus; Element 84 Earth Search STAC (collection sentinel-2-c1-l2a)
+    data_class: observation
+    adapter: stac_sentinel2
+    urls: ["https://earth-search.aws.element84.com/v1"]
+    collection: sentinel-2-c1-l2a
+    license: Copernicus Sentinel data terms (free, full and open)
+    attribution: "Contains modified Copernicus Sentinel data 2025"
+    crs: UTM zone 43N (EPSG:32643) per tile
+    resolution: 10/20 m
+    bands: [{name: blue, units: reflectance}, {name: green}, {name: red}, {name: nir}, {name: swir16}, {name: swir22}, {name: scl, units: class}]
+    processing_level: L2A (Sen2Cor), scale 0.0001 and offset -0.1 read from STAC raster:bands
+
+  - id: osm_kozhikode
+    title: OpenStreetMap roads (major), hospitals, schools and building centroids for the Kozhikode bbox
+    provider: OpenStreetMap contributors via Overpass API
+    data_class: crowdsourced
+    adapter: overpass
+    urls: ["https://overpass-api.de/api/interpreter", "https://overpass.private.coffee/api/interpreter", "https://maps.mail.ru/osm/tools/overpass/api/interpreter"]
+    license: ODbL 1.0
+    attribution: "© OpenStreetMap contributors"
+    crs: EPSG:4326
+
+  - id: era5_rain_kozhikode_2018_2019
+    title: ERA5 hourly total precipitation (reanalysis) via Open-Meteo archive, Kozhikode points, Aug 2018 and Aug 2019
+    provider: ECMWF Copernicus Climate Change Service ERA5, served by Open-Meteo Historical Weather API
+    data_class: reanalysis
+    adapter: open_meteo
+    urls: ["https://archive-api.open-meteo.com/v1/archive"]
+    periods: [["2018-08-01", "2018-08-31"], ["2019-08-01", "2019-08-31"]]
+    points: [[11.25, 75.78], [11.45, 75.70], [11.35, 75.95], [11.55, 75.85], [11.30, 76.05]]
+    license: "Open-Meteo data CC BY 4.0; ERA5 Copernicus licence"
+    attribution: "Hersbach et al. (2023) ERA5 hourly data, C3S; weather data by Open-Meteo.com"
+    resolution: ERA5 0.25 deg (~28 km) - far coarser than the flood grid
+    bands: [{name: precipitation, units: mm per hour}]
+
+  - id: ksdma_flood_hazard
+    title: KSDMA historical flood return-period rasters (10, 25, 50 yr), Kerala
+    provider: Kerala State Disaster Management Authority (portal download supplied by the owner)
+    data_class: external_model
+    adapter: local
+    local_candidates:
+      - "/workspace/kozhikode_flood/raster/1. Flood Return Probability History (10, 25, 50 years)/Kerala_Flood_10_yr_Historical.tif"
+      - "/workspace/kozhikode_flood/raster/1. Flood Return Probability History (10, 25, 50 years)/Kerala_Flood_25_yr_Historical.tif"
+      - "/workspace/kozhikode_flood/raster/1. Flood Return Probability History (10, 25, 50 years)/Kerala_Flood_50_yr_Historical.tif"
+    license: "Government of Kerala / KSDMA - terms not stated in the files; internal research use only"
+    attribution: "Kerala State Disaster Management Authority"
+    crs: EPSG:4326
+    resolution: 3 arc-seconds (~90 m)
+    bands: [{name: value, units: "undocumented (positive = mapped flood support)"}]
+    processing_level: "agency model product; value units unknown, used only as a binary footprint"
+
+  - id: landsat_ndvi_1990_2025
+    title: Landsat 5/7/8/9 three-year NDVI composites 1990-2025 (earlier workspace project)
+    provider: USGS Landsat Collection 2 Level-2 (processed in /workspace/kozhikode_longterm)
+    data_class: derived
+    adapter: local
+    local_candidates: ["/workspace/kozhikode_longterm"]
+    glob: "NDVI_[12]*-[12]*.tif"
+    license: "Landsat data public domain (USGS)"
+    attribution: "Landsat imagery courtesy of the U.S. Geological Survey"
+    provenance_file: /workspace/kozhikode_longterm/provenance.json
+
+  - id: sentinel1_rtc_floods
+    title: Sentinel-1 GRD radiometrically terrain-corrected (gamma0) VV/VH, flood events 2018-2019 and dry-season references
+    provider: ESA Copernicus; Microsoft Planetary Computer (collection sentinel-1-rtc, produced with Catalyst)
+    data_class: observation
+    adapter: pc_sentinel1_rtc
+    urls: ["https://planetarycomputer.microsoft.com/api/stac/v1"]
+    collection: sentinel-1-rtc
+    license: CC BY 4.0 (Planetary Computer sentinel-1-rtc terms); contains modified Copernicus Sentinel data
+    attribution: "Contains modified Copernicus Sentinel data 2018-2019, processed by Catalyst/Microsoft Planetary Computer"
+    crs: UTM per scene; reprojected to EPSG:32643 district 30 m grid
+    resolution_m: 10
+    temporal: "2018-08-09, 2018-08-14, 2019-08-10 events; Jan-Feb 2019 references"
+    polarisations: [vv]
+    overview_level: 0
+    notes: "VV only, read from the COG's first internal overview (20 m, built by the provider) and AVERAGE-resampled in linear power onto the 30 m district grid. VH omitted because the link to Planetary Computer measured ~0.4-0.7 MB/s. Observation of open water at overpass time only."

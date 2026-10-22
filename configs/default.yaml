@@ -1,0 +1,42 @@
+# Default EARTHSIM-Omega configuration (validated by earthsim.config.Settings)
+region:
+  name: Kozhikode
+  boundary_dataset: aoi_kozhikode_geoboundaries
+  discovery_crs: EPSG:4326
+  analysis_crs: EPSG:32643     # WGS 84 / UTM 43N - valid for Kozhikode (72-78 E)
+  fetch_buffer_m: 2000
+paths:
+  data_dir: data
+  raw_dir: data/raw
+  processed_dir: data/processed
+  fixtures_dir: data/fixtures
+  runs_dir: experiments/results
+  models_dir: models
+  benchmarks_dir: benchmarks/results
+  manifest: configs/datasets.yaml
+  jobs_db: data/jobs.sqlite
+compute:
+  profile: auto
+  workers: null        # null = derive from hardware profile
+  tile_size: 1024
+  max_memory_fraction: 0.5
+  device: auto         # auto | cpu | cuda (cuda fails loudly if unavailable)
+  seed: 42
+processing:
+  dem_resolution_m: 30
+  optical_resolution_m: 20
+  stream_threshold_km2: 1.0
+  terrain_buffer_m: 45000   # catchments upstream of the district (Chaliyar, Kuttiyadi)
+  composite_start: "2025-01-01"
+  composite_end: "2025-03-31"
+  max_scene_cloud_pct: 30
+  max_items: 8
+api:
+  host: 127.0.0.1
+  port: 8000
+  max_request_bytes: 1000000
+  job_timeout_s: 3600
+  max_concurrent_jobs: 2
+logging:
+  level: INFO
+  json_logs: true
