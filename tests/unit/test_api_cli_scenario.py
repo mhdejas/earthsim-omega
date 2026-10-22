@@ -129,3 +129,28 @@ def test_channel_preserving_aggregation(tmp_path):
     raw = ct["z_raw"][gorge_row]
     assert raw[30 // 8] < 20, "gorge cell should keep the thalweg elevation"
     assert ct["fill_depth_max_m"] < 1.0
+
+
+def _fake_run(settings, run_id, status="OK", level="GREEN"):
+    import json
+    d = settings.p.processed_dir.parent / "forecast" / "runs" / run_id
+    d.mkdir(parents=True)
+    (d / "manifest.json").write_text(json.dumps({"run_id": run_id, "status": status,
+                                                 "overall_level_next_72h": level, "wall_s": 1.0}))
+    (d / "alert.json").write_text(json.dumps({"run_id": run_id, "overall_level_next_72h": level}))
+    (d / "outlook.png").write_bytes(b"\x89PNG\r\n\x1a\nfake")
+    return d
+
+
+def test_forecast_endpoints(client, settings):
+    assert client.get("/api/forecast/latest").status_code == 404
+    assert client.get("/api/forecast/runs").json() == []
+    d = _fake_run(settings, "20261023T0300_IST", level="YELLOW")
+    _fake_run(settings, "20261023T0900_IST", status="FAILED")
+    (d.parent / "latest").symlink_to(d.name)
+    runs = client.get("/api/forecast/runs").json()
+    assert [r["run_id"] for r in runs] == ["20261023T0900_IST", "20261023T0300_IST"]   # newest first, no symlink
+    assert client.get("/api/forecast/latest").json()["overall_level_next_72h"] == "YELLOW"
+    assert client.get("/api/forecast/20261023T0300_IST/outlook.png").headers["content-type"] == "image/png"
+    assert client.get("/api/forecast/..%2F..%2Fetc/outlook.png").status_code in (404, 422)
+    assert client.get("/api/forecast/nope/outlook.png").status_code == 404
