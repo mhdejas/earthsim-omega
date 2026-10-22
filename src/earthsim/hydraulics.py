@@ -176,14 +176,16 @@ class SolverResult:
     steps: int = 0
     mass: dict[str, float] = field(default_factory=dict)
     diagnostics: dict[str, Any] = field(default_factory=dict)
+    captures: dict[float, np.ndarray] = field(default_factory=dict)
 
 
 def run(z: np.ndarray, cfg: SolverConfig, t_end: float, rain_rate: Callable[[float], float] | None = None,
         h0: np.ndarray | None = None, ocean: np.ndarray | None = None, active: np.ndarray | None = None,
-        bc: Callable[[float, np.ndarray], None] | None = None, progress: Callable[[float, int], None] | None = None
-        ) -> SolverResult:
+        bc: Callable[[float, np.ndarray], None] | None = None, progress: Callable[[float, int], None] | None = None,
+        capture_at: tuple[float, ...] = ()) -> SolverResult:
     """Run the solver. ``rain_rate(t)`` returns net rainfall in m/s (spatially uniform over ``active``).
-    ``bc(t, h)`` may impose depths in place (e.g. an inflow hydrograph boundary); its volume is tallied."""
+    ``bc(t, h)`` may impose depths in place (e.g. an inflow hydrograph boundary); its volume is tallied.
+    ``capture_at``: times (s) at which the depth field is stored exactly (the step is shortened to land on them)."""
     z = np.ascontiguousarray(z, dtype=np.float64)
     if not np.all(np.isfinite(z)):
         raise ValueError("terrain contains NaN/inf; fill or mask before simulation")
@@ -207,10 +209,13 @@ def run(z: np.ndarray, cfg: SolverConfig, t_end: float, rain_rate: Callable[[flo
     v_rain = v_ocean = v_edge = v_bc = 0.0
     t, next_out, steps, dts = 0.0, cfg.output_every_s, 0, []
     n_active = int(active.sum())
+    pending = sorted(float(c) for c in capture_at if 0 < c <= t_end)
     while t < t_end - 1e-9:
         hm = float(h.max())
         dt = cfg.dt_max if hm <= cfg.h_min else min(cfg.dt_max, cfg.alpha * dx / math.sqrt(G * hm))
         dt = min(dt, t_end - t, max(next_out - t, 1e-6))
+        if pending:
+            dt = min(dt, max(pending[0] - t, 1e-6))
         if bc is not None:
             before = float(h[active].sum())
             bc(t, h)
@@ -234,6 +239,8 @@ def run(z: np.ndarray, cfg: SolverConfig, t_end: float, rain_rate: Callable[[flo
             np.maximum(res.v_max, v, out=res.v_max)
             newly = np.isnan(res.t_arrival) & (h > cfg.wet_threshold_m)
             res.t_arrival[newly] = t
+        while pending and t >= pending[0] - 1e-6:
+            res.captures[pending.pop(0)] = h.astype(np.float32)
         if t >= next_out - 1e-9:
             res.t.append(t)
             res.snapshots.append(h.astype(np.float32))

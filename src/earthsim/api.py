@@ -299,6 +299,36 @@ def create_app(s: Settings | None = None):
             raise HTTPException(404, f"no provenance for '{stage}'; known: {sorted(allowed)}")
         return json.loads((processed / allowed[stage]).read_text())
 
+    fc_root = s.p.processed_dir.parent / "forecast" / "runs"
+
+    @app.get("/api/forecast/runs")
+    def forecast_runs():
+        if not fc_root.exists():
+            return []
+        out = []
+        for d in sorted((p for p in fc_root.iterdir() if p.is_dir() and not p.is_symlink()), reverse=True)[:50]:
+            m = d / "manifest.json"
+            if m.exists():
+                j = json.loads(m.read_text())
+                out.append({k: j.get(k) for k in ("run_id", "status", "overall_level_next_72h", "wall_s", "error")})
+        return out
+
+    @app.get("/api/forecast/latest")
+    def forecast_latest():
+        p = fc_root / "latest" / "alert.json"
+        if not p.exists():
+            raise HTTPException(404, "no successful forecast run yet")
+        return json.loads(p.read_text())
+
+    @app.get("/api/forecast/{run_id}/outlook.png")
+    def forecast_png(run_id: str):
+        if not all(ch.isalnum() or ch in "_-" for ch in run_id):
+            raise HTTPException(422, "bad run id")
+        p = fc_root / run_id / "outlook.png"
+        if not p.exists():
+            raise HTTPException(404, "no outlook image for this run")
+        return FileResponse(p, media_type="image/png")
+
     @app.post("/api/jobs", status_code=202)
     def submit(req: JobReq):
         reg = _stage_registry()

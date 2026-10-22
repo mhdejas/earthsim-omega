@@ -145,3 +145,93 @@ def flood_figure(flood_dir: str | Path, terrain_dir: str | Path, aoi_path: str |
     fig.savefig(out)
     plt.close(fig)
     return out
+
+
+def forecast_figure(alert: dict, run_dir, s) -> str:
+    """Two-panel experimental outlook: daily rain fan with IMD thresholds, and simulated wet footprint."""
+    import json as _json
+    from pathlib import Path as _P
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    import numpy as _np
+    import rasterio
+    colors = {"GREEN": "#2e7d32", "YELLOW": "#f9a825", "ORANGE": "#ef6c00", "RED": "#c62828"}
+    f = alert["flood_scenarios"]
+    fig = plt.figure(figsize=(10.8, 13.5 if f.get("run") else 7.2), dpi=100)
+    fig.patch.set_facecolor("white")
+    fig.text(0.5, 0.985, "Kozhikode flood outlook - EXPERIMENTAL, not an official warning", ha="center", va="top",
+             fontsize=17, weight="bold", color="#b71c1c")
+    fig.text(0.5, 0.985 - 0.42 / fig.get_figheight(), f"Issued {alert['issued_ist'][:16].replace('T', ' ')} IST  |  overall level next 72 h: "
+             f"{alert['overall_level_next_72h']}  |  official advisories: IMD, CWC, KSDMA", ha="center", va="top", fontsize=11)
+    ax = fig.add_axes([0.09, 0.62 if f.get("run") else 0.12, 0.86, 0.29 if f.get("run") else 0.75])
+    days = alert["rain_outlook"]["days"]
+    x = _np.arange(len(days))
+    for i, d in enumerate(days):
+        p10, p50, p90 = d["ensemble_p10_p50_p90_mm"]
+        ax.bar(i, p90 - p10, bottom=p10, width=0.6, color=colors[d["rain_level"]], alpha=0.45)
+        ax.plot([i - 0.3, i + 0.3], [p50, p50], color="k", lw=2)
+        ax.plot(i, d["deterministic_mm"], "D", color="#1565c0", ms=8)
+        ax.text(i, p90 + 3, f"P(heavy) {d['prob_heavy']:.0%}", ha="center", fontsize=9)
+    for y, lab in ((64.5, "IMD heavy 64.5"), (115.6, "IMD very heavy 115.6"), (alert["rain_outlook"]["trigger_mm"], "verified trigger 50")):
+        ax.axhline(y, ls="--", lw=1, color="#555")
+        ax.text(len(days) - 0.45, y + 1.5, lab, ha="right", fontsize=9, color="#333")
+    ax.set_xticks(x, [d["day_ending_0830_ist"][5:] + ("*" if d["in_progress"] else "") for d in days])
+    ax.set_ylabel("District-mean rain, 24 h to 08:30 IST (mm)")
+    ax.set_title("ECMWF IFS 51-member ensemble: bar = p10-p90 (colour = experimental level), line = median, "
+                 "diamond = deterministic", fontsize=10)
+    ax.set_ylim(0, max(130, max(d["ensemble_p10_p50_p90_mm"][2] for d in days) + 15))
+    if f.get("run"):
+        from .calibration import coarse_terrain_cached
+        from .geo import Grid, aoi_mask
+        from .pipelines import load_aoi
+        ct = coarse_terrain_cached(s)
+        ny, nx = ct["z"].shape
+        aoi = aoi_mask(load_aoi(s), Grid(ct["crs"], ct["transform"], nx, ny))
+        th = f["params"]["wet_threshold_m"]
+        mem = f["members"]
+        wettest = max(mem, key=lambda k: mem[k]["peak_of_snapshots"]["wet_km2"])
+        med = next((k for k in mem if k.startswith("ens_p50")), wettest)
+        def peak(name):
+            arr = None
+            for lab in f["capture_times_ist"]:
+                with rasterio.open(_P(run_dir) / "members" / name / f"depth_{lab}.tif") as ds:
+                    d = ds.read(1)
+                arr = d if arr is None else _np.fmax(arr, d)
+            return (_np.nan_to_num(arr) >= th) & aoi
+        show = _np.where(aoi, 0, _np.nan)
+        show[peak(wettest)] = 1
+        show[peak(med)] = 2
+        ax2 = fig.add_axes([0.03, 0.05, 0.62, 0.50])
+        rr, cc = _np.where(aoi)
+        sl = (slice(max(rr.min() - 3, 0), rr.max() + 4), slice(max(cc.min() - 3, 0), cc.max() + 4))
+        hs = _np.where(aoi, ct["z"], _np.nan)[sl]
+        show = show[sl]; aoi = aoi[sl]
+        ax2.imshow(hs, cmap="Greys", alpha=0.35)
+        from matplotlib.colors import ListedColormap
+        ax2.imshow(show, cmap=ListedColormap(["#f5f5f5", "#64b5f6", "#0d47a1"]), vmin=0, vmax=2, alpha=0.9)
+        ax2.contour(aoi.astype(float), levels=[0.5], colors="#b71c1c", linewidths=1)
+        ax2.set_axis_off()
+        ax2.set_title(f"SIMULATED wet cells (depth >= {th} m) at peak of +24/48/72 h\n"
+                      f"dark = ensemble median member, light = wettest scenario", fontsize=11)
+        tx = fig.add_axes([0.66, 0.05, 0.32, 0.52]); tx.set_axis_off()
+        lines = ["Scenario (72 h rain)", ""]
+        for k, m in mem.items():
+            pk = m["peak_of_snapshots"]
+            lines += [f"{k.split('_member')[0]} ({m['forecast_72h_mm']:.0f} mm)",
+                      f"  wet {pk['wet_km2']:.0f} km2, {pk['buildings']:,} bldgs",
+                      f"  roads {pk['major_road_km']:.0f} km, schools {pk['facilities'].get('school', 0)},",
+                      f"  hospitals {pk['facilities'].get('hospital', 0)}", ""]
+        ref = f.get("reference_hindcast_wet_km2", {})
+        if ref:
+            lines += ["Same model, past floods:"] + [f"  {e}: {v['wet_km2']:.0f} km2" for e, v in ref.items()]
+        tx.text(0, 1, "\n".join(lines), va="top", fontsize=10, family="monospace")
+    v = alert["verified_skill"]["lead_day1_held_out"]
+    fig.text(0.5, 0.012, f"Rain: ECMWF IFS 0.25 deg via Open-Meteo. Day-1 trigger skill (held-out, JJAS 2024-26): hit rate "
+             f"{v['pod_hit_rate']:.2f}, false-alarm ratio {v['far_false_alarm_ratio']:.2f}. Probability cut-offs unverified.\n"
+             "Flood model: ~9x the radar-observed area on its calibration event; held-out skill not better than the "
+             "KSDMA hazard map. Footprints show where water collects first, not depths.",
+             ha="center", fontsize=8.5, color="#333")
+    out = _P(run_dir) / "outlook.png"
+    fig.savefig(out); plt.close(fig)
+    return str(out)

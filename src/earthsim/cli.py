@@ -228,3 +228,60 @@ def serve(ctx, host, port):
 
     s = _settings(ctx)
     uvicorn.run(create_app(s), host=host or s.api.host, port=port or s.api.port, log_level="info")
+
+
+@main.group()
+def forecast():
+    """Experimental flood decision-support cycle (live ECMWF rain -> flood footprint -> alert)."""
+
+
+@forecast.command("verify-triggers")
+@click.pass_context
+def forecast_verify(ctx):
+    """Verify IMD-category rain triggers by lead day against ERA5 (JJAS 2024-2026) and tune the trigger."""
+    from .rain_trigger import tune_trigger_loyo, verify
+    s = _settings(ctx)
+    r = verify(s.p.raw_dir / "forecast_archive")
+    r["trigger_tuning_loyo"] = tune_trigger_loyo(r)
+    out = s.p.processed_dir / "warning"
+    out.mkdir(parents=True, exist_ok=True)
+    (out / "rain_trigger_verification.json").write_text(json.dumps(r, indent=2))
+    _echo_json({k: v["pooled_held_out"] for k, v in r["trigger_tuning_loyo"]["by_lead"].items()})
+
+
+@forecast.command("run")
+@click.option("--no-hydraulics", is_flag=True, help="rain outlook only (seconds instead of minutes)")
+@click.option("--workers", type=int, default=4, show_default=True, help="parallel flood-model members")
+@click.pass_context
+def forecast_run(ctx, no_hydraulics, workers):
+    """Run one forecast cycle; writes data/forecast/runs/<run_id>/ and updates 'latest' on success."""
+    from .forecast import run_cycle
+    if workers < 1:
+        _fail("--workers must be >= 1")
+    m = run_cycle(_settings(ctx), hydraulics=not no_hydraulics, workers=workers)
+    _echo_json({k: m.get(k) for k in ("run_id", "status", "overall_level_next_72h", "wall_s", "stages", "error")})
+    if m["status"] != "OK":
+        raise SystemExit(1)
+
+
+@forecast.command("latest")
+@click.pass_context
+def forecast_latest(ctx):
+    """Print the latest successful alert summary."""
+    s = _settings(ctx)
+    p = s.p.processed_dir.parent / "forecast" / "runs" / "latest" / "alert.json"
+    if not p.exists():
+        _fail("no successful forecast run yet: earthsim forecast run")
+    a = json.loads(p.read_text())
+    _echo_json({"run_id": a["run_id"], "level": a["overall_level_next_72h"],
+                "days": [(d["day_ending_0830_ist"], d["deterministic_mm"], d["prob_heavy"], d["rain_level"])
+                         for d in a["rain_outlook"]["days"]]})
+
+
+@main.command("calibrate")
+@click.argument("step", type=click.Choice(["terrain", "select", "test"]))
+@click.pass_context
+def calibrate(ctx, step):
+    """Pre-registered flood-model calibration (configs/experiments/flood_calibration.yaml)."""
+    import subprocess, sys
+    raise SystemExit(subprocess.call([sys.executable, "-m", "earthsim.calibration", step]))
