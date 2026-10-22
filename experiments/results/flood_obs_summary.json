@@ -1,0 +1,80 @@
+{
+  "grid": {
+    "crs": "EPSG:32643",
+    "transform": [
+      30.0,
+      0.0,
+      556440.0,
+      0.0,
+      -30.0,
+      1307220.0
+    ],
+    "width": 2360,
+    "height": 2652,
+    "res_m": 30.0,
+    "bounds": [
+      556440.0,
+      1227660.0,
+      627240.0,
+      1307220.0
+    ]
+  },
+  "events": {
+    "2018-08-09": {
+      "relative_orbit": 165,
+      "post_item_ids": [
+        "S1A_IW_GRDH_1SDV_20180809T004043_20180809T004108_023162_02842B_rtc",
+        "S1A_IW_GRDH_1SDV_20180809T004018_20180809T004043_023162_02842B_rtc"
+      ],
+      "reference_dates": [
+        "2019-01-12",
+        "2019-01-24"
+      ],
+      "threshold_db": -15.0,
+      "drop_db": 3.0,
+      "district_valid_km2": 333.3,
+      "district_valid_fraction": 0.1408,
+      "flooded_km2": 0.18,
+      "permanent_water_km2": 2.88,
+      "post_vv_db_median_district": -5.32,
+      "ref_vv_db_median_district": -6.27
+    },
+    "2018-08-14": {
+      "relative_orbit": 63,
+      "post_item_ids": [
+        "S1A_IW_GRDH_1SDV_20180814T004838_20180814T004905_023235_028685_rtc"
+      ],
+      "reference_dates": [
+        "2019-01-05",
+        "2019-01-17"
+      ],
+      "threshold_db": -15.0,
+      "drop_db": 3.0,
+      "district_valid_km2": 2367.7,
+      "district_valid_fraction": 1.0,
+      "flooded_km2": 2.26,
+      "permanent_water_km2": 23.6,
+      "post_vv_db_median_district": -5.09,
+      "ref_vv_db_median_district": -6.34
+    },
+    "2019-08-10": {
+      "relative_orbit": 165,
+      "post_item_ids": [
+        "S1B_IW_GRDH_1SDV_20190810T004008_20190810T004033_017516_020F12_rtc",
+        "S1B_IW_GRDH_1SDV_20190810T003943_20190810T004008_017516_020F12_rtc"
+      ],
+      "reference_dates": [
+        "2019-01-12",
+        "2019-01-24"
+      ],
+      "threshold_db": -15.0,
+      "drop_db": 3.0,
+      "district_valid_km2": 335.0,
+      "district_valid_fraction": 0.1415,
+      "flooded_km2": 0.28,
+      "permanent_water_km2": 2.89,
+      "post_vv_db_median_district": -5.37,
+      "ref_vv_db_median_district": -6.27
+    }
+  }
+}

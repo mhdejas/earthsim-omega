@@ -1,0 +1,90 @@
+{
+  "tag": "c090",
+  "params": {
+    "dx_m": 240.0,
+    "factor": 8,
+    "runoff_c": 0.9,
+    "n_land": 0.08,
+    "n_channel": 0.04,
+    "alpha": 0.7,
+    "start_ist": "2019-08-01T00:00",
+    "end_ist": "2019-08-10T06:10",
+    "t_end_s": 799800.0
+  },
+  "forcing": {
+    "distinct_era5_cells": [
+      [
+        11.25,
+        76.0
+      ],
+      [
+        11.5,
+        75.75
+      ]
+    ],
+    "requested_points": 5,
+    "timezone": "Asia/Kolkata",
+    "per_cell_total_mm": [
+      428.4,
+      391.8
+    ],
+    "hours": 223,
+    "total_rain_mm": 410.09999999999997,
+    "max_hourly_mm": 9.85,
+    "net_total_mm": 369.09
+  },
+  "terrain": {
+    "raised_cells": 14665,
+    "fill_depth_max_m": 19.492919921875114,
+    "fill_cells_gt_1m": 8774,
+    "channel_cells": 58900,
+    "diagonal_carved_cells": 57505
+  },
+  "aggregation": "channel-preserving (stream: block-min of stream cells; else block-mean)",
+  "grid": {
+    "crs": "EPSG:32643",
+    "transform": [
+      240.0,
+      0.0,
+      513420.0,
+      0.0,
+      -240.0,
+      1350180.0
+    ],
+    "shape": [
+      689,
+      653
+    ]
+  },
+  "steps": 35558,
+  "mass": {
+    "v_initial_m3": 0.0,
+    "v_final_m3": 2624305102.6960635,
+    "v_rain_m3": 9424220622.082043,
+    "v_boundary_in_m3": 0.0,
+    "v_ocean_out_m3": 5519249848.732488,
+    "v_edge_out_m3": 1280665670.65353,
+    "residual_m3": 3.8623809814453125e-05,
+    "relative_residual": 4.0983558602133164e-15
+  },
+  "diagnostics": {
+    "dt_min_s": 0.3593220787588507,
+    "dt_mean_s": 22.492828618032455,
+    "dt_max_s": 30.0,
+    "negative_depth_cells": 0,
+    "nan_cells": 0,
+    "h_max_m": 11.43540875478618,
+    "v_max_ms": 36.130557535458884,
+    "cells": 449917,
+    "active_cells": 449917
+  },
+  "outputs": {
+    "depth_at_overpass": "data/processed/hydraulics/c090_depth_at_overpass.tif",
+    "depth_max": "data/processed/hydraulics/c090_depth_max.tif",
+    "speed_max": "data/processed/hydraulics/c090_speed_max.tif",
+    "arrival_time_h": "data/processed/hydraulics/c090_arrival_time_h.tif",
+    "terrain_conditioned": "data/processed/hydraulics/c090_terrain_conditioned.tif"
+  },
+  "wall_s": 261.4,
+  "cell_steps_per_s": 61195131
+}

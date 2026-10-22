@@ -1,0 +1,29 @@
+{
+  "test": "basin area vs published values",
+  "dem": "Copernicus GLO-30 DSM, 30 m, Priority-Flood+eps D8",
+  "results": [
+    {
+      "river": "Chaliyar",
+      "modelled_outlet": [
+        75.81273,
+        11.17603
+      ],
+      "modelled_area_km2": 2820.16,
+      "published_area_km2": 2933,
+      "rel_error_pct": -3.85,
+      "source": "India-WRIS wiki, https://indiawris.gov.in/wiki/doku.php?id=chaliyar (retrieved 2026-10-23)"
+    },
+    {
+      "river": "Kuttiyadi",
+      "modelled_outlet": [
+        75.59814,
+        11.56992
+      ],
+      "modelled_area_km2": 641.5,
+      "published_area_km2": 657,
+      "rel_error_pct": -2.36,
+      "source": "IJERT 2022 'Impact of LULC change on runoff in Kuttiyadi river basin', https://www.ijert.org/impact-of-land-use-land-cover-change-on-runoff-in-kuttiyadi-river-basin (retrieved 2026-10-23); published values range 583-667 km2"
+    }
+  ],
+  "note": "Outlets matched to river mouths (Beypore; Kottakkal near Vadakara). Differences include DSM canopy effects, D8 discretisation, and differing basin definitions in sources."
+}

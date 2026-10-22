@@ -1,0 +1,109 @@
+{
+  "os": "Linux 6.18.38+",
+  "arch": "x86_64",
+  "python": "3.12.3",
+  "executable": ".venv/bin/python3",
+  "cpu_model": "Intel(R) Xeon(R) Processor @ 2.50GHz",
+  "cpu": {
+    "vendor": "GenuineIntel",
+    "family": 6,
+    "model": 85,
+    "stepping": 7,
+    "hypervisor": "KVM",
+    "l3_cache": "35.8 MiB (1 instance)",
+    "cache_size_reported": "36608 KB",
+    "virtualized": true,
+    "microarchitecture_inferred": "Cascade Lake (inferred: model 85, stepping 7, AVX512_VNNI present)",
+    "isa_supported": {
+      "sse4_2": true,
+      "avx": true,
+      "avx2": true,
+      "fma": true,
+      "avx512f": true,
+      "avx512dq": true,
+      "avx512bw": true,
+      "avx512vl": true,
+      "avx512cd": true,
+      "avx512_vnni": true,
+      "avx512_bf16": false,
+      "amx_tile": false,
+      "amx_bf16": false,
+      "amx_int8": false,
+      "f16c": true
+    },
+    "sku_note": "Virtualised CPU: the model-name string is hypervisor-provided; exact host SKU and sustained clock are unknown."
+  },
+  "simd": {
+    "numpy": {
+      "baseline_compiled": [
+        "X86_V2"
+      ],
+      "dispatch_targets_compiled": [
+        "X86_V3",
+        "X86_V4",
+        "AVX512_ICL",
+        "AVX512_SPR"
+      ],
+      "dispatch_targets_active": [
+        "X86_V3",
+        "X86_V4"
+      ],
+      "note": "active = compiled dispatch target AND supported by this CPU; numpy selects these at runtime"
+    },
+    "torch": {
+      "aten_cpu_capability": "AVX512",
+      "mkldnn_available": true,
+      "num_threads": 4
+    },
+    "avx512_vnni_used": false,
+    "avx512_vnni_note": "no int8-quantised kernels are executed by EARTHSIM workloads"
+  },
+  "logical_cores": 8,
+  "physical_cores": 4,
+  "ram_total_bytes": 25383874560,
+  "ram_available_bytes": 21523869696,
+  "disk_total_bytes": 76472786944,
+  "disk_free_bytes": 40398450688,
+  "gpu": {
+    "available": false,
+    "devices": [],
+    "framework": "torch 2.14.1+cpu",
+    "notes": [
+      "torch.cuda.is_available() is False"
+    ],
+    "torch_cuda_build": null,
+    "nvidia_smi": false
+  },
+  "gdal_version": "3.12.2",
+  "gdal_cli": false,
+  "libraries": {
+    "numpy": "2.5.4",
+    "scipy": "1.18.1",
+    "pandas": "3.1.0",
+    "rasterio": "1.5.2",
+    "geopandas": "1.2.0",
+    "shapely": "2.2.0",
+    "pyproj": "3.8.0",
+    "xarray": "2026.9.0",
+    "rioxarray": "0.23.0",
+    "dask": "2026.8.0",
+    "pyarrow": "26.0.0",
+    "sklearn": "1.9.1",
+    "torch": "2.14.1+cpu",
+    "pystac_client": "0.9.1",
+    "fastapi": "0.161.0",
+    "pydantic": "2.14.1"
+  },
+  "internet": true,
+  "docker": false,
+  "docker_compose": false,
+  "recommended_profile": "workstation",
+  "profile_settings": {
+    "tile_size": 1024,
+    "max_memory_fraction": 0.5,
+    "batch_size": 32,
+    "workers": 6,
+    "memory_budget_bytes": 10761934848,
+    "device": "cpu"
+  }
+}

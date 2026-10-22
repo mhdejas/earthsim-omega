@@ -1,0 +1,392 @@
+{
+  "dem_quality": {
+    "valid_px": 28848104,
+    "nan_px": 0,
+    "min_m": -5.4322733879089355,
+    "max_m": 2620.885498046875,
+    "mean_m": 298.321533203125,
+    "res_m": 30.0,
+    "zero_or_below_px": 9697944,
+    "vertical_datum": "EGM2008 geoid (Copernicus DEM spec)",
+    "units": "m",
+    "surface_type": "DSM"
+  },
+  "conditioning": {
+    "algorithm": "Priority-Flood+epsilon (Barnes et al. 2014), float64; D8 steepest descent; accumulation in descending elevation order",
+    "cells_raised": 1999488,
+    "depression_filled_px_gt_1mm": 1836420,
+    "max_fill_depth_m": 30.090332031251364,
+    "mean_fill_depth_where_filled_m": 2.5623875987602864,
+    "ocean_px": 9692391,
+    "outlet_seed_px": 38299,
+    "land_cells_without_downslope_receiver": 0,
+    "pysheds_crosscheck": {
+      "library": "pysheds 0.5",
+      "input_dtype": "float32",
+      "unresolved_flat_cells_on_land": 96,
+      "unresolved_pit_cells_on_land": 949,
+      "verdict": "rejected: leaves inland terminal cells"
+    }
+  },
+  "streams": {
+    "stream_px": 51198,
+    "stream_length_km_approx": 1535.94,
+    "max_catchment_km2": 4441.0212
+  },
+  "stream_threshold_cells": 1111.111111111111,
+  "grid": {
+    "crs": "EPSG:32643",
+    "transform": [
+      30.0,
+      0.0,
+      513420.0,
+      0.0,
+      -30.0,
+      1350180.0
+    ],
+    "width": 5228,
+    "height": 5518,
+    "res_m": 30.0,
+    "bounds": [
+      513420.0,
+      1184640.0,
+      670260.0,
+      1350180.0
+    ]
+  },
+  "aoi_stats": {
+    "hand_median_m": 17.125450134277344,
+    "slope_median_deg": 7.523804187774658,
+    "dem_aoi_min_m": -5.4322733879089355,
+    "dem_aoi_max_m": 2329.0517578125
+  },
+  "domain": {
+    "crs": "EPSG:32643",
+    "res_m": 30.0,
+    "bounds_utm": [
+      513420.0,
+      1184640.0,
+      670260.0,
+      1350180.0
+    ],
+    "bbox_lonlat": [
+      75.1227,
+      10.7127,
+      76.5651,
+      12.2136
+    ],
+    "size_px": [
+      5228,
+      5518
+    ],
+    "area_km2": 25963.2936,
+    "buffer_m": 45000.0
+  },
+  "basins_summary": {
+    "basins_draining_district": 27,
+    "truncated_basins": 1,
+    "district_area_in_truncated_basins_km2": 6.98,
+    "district_area_in_basins_listed_km2": 2319.81,
+    "internal_sink_basins": 0,
+    "total_upstream_area_km2": 10266.8
+  },
+  "basins": [
+    {
+      "outlet_index": 2044147,
+      "outlet_lon": 76.56432,
+      "outlet_lat": 12.10331,
+      "outlet_type": "domain_edge",
+      "area_km2": 4441.02,
+      "area_in_district_km2": 6.98,
+      "max_elev_m": 2043.3,
+      "border_cells": 1,
+      "truncated": true
+    },
+    {
+      "outlet_index": 19973470,
+      "outlet_lon": 75.81273,
+      "outlet_lat": 11.17603,
+      "outlet_type": "ocean",
+      "area_km2": 2820.16,
+      "area_in_district_km2": 628.9,
+      "max_elev_m": 2615.5,
+      "border_cells": 0,
+      "truncated": false
+    },
+    {
+      "outlet_index": 20836164,
+      "outlet_lon": 75.83293,
+      "outlet_lat": 11.13121,
+      "outlet_type": "ocean",
+      "area_km2": 1171.14,
+      "area_in_district_km2": 2.76,
+      "max_elev_m": 1350.3,
+      "border_cells": 0,
+      "truncated": false
+    },
+    {
+      "outlet_index": 12392086,
+      "outlet_lon": 75.59814,
+      "outlet_lat": 11.56992,
+      "outlet_type": "ocean",
+      "area_km2": 641.5,
+      "area_in_district_km2": 634.49,
+      "max_elev_m": 2042.3,
+      "border_cells": 0,
+      "truncated": false
+    },
+    {
+      "outlet_index": 10159597,
+      "outlet_lon": 75.56177,
+      "outlet_lat": 11.68583,
+      "outlet_type": "ocean",
+      "area_km2": 383.99,
+      "area_in_district_km2": 266.82,
+      "max_elev_m": 1378.9,
+      "border_cells": 0,
+      "truncated": false
+    },
+    {
+      "outlet_index": 16721405,
+      "outlet_lon": 75.74475,
+      "outlet_lat": 11.34495,
+      "outlet_type": "ocean",
+      "area_km2": 311.26,
+      "area_in_district_km2": 311.26,
+      "max_elev_m": 1139.6,
+      "border_cells": 0,
+      "truncated": false
+    },
+    {
+      "outlet_index": 16177694,
+      "outlet_lon": 75.74509,
+      "outlet_lat": 11.37316,
+      "outlet_type": "ocean",
+      "area_km2": 280.05,
+      "area_in_district_km2": 280.05,
+      "max_elev_m": 691.6,
+      "border_cells": 0,
+      "truncated": false
+    },
+    {
+      "outlet_index": 18823209,
+      "outlet_lon": 75.78514,
+      "outlet_lat": 11.23579,
+      "outlet_type": "ocean",
+      "area_km2": 110.7,
+      "area_in_district_km2": 110.7,
+      "max_elev_m": 149.5,
+      "border_cells": 0,
+      "truncated": false
+    },
+    {
+      "outlet_index": 20339463,
+      "outlet_lon": 75.82174,
+      "outlet_lat": 11.15701,
+      "outlet_type": "ocean",
+      "area_km2": 53.14,
+      "area_in_district_km2": 24.02,
+      "max_elev_m": 237.5,
+      "border_cells": 0,
+      "truncated": false
+    },
+    {
+      "outlet_index": 12517542,
+      "outlet_lon": 75.59372,
+      "outlet_lat": 11.56342,
+      "outlet_type": "ocean",
+      "area_km2": 12.94,
+      "area_in_district_km2": 12.94,
+      "max_elev_m": 74.1,
+      "border_cells": 0,
+      "truncated": false
+    },
+    {
+      "outlet_index": 12365946,
+      "outlet_lon": 75.59814,
+      "outlet_lat": 11.57127,
+      "outlet_type": "ocean",
+      "area_km2": 6.56,
+      "area_in_district_km2": 6.56,
+      "max_elev_m": 101.0,
+      "border_cells": 0,
+      "truncated": false
+    },
+    {
+      "outlet_index": 16470430,
+      "outlet_lon": 75.73626,
+      "outlet_lat": 11.35799,
+      "outlet_type": "ocean",
+      "area_km2": 5.27,
+      "area_in_district_km2": 5.27,
+      "max_elev_m": 31.5,
+      "border_cells": 0,
+      "truncated": false
+    },
+    {
+      "outlet_index": 12355468,
+      "outlet_lon": 75.59209,
+      "outlet_lat": 11.57183,
+      "outlet_type": "ocean",
+      "area_km2": 4.46,
+      "area_in_district_km2": 4.46,
+      "max_elev_m": 46.0,
+      "border_cells": 0,
+      "truncated": false
+    },
+    {
+      "outlet_index": 14975056,
+      "outlet_lon": 75.69081,
+      "outlet_lat": 11.43569,
+      "outlet_type": "ocean",
+      "area_km2": 3.54,
+      "area_in_district_km2": 3.54,
+      "max_elev_m": 56.0,
+      "border_cells": 0,
+      "truncated": false
+    },
+    {
+      "outlet_index": 20491046,
+      "outlet_lon": 75.81375,
+      "outlet_lat": 11.14917,
+      "outlet_type": "ocean",
+      "area_km2": 2.56,
+      "area_in_district_km2": 2.56,
+      "max_elev_m": 32.5,
+      "border_cells": 0,
+      "truncated": false
+    },
+    {
+      "outlet_index": 19408751,
+      "outlet_lon": 75.7867,
+      "outlet_lat": 11.2054,
+      "outlet_type": "ocean",
+      "area_km2": 2.46,
+      "area_in_district_km2": 2.45,
+      "max_elev_m": 24.1,
+      "border_cells": 0,
+      "truncated": false
+    },
+    {
+      "outlet_index": 11001301,
+      "outlet_lon": 75.56059,
+      "outlet_lat": 11.64216,
+      "outlet_type": "ocean",
+      "area_km2": 2.27,
+      "area_in_district_km2": 2.27,
+      "max_elev_m": 53.2,
+      "border_cells": 0,
+      "truncated": false
+    },
+    {
+      "outlet_index": 16371169,
+      "outlet_lon": 75.75579,
+      "outlet_lat": 11.3631,
+      "outlet_type": "ocean",
+      "area_km2": 1.66,
+      "area_in_district_km2": 1.66,
+      "max_elev_m": 94.7,
+      "border_cells": 0,
+      "truncated": false
+    },
+    {
+      "outlet_index": 17824562,
+      "outlet_lon": 75.75807,
+      "outlet_lat": 11.28767,
+      "outlet_type": "ocean",
+      "area_km2": 1.57,
+      "area_in_district_km2": 1.57,
+      "max_elev_m": 44.3,
+      "border_cells": 0,
+      "truncated": false
+    },
+    {
+      "outlet_index": 18891160,
+      "outlet_lon": 75.78156,
+      "outlet_lat": 11.23227,
+      "outlet_type": "ocean",
+      "area_km2": 1.5,
+      "area_in_district_km2": 1.5,
+      "max_elev_m": 18.4,
+      "border_cells": 0,
+      "truncated": false
+    },
+    {
+      "outlet_index": 18085981,
+      "outlet_lon": 75.76325,
+      "outlet_lat": 11.27409,
+      "outlet_type": "ocean",
+      "area_km2": 1.42,
+      "area_in_district_km2": 1.42,
+      "max_elev_m": 20.6,
+      "border_cells": 0,
+      "truncated": false
+    },
+    {
+      "outlet_index": 20146002,
+      "outlet_lon": 75.8149,
+      "outlet_lat": 11.16707,
+      "outlet_type": "ocean",
+      "area_km2": 1.39,
+      "area_in_district_km2": 1.39,
+      "max_elev_m": 17.7,
+      "border_cells": 0,
+      "truncated": false
+    },
+    {
+      "outlet_index": 16763196,
+      "outlet_lon": 75.73567,
+      "outlet_lat": 11.3428,
+      "outlet_type": "ocean",
+      "area_km2": 1.35,
+      "area_in_district_km2": 1.35,
+      "max_elev_m": 21.7,
+      "border_cells": 0,
+      "truncated": false
+    },
+    {
+      "outlet_index": 9940003,
+      "outlet_lon": 75.55684,
+      "outlet_lat": 11.69724,
+      "outlet_type": "ocean",
+      "area_km2": 1.32,
+      "area_in_district_km2": 1.32,
+      "max_elev_m": 39.7,
+      "border_cells": 0,
+      "truncated": false
+    },
+    {
+      "outlet_index": 14232437,
+      "outlet_lon": 75.62406,
+      "outlet_lat": 11.47437,
+      "outlet_type": "ocean",
+      "area_km2": 1.24,
+      "area_in_district_km2": 1.24,
+      "max_elev_m": 22.8,
+      "border_cells": 0,
+      "truncated": false
+    },
+    {
+      "outlet_index": 16444334,
+      "outlet_lon": 75.74836,
+      "outlet_lat": 11.35932,
+      "outlet_type": "ocean",
+      "area_km2": 1.22,
+      "area_in_district_km2": 1.22,
+      "max_elev_m": 36.9,
+      "border_cells": 0,
+      "truncated": false
+    },
+    {
+      "outlet_index": 11911040,
+      "outlet_lon": 75.57893,
+      "outlet_lat": 11.59492,
+      "outlet_type": "ocean",
+      "area_km2": 1.11,
+      "area_in_district_km2": 1.11,
+      "max_elev_m": 40.7,
+      "border_cells": 0,
+      "truncated": false
+    }
+  ]
+}

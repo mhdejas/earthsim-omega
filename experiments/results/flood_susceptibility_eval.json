@@ -1,0 +1,357 @@
+{
+  "grid": {
+    "crs": "EPSG:32643",
+    "transform": [
+      30.0,
+      0.0,
+      556440.0,
+      0.0,
+      -30.0,
+      1307220.0
+    ],
+    "width": 2360,
+    "height": 2652,
+    "res_m": 30.0,
+    "bounds": [
+      556440.0,
+      1227660.0,
+      627240.0,
+      1307220.0
+    ]
+  },
+  "pixels": 2599694,
+  "blocks": 127,
+  "excluded": {
+    "permanent_water_any_date_px": 29103,
+    "missing_terrain_px": 5013
+  },
+  "calibration_event": "2018-08-14",
+  "tests": {
+    "2019-08-10": {
+      "folds": [
+        {
+          "fold": 0,
+          "train_pixels_cal_ref": 2079758,
+          "test_pixels": 519936,
+          "hand_threshold_m": 0.5,
+          "train_csi_hand": 0.0103,
+          "dist_threshold_m": 90.0,
+          "logistic_threshold": 0.75,
+          "logistic_std_coefs": {
+            "hand": -0.42879998683929443,
+            "log_upstream_km2": 0.7860999703407288,
+            "slope_deg": -1.3747999668121338,
+            "elevation": 0.9843999743461609,
+            "dist_to_stream_m": -1.0778000354766846
+          }
+        },
+        {
+          "fold": 1,
+          "train_pixels_cal_ref": 2079757,
+          "test_pixels": 519937,
+          "hand_threshold_m": 0.5,
+          "train_csi_hand": 0.0106,
+          "dist_threshold_m": 90.0,
+          "logistic_threshold": 0.76,
+          "logistic_std_coefs": {
+            "hand": -0.5152000188827515,
+            "log_upstream_km2": 0.7390000224113464,
+            "slope_deg": -1.410099983215332,
+            "elevation": 1.0910999774932861,
+            "dist_to_stream_m": -1.164199948310852
+          }
+        },
+        {
+          "fold": 2,
+          "train_pixels_cal_ref": 2079742,
+          "test_pixels": 519952,
+          "hand_threshold_m": 0.5,
+          "train_csi_hand": 0.0077,
+          "dist_threshold_m": 90.0,
+          "logistic_threshold": 0.76,
+          "logistic_std_coefs": {
+            "hand": -0.1128000020980835,
+            "log_upstream_km2": 0.7558000087738037,
+            "slope_deg": -1.0083999633789062,
+            "elevation": 0.5885999798774719,
+            "dist_to_stream_m": -1.2347999811172485
+          }
+        },
+        {
+          "fold": 3,
+          "train_pixels_cal_ref": 2079698,
+          "test_pixels": 519996,
+          "hand_threshold_m": 0.5,
+          "train_csi_hand": 0.0089,
+          "dist_threshold_m": 90.0,
+          "logistic_threshold": 0.8,
+          "logistic_std_coefs": {
+            "hand": -1.7259000539779663,
+            "log_upstream_km2": 0.699999988079071,
+            "slope_deg": -2.4337000846862793,
+            "elevation": 1.5407999753952026,
+            "dist_to_stream_m": -0.9067999720573425
+          }
+        },
+        {
+          "fold": 4,
+          "train_pixels_cal_ref": 2079821,
+          "test_pixels": 519873,
+          "hand_threshold_m": 0.5,
+          "train_csi_hand": 0.0091,
+          "dist_threshold_m": 90.0,
+          "logistic_threshold": 0.74,
+          "logistic_std_coefs": {
+            "hand": -0.6294999718666077,
+            "log_upstream_km2": 0.7497000098228455,
+            "slope_deg": -1.5420000553131104,
+            "elevation": 1.0230000019073486,
+            "dist_to_stream_m": -1.0220999717712402
+          }
+        }
+      ],
+      "features": [
+        "hand",
+        "log_upstream_km2",
+        "slope_deg",
+        "elevation",
+        "dist_to_stream_m"
+      ],
+      "test": {
+        "hand_threshold": {
+          "tp": 293,
+          "fp": 19734,
+          "fn": 14,
+          "tn": 348641,
+          "precision": 0.014630249163629101,
+          "recall": 0.9543973941368078,
+          "csi": 0.014620028940671622,
+          "iou": 0.014620028940671622,
+          "far": 0.9853697508363709,
+          "missed_ratio": 0.04560260586319218,
+          "f1": 0.028818727254844103,
+          "predicted_fraction": 0.054320525547762025,
+          "observed_fraction": 0.0008326959276558118,
+          "average_precision": 0.011424308235996982
+        },
+        "logistic": {
+          "tp": 195,
+          "fp": 25227,
+          "fn": 112,
+          "tn": 343148,
+          "precision": 0.007670521595468492,
+          "recall": 0.6351791530944625,
+          "csi": 0.007636876321767056,
+          "iou": 0.007636876321767056,
+          "far": 0.9923294784045316,
+          "missed_ratio": 0.36482084690553745,
+          "f1": 0.015157992926269967,
+          "predicted_fraction": 0.06895373248490569,
+          "observed_fraction": 0.0008326959276558118,
+          "average_precision": 0.005469695412224506
+        },
+        "distance_threshold": {
+          "tp": 148,
+          "fp": 53097,
+          "fn": 159,
+          "tn": 315278,
+          "precision": 0.002779603718659029,
+          "recall": 0.4820846905537459,
+          "csi": 0.0027713279904127033,
+          "iou": 0.0027713279904127033,
+          "far": 0.997220396281341,
+          "missed_ratio": 0.5179153094462541,
+          "f1": 0.005527337914550344,
+          "predicted_fraction": 0.14441985233887197,
+          "observed_fraction": 0.0008326959276558118
+        },
+        "ksdma_10yr_footprint": {
+          "tp": 277,
+          "fp": 11645,
+          "fn": 30,
+          "tn": 356730,
+          "precision": 0.02323435665156853,
+          "recall": 0.9022801302931596,
+          "csi": 0.0231760374832664,
+          "iou": 0.0231760374832664,
+          "far": 0.9767656433484315,
+          "missed_ratio": 0.09771986970684039,
+          "f1": 0.04530215062556219,
+          "predicted_fraction": 0.032336810584731555,
+          "observed_fraction": 0.0008326959276558118
+        },
+        "ksdma_25yr_footprint": {
+          "tp": 294,
+          "fp": 12322,
+          "fn": 13,
+          "tn": 356053,
+          "precision": 0.023303741280913125,
+          "recall": 0.9576547231270358,
+          "csi": 0.023279752949560535,
+          "iou": 0.023279752949560535,
+          "far": 0.9766962587190868,
+          "missed_ratio": 0.04234527687296417,
+          "f1": 0.04550027083494545,
+          "predicted_fraction": 0.034219191606859024,
+          "observed_fraction": 0.0008326959276558118
+        },
+        "ksdma_50yr_footprint": {
+          "tp": 294,
+          "fp": 13117,
+          "fn": 13,
+          "tn": 355258,
+          "precision": 0.021922302587428232,
+          "recall": 0.9576547231270358,
+          "csi": 0.021901072705601907,
+          "iou": 0.021901072705601907,
+          "far": 0.9780776974125718,
+          "missed_ratio": 0.04234527687296417,
+          "f1": 0.04286339116489284,
+          "predicted_fraction": 0.036375521452091504,
+          "observed_fraction": 0.0008326959276558118
+        }
+      },
+      "calibration_event_spatial_cv": {
+        "hand_threshold": {
+          "tp": 2256,
+          "fp": 239334,
+          "fn": 149,
+          "tn": 2357955,
+          "precision": 0.009338134856575189,
+          "recall": 0.9380457380457381,
+          "csi": 0.009332379136175793,
+          "iou": 0.009332379136175793,
+          "far": 0.9906618651434248,
+          "missed_ratio": 0.06195426195426196,
+          "f1": 0.018492182216848705,
+          "predicted_fraction": 0.09293016793514929,
+          "observed_fraction": 0.0009251088781987418
+        },
+        "logistic": {
+          "tp": 1411,
+          "fp": 167237,
+          "fn": 994,
+          "tn": 2430052,
+          "precision": 0.008366538589250985,
+          "recall": 0.5866943866943867,
+          "csi": 0.008317515709553058,
+          "iou": 0.008317515709553058,
+          "far": 0.991633461410749,
+          "missed_ratio": 0.41330561330561333,
+          "f1": 0.016497810620100202,
+          "predicted_fraction": 0.0648722503494642,
+          "observed_fraction": 0.0009251088781987418
+        },
+        "distance_threshold": {
+          "tp": 1151,
+          "fp": 362944,
+          "fn": 1254,
+          "tn": 2234345,
+          "precision": 0.0031612628572213297,
+          "recall": 0.4785862785862786,
+          "csi": 0.0031504123454559885,
+          "iou": 0.0031504123454559885,
+          "far": 0.9968387371427787,
+          "missed_ratio": 0.5214137214137214,
+          "f1": 0.006281036834924966,
+          "predicted_fraction": 0.14005302162485278,
+          "observed_fraction": 0.0009251088781987418
+        },
+        "ksdma_10yr_footprint": {
+          "tp": 1946,
+          "fp": 160325,
+          "fn": 459,
+          "tn": 2436964,
+          "precision": 0.011992284511711889,
+          "recall": 0.8091476091476092,
+          "csi": 0.011958458796779942,
+          "iou": 0.011958458796779942,
+          "far": 0.9880077154882881,
+          "missed_ratio": 0.19085239085239086,
+          "f1": 0.023634287935096795,
+          "predicted_fraction": 0.062419269344776734,
+          "observed_fraction": 0.0009251088781987418
+        },
+        "ksdma_25yr_footprint": {
+          "tp": 1955,
+          "fp": 171528,
+          "fn": 450,
+          "tn": 2425761,
+          "precision": 0.01126911570586167,
+          "recall": 0.8128898128898129,
+          "csi": 0.011239960214565378,
+          "iou": 0.011239960214565378,
+          "far": 0.9887308842941384,
+          "missed_ratio": 0.18711018711018712,
+          "f1": 0.02223005548985718,
+          "predicted_fraction": 0.06673208462226708,
+          "observed_fraction": 0.0009251088781987418
+        },
+        "ksdma_50yr_footprint": {
+          "tp": 1958,
+          "fp": 181264,
+          "fn": 447,
+          "tn": 2416025,
+          "precision": 0.010686489613692679,
+          "recall": 0.8141372141372142,
+          "csi": 0.010660481627275153,
+          "iou": 0.010660481627275153,
+          "far": 0.9893135103863073,
+          "missed_ratio": 0.18586278586278587,
+          "f1": 0.02109606899858318,
+          "predicted_fraction": 0.07047829475315172,
+          "observed_fraction": 0.0009251088781987418
+        }
+      },
+      "test_prevalence": 0.0008326959276558118
+    }
+  },
+  "resampling_log": [
+    {
+      "source": "${EARTHSIM_LOCAL_DATA}/kozhikode_flood/raster/1. Flood Return Probability History (10, 25, 50 years)/Kerala_Flood_10_yr_Historical.tif",
+      "band": 1,
+      "resampling": "nearest",
+      "kind": "mask",
+      "src_crs": "EPSG:4326",
+      "src_res": [
+        0.0008333333333333371,
+        0.0008333333333333367
+      ],
+      "dst_res_m": 30.0,
+      "open_options": {}
+    },
+    {
+      "source": "${EARTHSIM_LOCAL_DATA}/kozhikode_flood/raster/1. Flood Return Probability History (10, 25, 50 years)/Kerala_Flood_25_yr_Historical.tif",
+      "band": 1,
+      "resampling": "nearest",
+      "kind": "mask",
+      "src_crs": "EPSG:4326",
+      "src_res": [
+        0.0008333333333333371,
+        0.0008333333333333367
+      ],
+      "dst_res_m": 30.0,
+      "open_options": {}
+    },
+    {
+      "source": "${EARTHSIM_LOCAL_DATA}/kozhikode_flood/raster/1. Flood Return Probability History (10, 25, 50 years)/Kerala_Flood_50_yr_Historical.tif",
+      "band": 1,
+      "resampling": "nearest",
+      "kind": "mask",
+      "src_crs": "EPSG:4326",
+      "src_res": [
+        0.0008333333333333371,
+        0.0008333333333333367
+      ],
+      "dst_res_m": 30.0,
+      "open_options": {}
+    }
+  ],
+  "final_model_std_coefs": {
+    "hand": -0.5138000249862671,
+    "log_upstream_km2": 0.7591999769210815,
+    "slope_deg": -1.447700023651123,
+    "elevation": 0.9945999979972839,
+    "dist_to_stream_m": -1.0888999700546265
+  }
+}

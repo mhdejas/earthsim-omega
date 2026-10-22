@@ -1,0 +1,429 @@
+{
+  "event": "2019-08-10",
+  "note": "SAR reference covers only valid pixels of orbit 165 (eastern ~14% of the district) and sees open water only; scores are indicative.",
+  "runs": {
+    "base": {
+      "reference_pixels": 369017,
+      "observed_flooded_px": 310,
+      "resampling_log": [
+        {
+          "source": "data/processed/hydraulics/base_depth_at_overpass.tif",
+          "band": 1,
+          "resampling": "bilinear",
+          "kind": "continuous",
+          "src_crs": "EPSG:32643",
+          "src_res": [
+            240.0,
+            240.0
+          ],
+          "dst_res_m": 30.0,
+          "open_options": {}
+        },
+        {
+          "source": "data/processed/hydraulics/base_depth_max.tif",
+          "band": 1,
+          "resampling": "bilinear",
+          "kind": "continuous",
+          "src_crs": "EPSG:32643",
+          "src_res": [
+            240.0,
+            240.0
+          ],
+          "dst_res_m": 30.0,
+          "open_options": {}
+        }
+      ],
+      "model": {
+        "depth_at_overpass>=0.1m": {
+          "tp": 298,
+          "fp": 38370,
+          "fn": 12,
+          "tn": 330337,
+          "precision": 0.007706630805834281,
+          "recall": 0.9612903225806452,
+          "csi": 0.007704239917269907,
+          "iou": 0.007704239917269907,
+          "far": 0.9922933691941657,
+          "missed_ratio": 0.03870967741935484,
+          "f1": 0.015290676792036533,
+          "predicted_fraction": 0.10478650035093234,
+          "observed_fraction": 0.0008400696986859684
+        },
+        "depth_max>=0.1m": {
+          "tp": 298,
+          "fp": 56744,
+          "fn": 12,
+          "tn": 311963,
+          "precision": 0.005224220749623085,
+          "recall": 0.9612903225806452,
+          "csi": 0.0052231219546394645,
+          "iou": 0.0052231219546394645,
+          "far": 0.994775779250377,
+          "missed_ratio": 0.03870967741935484,
+          "f1": 0.010391965406611801,
+          "predicted_fraction": 0.15457824436272583,
+          "observed_fraction": 0.0008400696986859684
+        },
+        "depth_at_overpass>=0.3m": {
+          "tp": 283,
+          "fp": 20075,
+          "fn": 27,
+          "tn": 348632,
+          "precision": 0.013901169073582867,
+          "recall": 0.9129032258064517,
+          "csi": 0.013882756929114545,
+          "iou": 0.013882756929114545,
+          "far": 0.9860988309264171,
+          "missed_ratio": 0.08709677419354839,
+          "f1": 0.02738532997871105,
+          "predicted_fraction": 0.055168190083383695,
+          "observed_fraction": 0.0008400696986859684
+        },
+        "depth_max>=0.3m": {
+          "tp": 283,
+          "fp": 27541,
+          "fn": 27,
+          "tn": 341166,
+          "precision": 0.010171075330649799,
+          "recall": 0.9129032258064517,
+          "csi": 0.01016121503716204,
+          "iou": 0.01016121503716204,
+          "far": 0.9898289246693502,
+          "missed_ratio": 0.08709677419354839,
+          "f1": 0.020118006682306108,
+          "predicted_fraction": 0.0754003203104464,
+          "observed_fraction": 0.0008400696986859684
+        }
+      },
+      "comparators": {
+        "hand<=0.5m": {
+          "tp": 295,
+          "fp": 19746,
+          "fn": 15,
+          "tn": 348961,
+          "precision": 0.014719824360061874,
+          "recall": 0.9516129032258065,
+          "csi": 0.014708815317112087,
+          "iou": 0.014708815317112087,
+          "far": 0.9852801756399381,
+          "missed_ratio": 0.04838709677419355,
+          "f1": 0.028991204363421945,
+          "predicted_fraction": 0.054309151068920945,
+          "observed_fraction": 0.0008400696986859684
+        },
+        "ksdma_25yr_footprint": {
+          "tp": 294,
+          "fp": 12322,
+          "fn": 16,
+          "tn": 356385,
+          "precision": 0.023303741280913125,
+          "recall": 0.9483870967741935,
+          "csi": 0.023274224192526914,
+          "iou": 0.023274224192526914,
+          "far": 0.9766962587190868,
+          "missed_ratio": 0.05161290322580645,
+          "f1": 0.04548971066068389,
+          "predicted_fraction": 0.03418812683426509,
+          "observed_fraction": 0.0008400696986859684
+        }
+      },
+      "simulated_wet_km2_district_at_overpass_0.3m": 268.4961,
+      "params": {
+        "dx_m": 240.0,
+        "factor": 8,
+        "runoff_c": 0.7,
+        "n_land": 0.08,
+        "n_channel": 0.04,
+        "alpha": 0.7,
+        "start_ist": "2019-08-01T00:00",
+        "end_ist": "2019-08-10T06:10",
+        "t_end_s": 799800.0
+      },
+      "mass_relative_residual": 2.862316817925241e-15,
+      "h_max_m": 10.088409362296956,
+      "v_max_ms": 26.746358196204707
+    },
+    "c050": {
+      "reference_pixels": 369017,
+      "observed_flooded_px": 310,
+      "resampling_log": [
+        {
+          "source": "data/processed/hydraulics/c050_depth_at_overpass.tif",
+          "band": 1,
+          "resampling": "bilinear",
+          "kind": "continuous",
+          "src_crs": "EPSG:32643",
+          "src_res": [
+            240.0,
+            240.0
+          ],
+          "dst_res_m": 30.0,
+          "open_options": {}
+        },
+        {
+          "source": "data/processed/hydraulics/c050_depth_max.tif",
+          "band": 1,
+          "resampling": "bilinear",
+          "kind": "continuous",
+          "src_crs": "EPSG:32643",
+          "src_res": [
+            240.0,
+            240.0
+          ],
+          "dst_res_m": 30.0,
+          "open_options": {}
+        }
+      ],
+      "model": {
+        "depth_at_overpass>=0.1m": {
+          "tp": 256,
+          "fp": 33087,
+          "fn": 54,
+          "tn": 335620,
+          "precision": 0.007677773445700747,
+          "recall": 0.8258064516129032,
+          "csi": 0.007665359163996766,
+          "iou": 0.007665359163996766,
+          "far": 0.9923222265542992,
+          "missed_ratio": 0.17419354838709677,
+          "f1": 0.015214096811576977,
+          "predicted_fraction": 0.09035627084931047,
+          "observed_fraction": 0.0008400696986859684
+        },
+        "depth_max>=0.1m": {
+          "tp": 256,
+          "fp": 49764,
+          "fn": 54,
+          "tn": 318943,
+          "precision": 0.005117952818872451,
+          "recall": 0.8258064516129032,
+          "csi": 0.005112433598274554,
+          "iou": 0.005112433598274554,
+          "far": 0.9948820471811275,
+          "missed_ratio": 0.17419354838709677,
+          "f1": 0.01017285912974369,
+          "predicted_fraction": 0.13554931073636173,
+          "observed_fraction": 0.0008400696986859684
+        },
+        "depth_at_overpass>=0.3m": {
+          "tp": 251,
+          "fp": 17203,
+          "fn": 59,
+          "tn": 351504,
+          "precision": 0.014380657728887362,
+          "recall": 0.8096774193548387,
+          "csi": 0.014332210358019756,
+          "iou": 0.014332210358019756,
+          "far": 0.9856193422711126,
+          "missed_ratio": 0.19032258064516128,
+          "f1": 0.028259401035802746,
+          "predicted_fraction": 0.04729863393827385,
+          "observed_fraction": 0.0008400696986859684
+        },
+        "depth_max>=0.3m": {
+          "tp": 251,
+          "fp": 23590,
+          "fn": 59,
+          "tn": 345117,
+          "precision": 0.010528081875760245,
+          "recall": 0.8096774193548387,
+          "csi": 0.010502092050209204,
+          "iou": 0.010502092050209204,
+          "far": 0.9894719181242397,
+          "missed_ratio": 0.19032258064516128,
+          "f1": 0.020785888783073164,
+          "predicted_fraction": 0.06460677963345862,
+          "observed_fraction": 0.0008400696986859684
+        }
+      },
+      "comparators": {
+        "hand<=0.5m": {
+          "tp": 295,
+          "fp": 19746,
+          "fn": 15,
+          "tn": 348961,
+          "precision": 0.014719824360061874,
+          "recall": 0.9516129032258065,
+          "csi": 0.014708815317112087,
+          "iou": 0.014708815317112087,
+          "far": 0.9852801756399381,
+          "missed_ratio": 0.04838709677419355,
+          "f1": 0.028991204363421945,
+          "predicted_fraction": 0.054309151068920945,
+          "observed_fraction": 0.0008400696986859684
+        },
+        "ksdma_25yr_footprint": {
+          "tp": 294,
+          "fp": 12322,
+          "fn": 16,
+          "tn": 356385,
+          "precision": 0.023303741280913125,
+          "recall": 0.9483870967741935,
+          "csi": 0.023274224192526914,
+          "iou": 0.023274224192526914,
+          "far": 0.9766962587190868,
+          "missed_ratio": 0.05161290322580645,
+          "f1": 0.04548971066068389,
+          "predicted_fraction": 0.03418812683426509,
+          "observed_fraction": 0.0008400696986859684
+        }
+      },
+      "simulated_wet_km2_district_at_overpass_0.3m": 238.3947,
+      "params": {
+        "dx_m": 240.0,
+        "factor": 8,
+        "runoff_c": 0.5,
+        "n_land": 0.08,
+        "n_channel": 0.04,
+        "alpha": 0.7,
+        "start_ist": "2019-08-01T00:00",
+        "end_ist": "2019-08-10T06:10",
+        "t_end_s": 799800.0
+      },
+      "mass_relative_residual": 6.238673157729366e-15,
+      "h_max_m": 8.476579119347432,
+      "v_max_ms": 48.86060127629055
+    },
+    "c090": {
+      "reference_pixels": 369017,
+      "observed_flooded_px": 310,
+      "resampling_log": [
+        {
+          "source": "data/processed/hydraulics/c090_depth_at_overpass.tif",
+          "band": 1,
+          "resampling": "bilinear",
+          "kind": "continuous",
+          "src_crs": "EPSG:32643",
+          "src_res": [
+            240.0,
+            240.0
+          ],
+          "dst_res_m": 30.0,
+          "open_options": {}
+        },
+        {
+          "source": "data/processed/hydraulics/c090_depth_max.tif",
+          "band": 1,
+          "resampling": "bilinear",
+          "kind": "continuous",
+          "src_crs": "EPSG:32643",
+          "src_res": [
+            240.0,
+            240.0
+          ],
+          "dst_res_m": 30.0,
+          "open_options": {}
+        }
+      ],
+      "model": {
+        "depth_at_overpass>=0.1m": {
+          "tp": 308,
+          "fp": 43179,
+          "fn": 2,
+          "tn": 325528,
+          "precision": 0.00708257640214317,
+          "recall": 0.9935483870967742,
+          "csi": 0.007082250684081032,
+          "iou": 0.007082250684081032,
+          "far": 0.9929174235978568,
+          "missed_ratio": 0.0064516129032258064,
+          "f1": 0.014064890289289221,
+          "predicted_fraction": 0.11784551931211841,
+          "observed_fraction": 0.0008400696986859684
+        },
+        "depth_max>=0.1m": {
+          "tp": 308,
+          "fp": 62889,
+          "fn": 2,
+          "tn": 305818,
+          "precision": 0.004873649065620204,
+          "recall": 0.9935483870967742,
+          "csi": 0.004873494833779015,
+          "iou": 0.004873494833779015,
+          "far": 0.9951263509343798,
+          "missed_ratio": 0.0064516129032258064,
+          "f1": 0.009699718141307257,
+          "predicted_fraction": 0.17125769273502306,
+          "observed_fraction": 0.0008400696986859684
+        },
+        "depth_at_overpass>=0.3m": {
+          "tp": 300,
+          "fp": 23301,
+          "fn": 10,
+          "tn": 345406,
+          "precision": 0.01271132579128003,
+          "recall": 0.967741935483871,
+          "csi": 0.012705942145610096,
+          "iou": 0.012705942145610096,
+          "far": 0.98728867420872,
+          "missed_ratio": 0.03225806451612903,
+          "f1": 0.025093053406382,
+          "predicted_fraction": 0.06395640309254046,
+          "observed_fraction": 0.0008400696986859684
+        },
+        "depth_max>=0.3m": {
+          "tp": 300,
+          "fp": 31431,
+          "fn": 10,
+          "tn": 337276,
+          "precision": 0.009454476694714947,
+          "recall": 0.967741935483871,
+          "csi": 0.009451498062442897,
+          "iou": 0.009451498062442897,
+          "far": 0.990545523305285,
+          "missed_ratio": 0.03225806451612903,
+          "f1": 0.018726007303142847,
+          "predicted_fraction": 0.08598790841614343,
+          "observed_fraction": 0.0008400696986859684
+        }
+      },
+      "comparators": {
+        "hand<=0.5m": {
+          "tp": 295,
+          "fp": 19746,
+          "fn": 15,
+          "tn": 348961,
+          "precision": 0.014719824360061874,
+          "recall": 0.9516129032258065,
+          "csi": 0.014708815317112087,
+          "iou": 0.014708815317112087,
+          "far": 0.9852801756399381,
+          "missed_ratio": 0.04838709677419355,
+          "f1": 0.028991204363421945,
+          "predicted_fraction": 0.054309151068920945,
+          "observed_fraction": 0.0008400696986859684
+        },
+        "ksdma_25yr_footprint": {
+          "tp": 294,
+          "fp": 12322,
+          "fn": 16,
+          "tn": 356385,
+          "precision": 0.023303741280913125,
+          "recall": 0.9483870967741935,
+          "csi": 0.023274224192526914,
+          "iou": 0.023274224192526914,
+          "far": 0.9766962587190868,
+          "missed_ratio": 0.05161290322580645,
+          "f1": 0.04548971066068389,
+          "predicted_fraction": 0.03418812683426509,
+          "observed_fraction": 0.0008400696986859684
+        }
+      },
+      "simulated_wet_km2_district_at_overpass_0.3m": 297.1935,
+      "params": {
+        "dx_m": 240.0,
+        "factor": 8,
+        "runoff_c": 0.9,
+        "n_land": 0.08,
+        "n_channel": 0.04,
+        "alpha": 0.7,
+        "start_ist": "2019-08-01T00:00",
+        "end_ist": "2019-08-10T06:10",
+        "t_end_s": 799800.0
+      },
+      "mass_relative_residual": 4.0983558602133164e-15,
+      "h_max_m": 11.43540875478618,
+      "v_max_ms": 36.130557535458884
+    }
+  }
+}
