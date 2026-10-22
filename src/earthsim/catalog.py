@@ -4,6 +4,7 @@ metadata inspection, checksum verification and safe cache cleanup."""
 from __future__ import annotations
 
 import json
+import os
 import shutil
 import time
 from pathlib import Path
@@ -31,6 +32,12 @@ class Catalog:
         self.datasets: dict[str, dict[str, Any]] = {d["id"]: d for d in m["datasets"]}
         self.raw_dir = Path(raw_dir)
         self.processed_dir = Path(processed_dir) if processed_dir else None
+        # Local-only inputs live outside the repo; ${EARTHSIM_LOCAL_DATA} defaults to the
+        # directory that contains the project checkout.
+        self.local_data = os.environ.get("EARTHSIM_LOCAL_DATA") or str(self.manifest_path.resolve().parent.parent.parent)
+
+    def _expand(self, c: str) -> Path:
+        return Path(str(c).replace("${EARTHSIM_LOCAL_DATA}", self.local_data)).expanduser()
 
     # ------------------------------------------------------------------ query
     def get(self, ds_id: str) -> dict[str, Any]:
@@ -107,7 +114,7 @@ class Catalog:
     def _local(self, d: dict[str, Any], out: Path) -> list[dict[str, Any]]:
         files = []
         for c in d["local_candidates"]:
-            p = Path(c)
+            p = self._expand(c)
             if p.is_dir() and d.get("glob"):
                 cands = sorted(p.glob(d["glob"]))
             elif p.is_file():
