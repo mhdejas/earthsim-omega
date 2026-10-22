@@ -209,3 +209,109 @@ if __name__ == "__main__":
     for name, fn in (("catchments", catchments), ("sar", sar), ("hindcast", hindcast)):
         if what in (name, "all"):
             print(fn())
+
+
+def fig_trigger_replay(root=None):
+    """Three monsoons: ERA5 district-mean daily rain vs the archived 1-day-ahead ECMWF forecast, 50 mm trigger."""
+    import json
+    from datetime import date
+    from pathlib import Path
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    import numpy as np
+    root = Path(root or Path(__file__).resolve().parents[1])
+    r = json.loads((root / "data/processed/warning/rain_trigger_verification.json").read_text())
+    T = r["trigger_tuning_loyo"]["by_lead"]["day1"]["deploy_T_mm_all_years"]
+    v = r["trigger_tuning_loyo"]["by_lead"]["day1"]["pooled_held_out"]
+    fig, axes = plt.subplots(3, 1, figsize=(10.8, 13.5), dpi=100)
+    fig.subplots_adjust(top=0.82, bottom=0.08, left=0.09, right=0.97, hspace=0.32)
+    fig.text(0.5, 0.975, "Would a rain trigger have warned Kozhikode?", ha="center", va="top", fontsize=22, weight="bold")
+    fig.text(0.5, 0.94, f"Archived ECMWF forecasts issued 1 day ahead vs ERA5 rain, June-September 2024-2026.\n"
+             f"Warn if forecast >= {T} mm; event = ERA5 district mean >= 64.5 mm (IMD 'heavy').", ha="center",
+             va="top", fontsize=12.5)
+    fig.text(0.5, 0.893, f"Held-out result (leave-one-monsoon-out): caught {v['hits']} of {v['hits'] + v['misses']} heavy days, "
+             f"{v['false_alarms']} false alarms", ha="center", va="top", fontsize=13.5, weight="bold", color="#b71c1c")
+    for ax, y in zip(axes, ("2024", "2025", "2026")):
+        days = [d for d in sorted(r["daily"]) if d[:4] == y and r["daily"][d]["precipitation_previous_day1"] is not None]
+        x = np.array([date.fromisoformat(d).toordinal() for d in days])
+        ob = np.array([r["daily"][d]["era5"] for d in days])
+        fc = np.array([r["daily"][d]["precipitation_previous_day1"] for d in days])
+        ax.bar(x, ob, width=1.0, color="#90a4ae", label="ERA5 rain (reanalysis)")
+        ax.plot(x, fc, color="#1565c0", lw=1.4, label="forecast issued 1 day ahead")
+        ax.axhline(64.5, color="#555", ls="--", lw=1); ax.axhline(T, color="#ef6c00", ls=":", lw=1.4)
+        ev, wr = ob >= 64.5, fc >= T
+        ax.scatter(x[ev & wr], ob[ev & wr] + 4, marker="v", s=70, color="#2e7d32", label="hit", zorder=3)
+        ax.scatter(x[ev & ~wr], ob[ev & ~wr] + 4, marker="x", s=70, color="#c62828", label="missed", zorder=3)
+        ax.scatter(x[~ev & wr], fc[~ev & wr] + 4, marker="o", s=30, facecolors="none", edgecolors="#ef6c00",
+                   label="false alarm", zorder=3)
+        if y == "2024":
+            i = days.index("2024-07-30")
+            ax.annotate("30 Jul 2024 (Vilangad landslides):\nforecast 29 mm, ERA5 69 mm", (x[i], ob[i] + 6),
+                        (x[i] + 8, 112), fontsize=10, arrowprops=dict(arrowstyle="->"))
+        ax.set_ylim(0, 130); ax.set_xlim(x[0] - 1, x[-1] + 1)
+        ticks = [date(int(y), m, 1).toordinal() for m in (6, 7, 8, 9)]
+        ax.set_xticks(ticks, ["Jun", "Jul", "Aug", "Sep"])
+        ax.set_title(y, loc="left", fontsize=14, weight="bold"); ax.set_ylabel("mm per day (08:30 IST)")
+        ax.text(x[-1], 66, "IMD heavy 64.5", ha="right", fontsize=9); ax.text(x[-1], T - 8, f"trigger {T}", ha="right",
+                                                                               fontsize=9, color="#ef6c00")
+    h, l = axes[0].get_legend_handles_labels()
+    fig.legend(h, l, loc="upper center", bbox_to_anchor=(0.5, 0.862), ncol=5, fontsize=10, frameon=False)
+    fig.text(0.5, 0.02, "REAL DATA, OBSERVED vs FORECAST. Rain = mean of the two 0.25 deg cells over Kozhikode (Open-Meteo "
+             "previous-runs + ERA5 archive).\nGridded rain smooths local downpours; this is an experimental check, not "
+             "an IMD verification. Markers use the final 50 mm trigger.", ha="center", fontsize=9.5, color="#333")
+    out = root / "figures/phone/05_rain_trigger_replay_OBSERVED_vs_FORECAST.png"
+    fig.savefig(out); plt.close(fig)
+    return out
+
+
+if __name__ == "__main__" and "replay" in __import__("sys").argv:
+    print(fig_trigger_replay())
+
+
+def fig_calibration_test():
+    """Held-out flood-extent scores: calibrated solver vs baselines on two SAR events (CSI, block-bootstrap CI)."""
+    d = json.load(open(ROOT / "data/processed/calibration/calibration_test.json"))
+    sel = d["selected"]
+    fig = _fig()
+    _badge(fig, "SIMULATED", "Does calibrating the flood model help? Scored against\n"
+                             "Sentinel-1 radar flood maps it never saw during calibration.")
+    order = [("calibrated", "Solver, calibrated on\n14 Aug 2018", "#b2182b"),
+             ("uncalibrated_default_C0.7_n0.08_0.3m", "Solver, default\nsettings", "#ef8a62"),
+             ("hand<=0.5m", "Terrain rule\nHAND ≤ 0.5 m", "#2166ac"),
+             ("ksdma_25yr_footprint", "KSDMA official\n25-yr hazard map", "#555555")]
+    events = [("2019-08-10", "10 Aug 2019 (different year: the real test)"),
+              ("2018-08-09", "9 Aug 2018 (same season, secondary check)")]
+    axes = [fig.add_axes([0.36, 0.495, 0.56, 0.235]), fig.add_axes([0.36, 0.135, 0.56, 0.235])]
+    tops = [0.772, 0.418]
+    for ax, top, (ev, title) in zip(axes, tops, events):
+        v = d["events"][ev]
+        vals = [v["calibrated"]["csi"]] + [v["baselines"][k]["csi"] for k, _, _ in order[1:]]
+        y = np.arange(len(order))[::-1]
+        ax.barh(y, vals, color=[c for _, _, c in order], height=0.62)
+        lo, hi = v["calibrated_bootstrap95"]["csi"]
+        ax.errorbar(vals[0], y[0], xerr=[[vals[0] - lo], [hi - vals[0]]], fmt="none", ecolor="k", capsize=5, lw=1.4)
+        for i, (yi, val) in enumerate(zip(y, vals)):
+            xt = (hi if i == 0 else val) + 0.0008
+            ax.text(xt, yi, f"{val:.3f}", va="center", fontsize=12, weight="bold" if i == 0 else None)
+        ax.set_yticks(y, [lab for _, lab, _ in order], fontsize=11.5)
+        ax.set_xlim(0, 0.045); ax.set_xlabel("Critical success index (higher is better; 1 = perfect)", fontsize=10.5)
+        ax.tick_params(axis="x", labelsize=10.5); ax.set_xticks([0, 0.01, 0.02, 0.03, 0.04])
+        fig.text(0.04, top, title, fontsize=13.5, weight="bold", va="bottom")
+        fig.text(0.04, top - 0.006, f"{v['observed_flooded_km2']:.2f} km² seen flooded by radar, scored on "
+                 f"{v['reference_pixels']:,} pixels", fontsize=10, color="#444", va="top")
+        for s in ("top", "right"):
+            ax.spines[s].set_visible(False)
+    fig.text(0.04, 0.862, f"Chosen by a rule fixed before any run: runoff {sel['runoff_c']}, Manning n "
+             f"{sel['n_land']}, depth ≥ {sel['threshold_m']} m.\nBlack bar = 95% range from resampling 5 km blocks. "
+             "Scores are low for every method\nbecause radar sees only open water.", fontsize=10.5, color="#222",
+             va="top")
+    _footer(fig, "REAL DATA. 12 solver runs (240 m, ERA5 rain) on 14 Aug 2018 → 1 setting → scored on events above.\n"
+                 "Calibration helps a little in 2019 (0.014 → 0.019) but the gain is within noise and KSDMA still wins.")
+    p = OUT / "04_calibration_heldout_SIMULATED.png"
+    fig.savefig(p); plt.close(fig)
+    return p
+
+
+if __name__ == "__main__" and "calibration" in sys.argv:
+    print(fig_calibration_test())
