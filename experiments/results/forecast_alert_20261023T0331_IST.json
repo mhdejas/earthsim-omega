@@ -1,0 +1,829 @@
+{
+  "run_id": "20261023T0331_IST",
+  "issued_ist": "2026-10-23T03:31:00",
+  "product": "EARTHSIM-Omega experimental flood decision support",
+  "official": false,
+  "disclaimer": "EXPERIMENTAL research output - not an official warning. Follow IMD, CWC and KSDMA / Kozhikode DDMA advisories for decisions.",
+  "overall_level_next_72h": "YELLOW",
+  "level_basis": "rain triggers (IMD categories, ensemble probability, verified 50 mm trigger); flood model gives footprint and exposure",
+  "rain_outlook": {
+    "days": [
+      {
+        "day_ending_0830_ist": "2026-10-23",
+        "lead_day": 0,
+        "in_progress": true,
+        "deterministic_mm": 38.0,
+        "deterministic_imd_category": "below_heavy",
+        "ensemble_members": 51,
+        "ensemble_p10_p50_p90_mm": [
+          12.1,
+          20.2,
+          39.5
+        ],
+        "prob_heavy": 0.0,
+        "prob_very_heavy": 0.0,
+        "prob_extremely_heavy": 0.0,
+        "deterministic_ge_trigger": false,
+        "rain_level": "GREEN",
+        "rain_level_reason": "below all rain triggers"
+      },
+      {
+        "day_ending_0830_ist": "2026-10-24",
+        "lead_day": 1,
+        "in_progress": false,
+        "deterministic_mm": 28.4,
+        "deterministic_imd_category": "below_heavy",
+        "ensemble_members": 51,
+        "ensemble_p10_p50_p90_mm": [
+          10.2,
+          26.6,
+          57.3
+        ],
+        "prob_heavy": 0.039,
+        "prob_very_heavy": 0.02,
+        "prob_extremely_heavy": 0.0,
+        "deterministic_ge_trigger": false,
+        "rain_level": "GREEN",
+        "rain_level_reason": "below all rain triggers"
+      },
+      {
+        "day_ending_0830_ist": "2026-10-25",
+        "lead_day": 2,
+        "in_progress": false,
+        "deterministic_mm": 44.2,
+        "deterministic_imd_category": "below_heavy",
+        "ensemble_members": 51,
+        "ensemble_p10_p50_p90_mm": [
+          17.6,
+          38.7,
+          108.8
+        ],
+        "prob_heavy": 0.275,
+        "prob_very_heavy": 0.098,
+        "prob_extremely_heavy": 0.02,
+        "deterministic_ge_trigger": false,
+        "rain_level": "YELLOW",
+        "rain_level_reason": "P(heavy) >= 20% or deterministic >= verified trigger"
+      },
+      {
+        "day_ending_0830_ist": "2026-10-26",
+        "lead_day": 3,
+        "in_progress": false,
+        "deterministic_mm": 62.1,
+        "deterministic_imd_category": "below_heavy",
+        "ensemble_members": 51,
+        "ensemble_p10_p50_p90_mm": [
+          6.0,
+          22.2,
+          73.1
+        ],
+        "prob_heavy": 0.157,
+        "prob_very_heavy": 0.059,
+        "prob_extremely_heavy": 0.0,
+        "deterministic_ge_trigger": true,
+        "rain_level": "YELLOW",
+        "rain_level_reason": "P(heavy) >= 20% or deterministic >= verified trigger"
+      },
+      {
+        "day_ending_0830_ist": "2026-10-27",
+        "lead_day": 4,
+        "in_progress": false,
+        "deterministic_mm": 5.4,
+        "deterministic_imd_category": "below_heavy",
+        "ensemble_members": 51,
+        "ensemble_p10_p50_p90_mm": [
+          0.6,
+          3.2,
+          27.3
+        ],
+        "prob_heavy": 0.0,
+        "prob_very_heavy": 0.0,
+        "prob_extremely_heavy": 0.0,
+        "deterministic_ge_trigger": false,
+        "rain_level": "GREEN",
+        "rain_level_reason": "below all rain triggers"
+      },
+      {
+        "day_ending_0830_ist": "2026-10-28",
+        "lead_day": 5,
+        "in_progress": false,
+        "deterministic_mm": 1.4,
+        "deterministic_imd_category": "below_heavy",
+        "ensemble_members": 51,
+        "ensemble_p10_p50_p90_mm": [
+          0.2,
+          2.0,
+          19.6
+        ],
+        "prob_heavy": 0.02,
+        "prob_very_heavy": 0.0,
+        "prob_extremely_heavy": 0.0,
+        "deterministic_ge_trigger": false,
+        "rain_level": "GREEN",
+        "rain_level_reason": "below all rain triggers"
+      },
+      {
+        "day_ending_0830_ist": "2026-10-29",
+        "lead_day": 6,
+        "in_progress": false,
+        "deterministic_mm": 1.2,
+        "deterministic_imd_category": "below_heavy",
+        "ensemble_members": 51,
+        "ensemble_p10_p50_p90_mm": [
+          0.3,
+          2.1,
+          16.5
+        ],
+        "prob_heavy": 0.02,
+        "prob_very_heavy": 0.0,
+        "prob_extremely_heavy": 0.0,
+        "deterministic_ge_trigger": false,
+        "rain_level": "GREEN",
+        "rain_level_reason": "below all rain triggers"
+      }
+    ],
+    "trigger_mm": 50.0,
+    "antecedent_5day_mm": 67.4
+  },
+  "flood_scenarios": {
+    "run": true,
+    "params": {
+      "runoff_c": 0.9,
+      "n_land": 0.16,
+      "wet_threshold_m": 2.0,
+      "dx_m": 240.0,
+      "spinup_h": 120,
+      "horizon_h": 72
+    },
+    "capture_times_ist": {
+      "+24h": "2026-10-24T03:00",
+      "+48h": "2026-10-25T03:00",
+      "+72h": "2026-10-26T03:00"
+    },
+    "spinup_start_ist": "2026-10-18T03:00",
+    "members": {
+      "deterministic": {
+        "forecast_72h_mm": 142.2,
+        "mass_relative_residual": 2.8806913342124796e-14,
+        "wall_s": 457.6,
+        "by_lead": {
+          "+24h": {
+            "wet_km2": 13.8,
+            "buildings": 235,
+            "major_road_km": 14.1,
+            "facilities": {
+              "school": 7,
+              "clinic": 1,
+              "hospital": 1,
+              "college": 1
+            },
+            "facility_examples": [
+              {
+                "type": "clinic",
+                "name": "Shafi Ayurveda Nursing Home",
+                "lon": 75.94031,
+                "lat": 11.25554
+              },
+              {
+                "type": "hospital",
+                "name": "Private homeopathy centre",
+                "lon": 75.92456,
+                "lat": 11.24257
+              }
+            ]
+          },
+          "+48h": {
+            "wet_km2": 30.1,
+            "buildings": 568,
+            "major_road_km": 25.2,
+            "facilities": {
+              "school": 12,
+              "clinic": 1,
+              "hospital": 1,
+              "college": 1
+            },
+            "facility_examples": [
+              {
+                "type": "clinic",
+                "name": "Shafi Ayurveda Nursing Home",
+                "lon": 75.94031,
+                "lat": 11.25554
+              },
+              {
+                "type": "hospital",
+                "name": "Private homeopathy centre",
+                "lon": 75.92456,
+                "lat": 11.24257
+              }
+            ]
+          },
+          "+72h": {
+            "wet_km2": 62.1,
+            "buildings": 1122,
+            "major_road_km": 42.6,
+            "facilities": {
+              "school": 17,
+              "clinic": 3,
+              "hospital": 4,
+              "college": 1
+            },
+            "facility_examples": [
+              {
+                "type": "clinic",
+                "name": "Shafi Ayurveda Nursing Home",
+                "lon": 75.94031,
+                "lat": 11.25554
+              },
+              {
+                "type": "clinic",
+                "name": "Doctors Care Poly Clinic",
+                "lon": 75.98721,
+                "lat": 11.26984
+              },
+              {
+                "type": "clinic",
+                "name": "Care and Cure Poly Clinic",
+                "lon": 75.63706,
+                "lat": 11.72622
+              },
+              {
+                "type": "hospital",
+                "name": "Relief Hospital",
+                "lon": 75.98708,
+                "lat": 11.2696
+              },
+              {
+                "type": "hospital",
+                "name": "Nature Care Naturopathy Hospital, Mukkam",
+                "lon": 75.9918,
+                "lat": 11.32659
+              },
+              {
+                "type": "hospital",
+                "name": "Private homeopathy centre",
+                "lon": 75.92456,
+                "lat": 11.24257
+              },
+              {
+                "type": "hospital",
+                "name": "Arogya upakendram",
+                "lon": 76.0044,
+                "lat": 11.36577
+              }
+            ]
+          }
+        },
+        "peak_of_snapshots": {
+          "wet_km2": 62.1,
+          "buildings": 1122,
+          "major_road_km": 42.6,
+          "facilities": {
+            "school": 17,
+            "clinic": 3,
+            "hospital": 4,
+            "college": 1
+          },
+          "facility_examples": [
+            {
+              "type": "clinic",
+              "name": "Shafi Ayurveda Nursing Home",
+              "lon": 75.94031,
+              "lat": 11.25554
+            },
+            {
+              "type": "clinic",
+              "name": "Doctors Care Poly Clinic",
+              "lon": 75.98721,
+              "lat": 11.26984
+            },
+            {
+              "type": "clinic",
+              "name": "Care and Cure Poly Clinic",
+              "lon": 75.63706,
+              "lat": 11.72622
+            },
+            {
+              "type": "hospital",
+              "name": "Relief Hospital",
+              "lon": 75.98708,
+              "lat": 11.2696
+            },
+            {
+              "type": "hospital",
+              "name": "Nature Care Naturopathy Hospital, Mukkam",
+              "lon": 75.9918,
+              "lat": 11.32659
+            },
+            {
+              "type": "hospital",
+              "name": "Private homeopathy centre",
+              "lon": 75.92456,
+              "lat": 11.24257
+            },
+            {
+              "type": "hospital",
+              "name": "Arogya upakendram",
+              "lon": 76.0044,
+              "lat": 11.36577
+            }
+          ]
+        }
+      },
+      "ens_p10_precipitation_member44": {
+        "forecast_72h_mm": 48.3,
+        "mass_relative_residual": 5.597729903338152e-14,
+        "wall_s": 436.6,
+        "by_lead": {
+          "+24h": {
+            "wet_km2": 8.2,
+            "buildings": 75,
+            "major_road_km": 10.3,
+            "facilities": {
+              "school": 6,
+              "clinic": 1,
+              "hospital": 1,
+              "college": 1
+            },
+            "facility_examples": [
+              {
+                "type": "clinic",
+                "name": "Shafi Ayurveda Nursing Home",
+                "lon": 75.94031,
+                "lat": 11.25554
+              },
+              {
+                "type": "hospital",
+                "name": "Private homeopathy centre",
+                "lon": 75.92456,
+                "lat": 11.24257
+              }
+            ]
+          },
+          "+48h": {
+            "wet_km2": 13.7,
+            "buildings": 158,
+            "major_road_km": 13.4,
+            "facilities": {
+              "school": 6,
+              "clinic": 1,
+              "hospital": 1,
+              "college": 1
+            },
+            "facility_examples": [
+              {
+                "type": "clinic",
+                "name": "Shafi Ayurveda Nursing Home",
+                "lon": 75.94031,
+                "lat": 11.25554
+              },
+              {
+                "type": "hospital",
+                "name": "Private homeopathy centre",
+                "lon": 75.92456,
+                "lat": 11.24257
+              }
+            ]
+          },
+          "+72h": {
+            "wet_km2": 21.0,
+            "buildings": 286,
+            "major_road_km": 20.4,
+            "facilities": {
+              "school": 9,
+              "clinic": 1,
+              "hospital": 1,
+              "college": 1
+            },
+            "facility_examples": [
+              {
+                "type": "clinic",
+                "name": "Shafi Ayurveda Nursing Home",
+                "lon": 75.94031,
+                "lat": 11.25554
+              },
+              {
+                "type": "hospital",
+                "name": "Private homeopathy centre",
+                "lon": 75.92456,
+                "lat": 11.24257
+              }
+            ]
+          }
+        },
+        "peak_of_snapshots": {
+          "wet_km2": 21.0,
+          "buildings": 286,
+          "major_road_km": 20.4,
+          "facilities": {
+            "school": 9,
+            "clinic": 1,
+            "hospital": 1,
+            "college": 1
+          },
+          "facility_examples": [
+            {
+              "type": "clinic",
+              "name": "Shafi Ayurveda Nursing Home",
+              "lon": 75.94031,
+              "lat": 11.25554
+            },
+            {
+              "type": "hospital",
+              "name": "Private homeopathy centre",
+              "lon": 75.92456,
+              "lat": 11.24257
+            }
+          ]
+        }
+      },
+      "ens_p50_precipitation_member13": {
+        "forecast_72h_mm": 93.2,
+        "mass_relative_residual": 3.4591340783076806e-14,
+        "wall_s": 448.4,
+        "by_lead": {
+          "+24h": {
+            "wet_km2": 7.8,
+            "buildings": 71,
+            "major_road_km": 9.8,
+            "facilities": {
+              "school": 6,
+              "clinic": 1,
+              "hospital": 1,
+              "college": 1
+            },
+            "facility_examples": [
+              {
+                "type": "clinic",
+                "name": "Shafi Ayurveda Nursing Home",
+                "lon": 75.94031,
+                "lat": 11.25554
+              },
+              {
+                "type": "hospital",
+                "name": "Private homeopathy centre",
+                "lon": 75.92456,
+                "lat": 11.24257
+              }
+            ]
+          },
+          "+48h": {
+            "wet_km2": 24.2,
+            "buildings": 407,
+            "major_road_km": 20.9,
+            "facilities": {
+              "school": 9,
+              "clinic": 1,
+              "hospital": 2,
+              "college": 1
+            },
+            "facility_examples": [
+              {
+                "type": "clinic",
+                "name": "Shafi Ayurveda Nursing Home",
+                "lon": 75.94031,
+                "lat": 11.25554
+              },
+              {
+                "type": "hospital",
+                "name": "Private homeopathy centre",
+                "lon": 75.92456,
+                "lat": 11.24257
+              },
+              {
+                "type": "hospital",
+                "name": "Arogya upakendram",
+                "lon": 76.0044,
+                "lat": 11.36577
+              }
+            ]
+          },
+          "+72h": {
+            "wet_km2": 43.5,
+            "buildings": 783,
+            "major_road_km": 32.1,
+            "facilities": {
+              "school": 14,
+              "clinic": 2,
+              "hospital": 3,
+              "college": 1
+            },
+            "facility_examples": [
+              {
+                "type": "clinic",
+                "name": "Shafi Ayurveda Nursing Home",
+                "lon": 75.94031,
+                "lat": 11.25554
+              },
+              {
+                "type": "clinic",
+                "name": "Doctors Care Poly Clinic",
+                "lon": 75.98721,
+                "lat": 11.26984
+              },
+              {
+                "type": "hospital",
+                "name": "Relief Hospital",
+                "lon": 75.98708,
+                "lat": 11.2696
+              },
+              {
+                "type": "hospital",
+                "name": "Nature Care Naturopathy Hospital, Mukkam",
+                "lon": 75.9918,
+                "lat": 11.32659
+              },
+              {
+                "type": "hospital",
+                "name": "Private homeopathy centre",
+                "lon": 75.92456,
+                "lat": 11.24257
+              }
+            ]
+          }
+        },
+        "peak_of_snapshots": {
+          "wet_km2": 45.3,
+          "buildings": 793,
+          "major_road_km": 32.7,
+          "facilities": {
+            "school": 14,
+            "clinic": 2,
+            "hospital": 4,
+            "college": 1
+          },
+          "facility_examples": [
+            {
+              "type": "clinic",
+              "name": "Shafi Ayurveda Nursing Home",
+              "lon": 75.94031,
+              "lat": 11.25554
+            },
+            {
+              "type": "clinic",
+              "name": "Doctors Care Poly Clinic",
+              "lon": 75.98721,
+              "lat": 11.26984
+            },
+            {
+              "type": "hospital",
+              "name": "Relief Hospital",
+              "lon": 75.98708,
+              "lat": 11.2696
+            },
+            {
+              "type": "hospital",
+              "name": "Nature Care Naturopathy Hospital, Mukkam",
+              "lon": 75.9918,
+              "lat": 11.32659
+            },
+            {
+              "type": "hospital",
+              "name": "Private homeopathy centre",
+              "lon": 75.92456,
+              "lat": 11.24257
+            },
+            {
+              "type": "hospital",
+              "name": "Arogya upakendram",
+              "lon": 76.0044,
+              "lat": 11.36577
+            }
+          ]
+        }
+      },
+      "ens_p90_precipitation_member17": {
+        "forecast_72h_mm": 226.5,
+        "mass_relative_residual": 2.3685331691558534e-14,
+        "wall_s": 461.5,
+        "by_lead": {
+          "+24h": {
+            "wet_km2": 7.8,
+            "buildings": 71,
+            "major_road_km": 9.8,
+            "facilities": {
+              "school": 6,
+              "clinic": 1,
+              "hospital": 1,
+              "college": 1
+            },
+            "facility_examples": [
+              {
+                "type": "clinic",
+                "name": "Shafi Ayurveda Nursing Home",
+                "lon": 75.94031,
+                "lat": 11.25554
+              },
+              {
+                "type": "hospital",
+                "name": "Private homeopathy centre",
+                "lon": 75.92456,
+                "lat": 11.24257
+              }
+            ]
+          },
+          "+48h": {
+            "wet_km2": 21.9,
+            "buildings": 292,
+            "major_road_km": 19.2,
+            "facilities": {
+              "school": 8,
+              "clinic": 1,
+              "hospital": 2,
+              "college": 1
+            },
+            "facility_examples": [
+              {
+                "type": "clinic",
+                "name": "Shafi Ayurveda Nursing Home",
+                "lon": 75.94031,
+                "lat": 11.25554
+              },
+              {
+                "type": "hospital",
+                "name": "Private homeopathy centre",
+                "lon": 75.92456,
+                "lat": 11.24257
+              },
+              {
+                "type": "hospital",
+                "name": "Arogya upakendram",
+                "lon": 76.0044,
+                "lat": 11.36577
+              }
+            ]
+          },
+          "+72h": {
+            "wet_km2": 113.0,
+            "buildings": 2252,
+            "major_road_km": 81.6,
+            "facilities": {
+              "school": 45,
+              "hospital": 10,
+              "clinic": 7,
+              "college": 1
+            },
+            "facility_examples": [
+              {
+                "type": "hospital",
+                "name": "KIMS Trust Hospital",
+                "lon": 75.89859,
+                "lat": 11.34175
+              },
+              {
+                "type": "clinic",
+                "name": "Apple clinic",
+                "lon": 75.90996,
+                "lat": 11.35972
+              },
+              {
+                "type": "clinic",
+                "name": "",
+                "lon": 75.80926,
+                "lat": 11.3348
+              },
+              {
+                "type": "clinic",
+                "name": "Shafi Ayurveda Nursing Home",
+                "lon": 75.94031,
+                "lat": 11.25554
+              },
+              {
+                "type": "clinic",
+                "name": "Doctors Care Poly Clinic",
+                "lon": 75.98721,
+                "lat": 11.26984
+              },
+              {
+                "type": "clinic",
+                "name": "Care and Cure Poly Clinic",
+                "lon": 75.63706,
+                "lat": 11.72622
+              },
+              {
+                "type": "hospital",
+                "name": "Hygiene Hospital for Naturopathy & Yoga",
+                "lon": 75.97696,
+                "lat": 11.29286
+              },
+              {
+                "type": "hospital",
+                "name": "Relief Hospital",
+                "lon": 75.98708,
+                "lat": 11.2696
+              },
+              {
+                "type": "hospital",
+                "name": "Nature Care Naturopathy Hospital, Mukkam",
+                "lon": 75.9918,
+                "lat": 11.32659
+              },
+              {
+                "type": "clinic",
+                "name": "Kcadcos Doctors Clinic",
+                "lon": 75.80623,
+                "lat": 11.23524
+              }
+            ]
+          }
+        },
+        "peak_of_snapshots": {
+          "wet_km2": 113.0,
+          "buildings": 2252,
+          "major_road_km": 81.6,
+          "facilities": {
+            "school": 45,
+            "hospital": 10,
+            "clinic": 7,
+            "college": 1
+          },
+          "facility_examples": [
+            {
+              "type": "hospital",
+              "name": "KIMS Trust Hospital",
+              "lon": 75.89859,
+              "lat": 11.34175
+            },
+            {
+              "type": "clinic",
+              "name": "Apple clinic",
+              "lon": 75.90996,
+              "lat": 11.35972
+            },
+            {
+              "type": "clinic",
+              "name": "",
+              "lon": 75.80926,
+              "lat": 11.3348
+            },
+            {
+              "type": "clinic",
+              "name": "Shafi Ayurveda Nursing Home",
+              "lon": 75.94031,
+              "lat": 11.25554
+            },
+            {
+              "type": "clinic",
+              "name": "Doctors Care Poly Clinic",
+              "lon": 75.98721,
+              "lat": 11.26984
+            },
+            {
+              "type": "clinic",
+              "name": "Care and Cure Poly Clinic",
+              "lon": 75.63706,
+              "lat": 11.72622
+            },
+            {
+              "type": "hospital",
+              "name": "Hygiene Hospital for Naturopathy & Yoga",
+              "lon": 75.97696,
+              "lat": 11.29286
+            },
+            {
+              "type": "hospital",
+              "name": "Relief Hospital",
+              "lon": 75.98708,
+              "lat": 11.2696
+            },
+            {
+              "type": "hospital",
+              "name": "Nature Care Naturopathy Hospital, Mukkam",
+              "lon": 75.9918,
+              "lat": 11.32659
+            },
+            {
+              "type": "clinic",
+              "name": "Kcadcos Doctors Clinic",
+              "lon": 75.80623,
+              "lat": 11.23524
+            }
+          ]
+        }
+      }
+    },
+    "reference_hindcast_wet_km2": {
+      "2018-08-14": {
+        "wet_km2": 32.1,
+        "buildings": 578
+      },
+      "2019-08-10": {
+        "wet_km2": 127.1,
+        "buildings": 2584
+      }
+    }
+  },
+  "verified_skill": {
+    "trigger_mm": 50.0,
+    "lead_day1_held_out": {
+      "hits": 9,
+      "false_alarms": 18,
+      "misses": 6,
+      "correct_negatives": 333,
+      "pod_hit_rate": 0.6,
+      "far_false_alarm_ratio": 0.6666666666666666,
+      "csi": 0.2727272727272727,
+      "false_alarm_rate_pofd": 0.05128205128205128
+    },
+    "note": "leave-one-monsoon-out, JJAS 2024-2026, ERA5 >= 64.5 mm district-mean days"
+  }
+}

@@ -1,0 +1,45 @@
+{
+  "run_id": "20261023T0331_IST",
+  "issued_local_ist": "2026-10-23T03:31:00",
+  "status": "OK",
+  "code_version": "4b2fb2d",
+  "disclaimer": "EXPERIMENTAL research output - not an official warning. Follow IMD, CWC and KSDMA / Kozhikode DDMA advisories for decisions.",
+  "stages": {
+    "fetch_s": 11.6,
+    "rain_s": 11.6,
+    "hydraulics_s": 463.1
+  },
+  "inputs": {
+    "model_runs": {
+      "deterministic": {
+        "last_run_initialisation_time": "2026-10-22T12:00:00Z",
+        "last_run_availability_time": "2026-10-22T21:41:37Z",
+        "temporal_resolution_s": 10800
+      },
+      "ensemble": {
+        "last_run_initialisation_time": "2026-10-22T06:00:00Z",
+        "last_run_availability_time": "2026-10-22T16:17:41Z",
+        "temporal_resolution_s": 10800
+      }
+    },
+    "sources": {
+      "deterministic": "https://api.open-meteo.com/v1/forecast?latitude=11.25,11.5&longitude=76.0,75.75&timezone=Asia%2FKolkata&hourly=precipitation&past_days=5&forecast_days=7&models=ecmwf_ifs025",
+      "ensemble": "https://ensemble-api.open-meteo.com/v1/ensemble?latitude=11.25,11.5&longitude=76.0,75.75&timezone=Asia%2FKolkata&hourly=precipitation&past_days=5&forecast_days=7&models=ecmwf_ifs025"
+    },
+    "fetched_utc": "2026-10-22T22:01:51Z",
+    "files": {
+      "forecast_deterministic.json": "9cc0fbdaa4ed2847b89aa6fc801375bf214ccdad12a98fd02f9996610758549e",
+      "forecast_ensemble.json": "718caf27da4a3feed1b79f1aa5a6b246e7beecb49fb3817dbc0430a8e893e18d",
+      "model_meta_deterministic.json": "f04f11683e6c665681750beb8eeb41a9eeef521feadfe6d38c862826d79c4c26",
+      "model_meta_ensemble.json": "f0bbf61b360a39d950b60784fe0963203e72d80bc82d3602e46ac18a8f386ae6"
+    },
+    "members": 51
+  },
+  "overall_level_next_72h": "YELLOW",
+  "wall_s": 476.2,
+  "outputs": {
+    "alert.json": "45cca93deb1bfa8e2781ffcca6db5c93395e7f05e08c24bc39a1a531c84fb89c",
+    "bulletin.md": "f28622844e7bc04874274c1c057216401deab7d339acbaebaa557dff3da889fc",
+    "outlook.png": "50e8e5d83dbf34caa484235c26260feaf6b0570193de37a9a687bc26aec8a293"
+  }
+}

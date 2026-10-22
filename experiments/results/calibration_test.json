@@ -1,0 +1,188 @@
+{
+  "selected": {
+    "tag": "s2018_c090_n160",
+    "runoff_c": 0.9,
+    "n_land": 0.16,
+    "threshold_m": 2.0
+  },
+  "events": {
+    "2018-08-09": {
+      "role": "secondary validation (same season as calibration",
+      "reference_pixels": 367131,
+      "observed_flooded_km2": 0.1764,
+      "calibrated": {
+        "tp": 13,
+        "fp": 4065,
+        "fn": 183,
+        "csi": 0.0030509270124383947,
+        "pod_hit_rate": 0.0663265306122449,
+        "far_false_alarm_ratio": 0.9968121628249141,
+        "frequency_bias": 20.806122448979593,
+        "predicted_km2": 3.6702,
+        "observed_km2": 0.1764,
+        "false_alarm_km2": 3.6585,
+        "missed_km2": 0.16469999999999999
+      },
+      "calibrated_bootstrap95": {
+        "blocks_5km": 24,
+        "resamples": 1000,
+        "csi": [
+          0.0,
+          0.007874015748031496
+        ],
+        "pod_hit_rate": [
+          0.06153846153846154,
+          1.0
+        ],
+        "far_false_alarm_ratio": [
+          0.9921259842519685,
+          1.0
+        ]
+      },
+      "baselines": {
+        "uncalibrated_default_C0.7_n0.08_0.3m": {
+          "tp": 61,
+          "fp": 12022,
+          "fn": 135,
+          "csi": 0.004992633818955639,
+          "pod_hit_rate": 0.3112244897959184,
+          "far_false_alarm_ratio": 0.9949515848713067,
+          "frequency_bias": 61.64795918367347,
+          "predicted_km2": 10.874699999999999,
+          "observed_km2": 0.1764,
+          "false_alarm_km2": 10.819799999999999,
+          "missed_km2": 0.1215
+        },
+        "hand<=0.5m": {
+          "tp": 193,
+          "fp": 19690,
+          "fn": 3,
+          "csi": 0.009705320325857388,
+          "pod_hit_rate": 0.9846938775510204,
+          "far_false_alarm_ratio": 0.9902932153095609,
+          "frequency_bias": 101.4438775510204,
+          "predicted_km2": 17.8947,
+          "observed_km2": 0.1764,
+          "false_alarm_km2": 17.721,
+          "missed_km2": 0.0027
+        },
+        "ksdma_25yr_footprint": {
+          "tp": 191,
+          "fp": 12348,
+          "fn": 5,
+          "csi": 0.01522640306122449,
+          "pod_hit_rate": 0.9744897959183674,
+          "far_false_alarm_ratio": 0.9847675253209985,
+          "frequency_bias": 63.974489795918366,
+          "predicted_km2": 11.2851,
+          "observed_km2": 0.1764,
+          "false_alarm_km2": 11.113199999999999,
+          "missed_km2": 0.0045
+        },
+        "all_dry": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 196,
+          "csi": 0.0,
+          "pod_hit_rate": 0.0,
+          "far_false_alarm_ratio": NaN,
+          "frequency_bias": 0.0,
+          "predicted_km2": 0.0,
+          "observed_km2": 0.1764,
+          "false_alarm_km2": 0.0,
+          "missed_km2": 0.1764
+        }
+      },
+      "mass_relative_residual": 1.446841414676675e-14
+    },
+    "2019-08-10": {
+      "role": "held-out test (different year",
+      "reference_pixels": 369017,
+      "observed_flooded_km2": 0.27899999999999997,
+      "calibrated": {
+        "tp": 271,
+        "fp": 14218,
+        "fn": 39,
+        "csi": 0.01865363436123348,
+        "pod_hit_rate": 0.8741935483870967,
+        "far_false_alarm_ratio": 0.9812961557043274,
+        "frequency_bias": 46.73870967741936,
+        "predicted_km2": 13.040099999999999,
+        "observed_km2": 0.27899999999999997,
+        "false_alarm_km2": 12.796199999999999,
+        "missed_km2": 0.0351
+      },
+      "calibrated_bootstrap95": {
+        "blocks_5km": 24,
+        "resamples": 1000,
+        "csi": [
+          0.0005753077896674721,
+          0.035511707352677876
+        ],
+        "pod_hit_rate": [
+          0.5,
+          1.0
+        ],
+        "far_false_alarm_ratio": [
+          0.9643046450302067,
+          0.9994246260069045
+        ]
+      },
+      "baselines": {
+        "uncalibrated_default_C0.7_n0.08_0.3m": {
+          "tp": 283,
+          "fp": 20039,
+          "fn": 27,
+          "csi": 0.013907317312890069,
+          "pod_hit_rate": 0.9129032258064517,
+          "far_false_alarm_ratio": 0.9860742052947544,
+          "frequency_bias": 65.55483870967743,
+          "predicted_km2": 18.2898,
+          "observed_km2": 0.27899999999999997,
+          "false_alarm_km2": 18.0351,
+          "missed_km2": 0.0243
+        },
+        "hand<=0.5m": {
+          "tp": 295,
+          "fp": 19746,
+          "fn": 15,
+          "csi": 0.014708815317112087,
+          "pod_hit_rate": 0.9516129032258065,
+          "far_false_alarm_ratio": 0.9852801756399381,
+          "frequency_bias": 64.64838709677419,
+          "predicted_km2": 18.0369,
+          "observed_km2": 0.27899999999999997,
+          "false_alarm_km2": 17.7714,
+          "missed_km2": 0.0135
+        },
+        "ksdma_25yr_footprint": {
+          "tp": 294,
+          "fp": 12322,
+          "fn": 16,
+          "csi": 0.023274224192526914,
+          "pod_hit_rate": 0.9483870967741935,
+          "far_false_alarm_ratio": 0.9766962587190868,
+          "frequency_bias": 40.696774193548386,
+          "predicted_km2": 11.3544,
+          "observed_km2": 0.27899999999999997,
+          "false_alarm_km2": 11.0898,
+          "missed_km2": 0.0144
+        },
+        "all_dry": {
+          "tp": 0,
+          "fp": 0,
+          "fn": 310,
+          "csi": 0.0,
+          "pod_hit_rate": 0.0,
+          "far_false_alarm_ratio": NaN,
+          "frequency_bias": 0.0,
+          "predicted_km2": 0.0,
+          "observed_km2": 0.27899999999999997,
+          "false_alarm_km2": 0.0,
+          "missed_km2": 0.27899999999999997
+        }
+      },
+      "mass_relative_residual": 4.4016303551809935e-15
+    }
+  }
+}
