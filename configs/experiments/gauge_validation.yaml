@@ -1,0 +1,54 @@
+# Pre-registered protocol: testing the flood solver against real CWC river gauges.
+# Written and committed BEFORE any gauge-scored simulation was run. Rules below are applied
+# mechanically by `earthsim.gauges`; nothing is re-tuned after the 2019 test is scored.
+experiment: gauge_validation_v1
+data:
+  discharge: CWC manual daily discharge, NWDP file river_discharge_manual_daily_cwc_kl_2001_2025.csv
+  stage: CWC manual hourly water level, NWDP file rwl_manual_hr_cwc_031_1991_2020.csv
+  sources_doc: docs/CWC_GAUGE_DATA.md
+gauges:
+  KUNIYIL:   {river: Chaliyar, lat: 11.239444, lon: 76.023333, area_km2: 1876, series: [discharge], role: calibration+test}
+  KUTTYADI:  {river: Kuttyadi, lat: 11.625000, lon: 75.784444, area_km2: 238, series: [discharge, stage], role: calibration+test}
+  THOTTATHINKADAVU: {river: Chaliyar/Iruvazhinjipuzha, lat: 11.361944, lon: 76.001944, area_km2: null, series: [discharge, stage], role: test only (record starts June 2019)}
+snapping: >-
+  On the 240 m solver grid, compute D4 steepest-descent flow (the terrain is conditioned for
+  4-connectivity). Within 3 km of the CWC position pick the cell whose upstream area is closest to the
+  official catchment area. Accept only if within +/-20 %; otherwise the gauge is reported as not
+  representable. THOTTATHINKADAVU has no official area in the CWC list: take the largest-area cell
+  within 1 km.
+simulated_discharge: >-
+  Net flow out of the gauge's upstream D4 catchment through faces within 2 cells of the gauge cell,
+  averaged over each hour; flow crossing the rest of the catchment boundary is reported as leakage.
+  Compared with the observation hour of each CWC daily reading (instantaneous 08:00-09:00 IST reading).
+stage_check: >-
+  Hourly simulated depth at the gauge cell vs observed hourly level (relative stage; the gauge zero is
+  not used). Metrics: Pearson r and peak-timing error. Diagnostic only, not used for selection.
+window: {"2018": ["2018-08-01T00:00", "2018-08-21T00:00"], "2019": ["2019-08-01T00:00", "2019-08-21T00:00"]}
+forcing: ERA5 hourly precipitation, spatially uniform (same files as flood_calibration_v1)
+why_new_grid: >-
+  2018-only water balance (1-20 Aug): Kuniyil carried 1150 mm of runoff, ERA5 gave 539 mm of rain, so
+  runoff factors <= 0.9 cannot match volume. The factor is therefore treated as an effective-rainfall
+  factor (ERA5 under-catch correction x runoff fraction) and allowed above 1.
+parameters:
+  effective_rain_factor: [0.9, 1.25, 1.75, 2.5]
+  n_land: [0.08, 0.16]
+  n_channel: 0.04
+baselines: ["prior (0.7, 0.08)", "SAR-selected flood_calibration_v1 (0.9, 0.16, >= 2.0 m)"]
+metrics: [KGE (Gupta et al. 2009), NSE, percent bias, peak ratio sim/obs, peak timing error (h)]
+selection_rule: >-
+  On 2018 only, choose (factor, n_land) maximising the mean discharge KGE over KUNIYIL and KUTTYADI.
+  Ties within 0.01 go to the factor closest to 1, then the larger n_land. The flood-map depth threshold
+  for that setting is then chosen by max CSI on the 2018-08-14 SAR map (same threshold grid as
+  flood_calibration_v1).
+held_out_test: >-
+  2019 is run once with the chosen setting and the two baselines. Reported: gauge metrics at all three
+  gauges, and CSI/POD/FAR on the 2019-08-10 SAR map with a 1000-resample 5 km block bootstrap,
+  next to the existing solver result (0.019) and the KSDMA 25-yr map (0.023).
+known_limits: >-
+  Uniform rain cannot represent the wetter Ghats headwaters; CWC daily discharge is one reading per
+  day; upstream regulation at KUTTYADI was not assessed; 240 m cells do not resolve the channel, so
+  depth at a gauge cell is not a river stage.
+amendment_1: >-
+  Added 2026-10-23, before any gauge-scored simulation. QC: daily discharge readings <= 0 are treated as
+  missing (CWC files contain isolated monsoon-season zeros between readings of hundreds of m3/s, which are
+  missing-value codes, not measurements). Stage readings are used as published.
