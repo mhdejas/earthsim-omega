@@ -27,6 +27,10 @@ What the results say:
 - Calibration (12 runs on 14 Aug 2018) lifts the solver's held-out CSI on 10 Aug 2019 from 0.014 to 0.019, just
   above HAND (0.015). The 95% interval is 0.001–0.036, so the gain is not resolved, and KSDMA's map (0.023)
   still scores best. On 9 Aug 2018 the calibrated model is the worst of the four methods (0.003).
+- Real CWC river gauges (Chaliyar at Kuniyil, Kuttiyadi at Kuttyadi) were added as a second test. Calibrating
+  on August 2018 gauges raised held-out August 2019 river-flow skill (mean KGE 0.21 uncalibrated, 0.32 old
+  setting, 0.52 gauge-calibrated; 0.09 vs −0.22 on an untouched third gauge), but it over-shoots 2019 peaks
+  1.6–2× and does not improve the flood map (CSI 0.018 vs 0.019). See `docs/GAUGE_VALIDATION.md`.
 - The rain trigger is the part with measurable skill. Out-of-sample over 366 monsoon days (2024–2026, 15 heavy
   days), the 1-day-ahead trigger has hit rate 0.60, false-alarm ratio 0.67 and CSI 0.27. On 30 Jul 2024
   (Vilangad landslides) it missed: 29 mm forecast against 69 mm in ERA5.
@@ -148,7 +152,7 @@ earthsim serve                        # then open http://127.0.0.1:8000
 ## 10. Exact test commands and results
 
 ```bash
-python -m pytest -q tests      # 56 passed in 10.42 s (2026-10-23 03:36 IST)
+python -m pytest -v tests      # 57 passed, 0 failed, 268 warnings in 9.34 s (2026-10-23 17:59 IST)
 ```
 
 The tests cover:
@@ -158,7 +162,8 @@ The tests cover:
 - spectral indices, SAR thresholding, the land-cover block CV and the config validators;
 - flood metrics and leakage-safe splits;
 - the API endpoints and job queue, the CLI, and hindcast aggregation;
-- rain-trigger scoring, alert levels, bulletin text and the forecast API endpoints.
+- rain-trigger scoring, alert levels, bulletin text and the forecast API endpoints;
+- gauge flow accounting (water balance closes within 0.1% on a synthetic valley).
 
 The tests run on synthetic fixtures and need no network.
 
@@ -232,6 +237,21 @@ gives different choices on each half.
 
 On the calibration event the model predicted 20.9 km² against 2.26 km² observed by radar, about 9× more.
 
+**Real river gauges (OBSERVED vs SIMULATED), protocol `configs/experiments/gauge_validation.yaml`.**
+CWC daily discharge and hourly water level (India National Water Data Portal) for Kuniyil (Chaliyar, 1,876 km²)
+and Kuttyadi (Kuttiyadi, 238 km²) were matched to the model network within +1.9% and 0.0% of the published
+catchment areas. Eight 2018 settings were scored with KGE. The chosen setting (rain factor 1.75, n 0.08, depth
+threshold 2.0 m) had 2018 KGE 0.71 at Kuniyil and −0.02 at Kuttyadi. On held-out August 2019:
+
+| Setting | Kuniyil KGE | Kuttyadi KGE | Thottathinkadavu KGE | CSI 10 Aug 2019 |
+| --- | --- | --- | --- | --- |
+| Uncalibrated | 0.26 | 0.15 | −0.22 | 0.014 |
+| Old radar-calibrated | 0.36 | 0.28 | −0.18 | 0.019 |
+| Gauge-calibrated | 0.34 | 0.69 | 0.09 | 0.018 (95%: 0.000–0.035) |
+
+The gauge-calibrated run over-shoots the 2019 peaks (4,247 vs 2,710 m³/s at Kuniyil; 658 vs 333 at Kuttyadi).
+Full write-up: `docs/GAUGE_VALIDATION.md`.
+
 **Rain trigger (OBSERVED vs FORECAST).** Archived ECMWF IFS forecasts (Open-Meteo previous-runs; 2021–2023 are
 not archived) were compared with ERA5 district-mean rain over 366 June–September days in 2024–2026. Fifteen of
 those days reached IMD "heavy" (≥64.5 mm).
@@ -300,6 +320,9 @@ Full detail is in `docs/DATA_SOURCES.md`.
   edge-of-grid, unstable across space, and about 9× over-predicts radar extent. Its held-out gain is unresolved.
 - The rain trigger rests on 15 heavy days. It misses local cloudbursts such as 30 Jul 2024, and it is unverified
   outside June–September.
+- Gauge test: the model starts with dry rivers (no baseflow), ERA5 rain mistimes the 2018 peaks, the 2018 rain
+  factor over-shoots in 2019, Kuttyadi is dam-regulated, Kuttyadi's 2018 discharge stops on 11 Aug, and the
+  Thottathinkadavu 2019 water-level record has inconsistent readings (up to 129.6 m) and is not trusted.
 - Building counts mean "centroid in a wet 240 m cell". They are not damage estimates.
 - 393 hindcast cells exceed 5 m/s.
 - The land-cover "accuracy" is agreement with a 2021 product.
@@ -312,7 +335,8 @@ Full detail is in `docs/DATA_SOURCES.md`.
 2. Use a bare-earth DEM, such as FABDEM (non-commercial licence) or the Kerala LiDAR DEM, if accessible.
 3. Add more and better flood references: Sentinel-1 for 16–20 Aug 2018, and the KSDMA or Copernicus EMS
    EMSR-301 2018 delineations.
-4. Use spatially varying rain (IMD gridded data) and a simple infiltration model.
+4. Use spatially varying rain (IMD gridded data) and a simple infiltration model; start runs from observed
+   July baseflow and represent Peruvannamuzhi releases (gauge test findings).
 5. Verify the ensemble ORANGE/RED cut-offs once enough live cycles are archived, and replay the north-east
    monsoon (Oct–Dec).
 6. Use IMD station or gridded rain as the trigger's truth instead of ERA5, which smooths cloudbursts.
