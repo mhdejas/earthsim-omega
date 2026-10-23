@@ -102,3 +102,16 @@ Sentinel-1 RTC on Planetary Computer (https://planetarycomputer.microsoft.com/ap
 - Flood scenarios (C 0.9, n 0.16, >=2.0 m, district-masked, peak of +24/48/72 h): det 142 mm/72 h -> 62.1 km2, 1,122 OSM buildings, 42.6 km major roads, 17 schools / 4 hospitals; p10 48 mm -> 21.0 km2; p50 93 mm -> 45.3 km2; p90 227 mm -> 113.0 km2, 2,252 buildings.
 - Independent recheck: det +72 h 62.1 km2 wet of which 8.9 km2 on >=50% WorldCover water, 35.9 km2 on <10% water (i.e. mostly land).
 - Caveat: model over-predicts ~9x vs radar on calibration event; season outside verified JJAS window.
+
+## Update 18:38 IST: real CWC river-gauge test (owner approved)
+- Data: CWC daily discharge (Kerala) and hourly water level (basin 031, 1991–2020) from the India National Water
+  Data Portal. Coverage exists for Aug 2018 and Aug 2019 at Kuniyil (Chaliyar) and Kuttyadi (Kuttiyadi), plus
+  Thottathinkadavu (2019). Sources: docs/CWC_GAUGE_DATA.md.
+- Protocol committed before any scored run (configs/experiments/gauge_validation.yaml), amendment 1 (zero-discharge QC) before scoring.
+- 11 solver runs (about 19–30 min each, 4 in parallel), mass error about 1e-15 each.
+- 2018 selection: rain factor 1.75, n 0.08, threshold 2.0 m (mean KGE 0.347).
+- 2019 held-out: mean KGE (Kuniyil, Kuttyadi) 0.52 vs 0.32 old vs 0.21 prior; Thottathinkadavu 0.09 vs −0.18 vs −0.22.
+  Flood-map CSI 0.018 vs 0.019 vs 0.014 (KSDMA 0.023). Peaks over-shoot 1.6–2×.
+- Tests: 57 passed, 0 failed, 268 warnings (run live on screen; screenshot kept with the project snapshots).
+- Note: the solver's per-step observer hook (hydraulics.py) was committed in local commit e29d6ca at 17:22 IST,
+  whose message mentions only the YAML fix. It was still committed before any gauge-scored run.

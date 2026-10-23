@@ -3,7 +3,7 @@
 EARTHSIM-Ω is a research prototype that builds a working, evidence-backed geospatial "digital twin" of
 Kozhikode district, Kerala. It covers terrain and hydrology, Sentinel-2 indices, land cover, Sentinel-1
 flood observation, a baseline flood-susceptibility workflow, a 2-D hydraulic solver with a regional hindcast,
-a pre-registered calibration with a held-out test, an experimental flood early-warning cycle on the live
+a pre-registered calibration with a held-out test, a test against real CWC river gauges, an experimental flood early-warning cycle on the live
 ECMWF forecast, and an API with a web map. Every result is computed from real public data with recorded
 provenance.
 
@@ -61,6 +61,16 @@ Twelve solver runs were scored against the 14 Aug 2018 radar map, using a select
 first run. On the held-out year (10 Aug 2019), the chosen setting raises CSI from 0.014 to 0.019 (95% block
 bootstrap 0.001–0.036). That gain is within the noise, and the KSDMA map still scores best (0.023). Details are
 in [`docs/CALIBRATION.md`](docs/CALIBRATION.md).
+
+### Real river gauges: does the model move the right water? (OBSERVED vs SIMULATED, held-out test)
+![Held-out 2019 river flow vs CWC gauges](figures/phone/gauge_test_2019.png)
+Real CWC discharge and water-level readings for the Chaliyar (Kuniyil) and Kuttiyadi (Kuttyadi) gauges were used
+to calibrate the solver on August 2018 under a protocol committed before any run, then scored once on August 2019.
+River-flow skill on the held-out year improved: mean KGE across the two gauges went from 0.21 (uncalibrated) and
+0.32 (old radar calibration) to 0.52, and on a third gauge never used for tuning from −0.22 to 0.09. The
+calibrated model over-shoots the 2019 peaks (1.6× at Kuniyil, 2× at Kuttyadi). The flood map did not improve
+(CSI 0.018 vs 0.019, 95% ranges overlap), and KSDMA's map still scores best (0.023). Kuttyadi is regulated by
+Peruvannamuzhi Dam. Details are in [`docs/GAUGE_VALIDATION.md`](docs/GAUGE_VALIDATION.md).
 
 ### Rain trigger replay, three monsoons (OBSERVED vs FORECAST)
 
