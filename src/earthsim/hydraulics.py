@@ -182,10 +182,13 @@ class SolverResult:
 def run(z: np.ndarray, cfg: SolverConfig, t_end: float, rain_rate: Callable[[float], float] | None = None,
         h0: np.ndarray | None = None, ocean: np.ndarray | None = None, active: np.ndarray | None = None,
         bc: Callable[[float, np.ndarray], None] | None = None, progress: Callable[[float, int], None] | None = None,
-        capture_at: tuple[float, ...] = ()) -> SolverResult:
+        capture_at: tuple[float, ...] = (),
+        observer: Callable[[float, float, np.ndarray, np.ndarray, np.ndarray], None] | None = None) -> SolverResult:
     """Run the solver. ``rain_rate(t)`` returns net rainfall in m/s (spatially uniform over ``active``).
     ``bc(t, h)`` may impose depths in place (e.g. an inflow hydrograph boundary); its volume is tallied.
-    ``capture_at``: times (s) at which the depth field is stored exactly (the step is shortened to land on them)."""
+    ``capture_at``: times (s) at which the depth field is stored exactly (the step is shortened to land on them).
+    ``observer(t_new, dt, h, qx, qy)`` is called after every step with the fluxes actually applied
+    (``qx[i, j]`` > 0 is flow from (i, j) to (i, j+1); ``qy[i, j]`` > 0 from (i, j) to (i+1, j); m2/s)."""
     z = np.ascontiguousarray(z, dtype=np.float64)
     if not np.all(np.isfinite(z)):
         raise ValueError("terrain contains NaN/inf; fill or mask before simulation")
@@ -230,6 +233,8 @@ def run(z: np.ndarray, cfg: SolverConfig, t_end: float, rain_rate: Callable[[flo
         t += dt
         steps += 1
         dts.append(dt)
+        if observer is not None:
+            observer(t, dt, h, qx, qy)
         np.maximum(res.h_max, h, out=res.h_max)
         if steps % 10 == 0 or t >= t_end - 1e-9:
             with np.errstate(divide="ignore", invalid="ignore"):
