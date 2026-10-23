@@ -1,0 +1,29 @@
+{
+  "KUNIYIL": {
+    "row": 448,
+    "col": 422,
+    "model_area_km2": 1911.3,
+    "official_area_km2": 1876,
+    "area_error": 0.019,
+    "offset_m": 3120.0,
+    "accepted": true
+  },
+  "KUTTYADI": {
+    "row": 261,
+    "col": 291,
+    "model_area_km2": 237.9,
+    "official_area_km2": 238,
+    "area_error": -0.0,
+    "offset_m": 3055.0,
+    "accepted": true
+  },
+  "THOTTATHINKADAVU": {
+    "row": 395,
+    "col": 398,
+    "model_area_km2": 164.1,
+    "official_area_km2": null,
+    "area_error": null,
+    "offset_m": 990.0,
+    "accepted": true
+  }
+}

@@ -1,0 +1,350 @@
+{
+  "selected": {
+    "tag": "g2018_f175_n080",
+    "factor": 1.75,
+    "n_land": 0.08,
+    "threshold_m": 2.0,
+    "mean_kge_2018": 0.34670364214610316
+  },
+  "event": "2019-08-10",
+  "settings": {
+    "gauge_selected": {
+      "factor": 1.75,
+      "n_land": 0.08,
+      "threshold_m": 2.0,
+      "gauges": {
+        "KUNIYIL": {
+          "discharge": {
+            "kge": 0.33855971183857836,
+            "r": 0.7086177205832368,
+            "alpha": 1.1823149386563976,
+            "beta": 1.5651202395841701,
+            "nse": 0.002690178780230923,
+            "pbias_pct": 56.51202395841702,
+            "n_obs": 13,
+            "obs_peak_m3s": 2709.522,
+            "obs_peak_time": "2019-08-08 09:00:00",
+            "sim_peak_at_obs_times_m3s": 2456.0549796233818,
+            "peak_ratio": 0.9064532340476962,
+            "sim_peak_hourly_m3s": 4247.073395889521,
+            "sim_peak_hourly_time": "2019-08-08 22:00:00",
+            "peak_timing_error_h": 13.0,
+            "leak_share": 0.00021940202913464196
+          }
+        },
+        "KUTTYADI": {
+          "discharge": {
+            "kge": 0.6946010772391729,
+            "r": 0.7960015009308086,
+            "alpha": 1.2223411612795876,
+            "beta": 0.9529094234285114,
+            "nse": 0.4463810087583673,
+            "pbias_pct": -4.709057657148868,
+            "n_obs": 13,
+            "obs_peak_m3s": 332.694,
+            "obs_peak_time": "2019-08-08 09:00:00",
+            "sim_peak_at_obs_times_m3s": 342.16770371057095,
+            "peak_ratio": 1.0284757275772058,
+            "sim_peak_hourly_m3s": 658.3858144159695,
+            "sim_peak_hourly_time": "2019-08-08 16:00:00",
+            "peak_timing_error_h": 7.0,
+            "leak_share": 0.0022464906613249578
+          },
+          "stage": {
+            "n": 479,
+            "pearson_r": 0.8268326456415146,
+            "obs_peak_time": "2019-08-08 22:00:00",
+            "sim_peak_time": "2019-08-08 18:00:00",
+            "peak_timing_error_h": -4.0,
+            "obs_rise_m": 7.1,
+            "sim_depth_range_m": 5.951965161163712
+          }
+        },
+        "THOTTATHINKADAVU": {
+          "discharge": {
+            "kge": 0.0918313809280793,
+            "r": 0.43109730270205715,
+            "alpha": 0.4718066911709809,
+            "beta": 0.5286914066321546,
+            "nse": -0.02898918550348517,
+            "pbias_pct": -47.13085933678454,
+            "n_obs": 12,
+            "obs_peak_m3s": 573.227,
+            "obs_peak_time": "2019-08-07 08:00:00",
+            "sim_peak_at_obs_times_m3s": 332.20053799704567,
+            "peak_ratio": 0.5795270250651935,
+            "sim_peak_hourly_m3s": 594.5746013695617,
+            "sim_peak_hourly_time": "2019-08-08 15:00:00",
+            "peak_timing_error_h": 31.0,
+            "leak_share": 0.01554099177947578
+          },
+          "stage": {
+            "n": 479,
+            "pearson_r": 0.5864750430827294,
+            "obs_peak_time": "2019-08-09 19:00:00",
+            "sim_peak_time": "2019-08-09 16:00:00",
+            "peak_timing_error_h": -3.0,
+            "obs_rise_m": 129.01,
+            "sim_depth_range_m": 6.880153924166153
+          }
+        }
+      },
+      "sar": {
+        "tp": 295,
+        "fp": 16316,
+        "fn": 15,
+        "csi": 0.017743293636472993,
+        "pod_hit_rate": 0.9516129032258065,
+        "far_false_alarm_ratio": 0.9822406838841732,
+        "frequency_bias": 53.58387096774194,
+        "predicted_km2": 14.9499,
+        "observed_km2": 0.27899999999999997,
+        "false_alarm_km2": 14.6844,
+        "missed_km2": 0.0135
+      },
+      "sar_bootstrap95": {
+        "blocks_5km": 24,
+        "resamples": 1000,
+        "csi": [
+          0.00044762757095372514,
+          0.03464648021844414
+        ],
+        "pod_hit_rate": [
+          0.5,
+          1.0
+        ],
+        "far_false_alarm_ratio": [
+          0.9652925326154856,
+          0.9995523048402288
+        ]
+      }
+    },
+    "sar_selected": {
+      "factor": 0.9,
+      "n_land": 0.16,
+      "threshold_m": 2.0,
+      "gauges": {
+        "KUNIYIL": {
+          "discharge": {
+            "kge": 0.3648917767166535,
+            "r": 0.733175239536932,
+            "alpha": 0.5160705714262195,
+            "beta": 0.686983529752491,
+            "nse": 0.4060236602773688,
+            "pbias_pct": -31.301647024750896,
+            "n_obs": 13,
+            "obs_peak_m3s": 2709.522,
+            "obs_peak_time": "2019-08-08 09:00:00",
+            "sim_peak_at_obs_times_m3s": 1264.4495465874022,
+            "peak_ratio": 0.4666688613664706,
+            "sim_peak_hourly_m3s": 1763.625915844746,
+            "sim_peak_hourly_time": "2019-08-09 07:00:00",
+            "peak_timing_error_h": 22.0,
+            "leak_share": 0.00023847473873439423
+          }
+        },
+        "KUTTYADI": {
+          "discharge": {
+            "kge": 0.28070967463013896,
+            "r": 0.6970435880921247,
+            "alpha": 0.6102969912031285,
+            "beta": 0.47681021647087574,
+            "nse": -0.19709499776946293,
+            "pbias_pct": -52.31897835291243,
+            "n_obs": 13,
+            "obs_peak_m3s": 332.694,
+            "obs_peak_time": "2019-08-08 09:00:00",
+            "sim_peak_at_obs_times_m3s": 189.1053215738166,
+            "peak_ratio": 0.5684061677511966,
+            "sim_peak_hourly_m3s": 270.1375131401911,
+            "sim_peak_hourly_time": "2019-08-08 18:00:00",
+            "peak_timing_error_h": 9.0,
+            "leak_share": 0.0024027324249041196
+          },
+          "stage": {
+            "n": 479,
+            "pearson_r": 0.7514355574056619,
+            "obs_peak_time": "2019-08-08 22:00:00",
+            "sim_peak_time": "2019-08-09 21:00:00",
+            "peak_timing_error_h": 23.0,
+            "obs_rise_m": 7.1,
+            "sim_depth_range_m": 4.946779458907055
+          }
+        },
+        "THOTTATHINKADAVU": {
+          "discharge": {
+            "kge": -0.18292118821614078,
+            "r": 0.4305700031560249,
+            "alpha": 0.24934777883273174,
+            "beta": 0.28475650364256827,
+            "nse": -0.33840076854125734,
+            "pbias_pct": -71.52434963574318,
+            "n_obs": 12,
+            "obs_peak_m3s": 573.227,
+            "obs_peak_time": "2019-08-07 08:00:00",
+            "sim_peak_at_obs_times_m3s": 171.74384050404703,
+            "peak_ratio": 0.29960877715817125,
+            "sim_peak_hourly_m3s": 214.87751362583916,
+            "sim_peak_hourly_time": "2019-08-08 18:00:00",
+            "peak_timing_error_h": 34.0,
+            "leak_share": 0.01534053573386317
+          },
+          "stage": {
+            "n": 479,
+            "pearson_r": 0.51833813667722,
+            "obs_peak_time": "2019-08-09 19:00:00",
+            "sim_peak_time": "2019-08-10 22:00:00",
+            "peak_timing_error_h": 27.0,
+            "obs_rise_m": 129.01,
+            "sim_depth_range_m": 5.7359443307227815
+          }
+        }
+      },
+      "sar": {
+        "tp": 271,
+        "fp": 14213,
+        "fn": 39,
+        "csi": 0.018660056462163465,
+        "pod_hit_rate": 0.8741935483870967,
+        "far_false_alarm_ratio": 0.9812896989781829,
+        "frequency_bias": 46.72258064516129,
+        "predicted_km2": 13.0356,
+        "observed_km2": 0.27899999999999997,
+        "false_alarm_km2": 12.7917,
+        "missed_km2": 0.0351
+      },
+      "sar_bootstrap95": {
+        "blocks_5km": 24,
+        "resamples": 1000,
+        "csi": [
+          0.000576036866359447,
+          0.03551413724553021
+        ],
+        "pod_hit_rate": [
+          0.5,
+          1.0
+        ],
+        "far_false_alarm_ratio": [
+          0.9642976382378733,
+          0.9994238967622998
+        ]
+      }
+    },
+    "prior": {
+      "factor": 0.7,
+      "n_land": 0.08,
+      "threshold_m": 0.3,
+      "gauges": {
+        "KUNIYIL": {
+          "discharge": {
+            "kge": 0.2648549936675394,
+            "r": 0.7870598493896883,
+            "alpha": 0.4395107396556918,
+            "beta": 0.5746219779627751,
+            "nse": 0.342826859151244,
+            "pbias_pct": -42.537802203722485,
+            "n_obs": 13,
+            "obs_peak_m3s": 2709.522,
+            "obs_peak_time": "2019-08-08 09:00:00",
+            "sim_peak_at_obs_times_m3s": 1035.1802069000198,
+            "peak_ratio": 0.38205270409320163,
+            "sim_peak_hourly_m3s": 1613.9691067534318,
+            "sim_peak_hourly_time": "2019-08-09 02:00:00",
+            "peak_timing_error_h": 17.0,
+            "leak_share": 0.0002544841253121231
+          }
+        },
+        "KUTTYADI": {
+          "discharge": {
+            "kge": 0.14893433359510422,
+            "r": 0.7219044786031553,
+            "alpha": 0.48957825243279773,
+            "beta": 0.37835276150965663,
+            "nse": -0.48640723626431925,
+            "pbias_pct": -62.16472384903434,
+            "n_obs": 13,
+            "obs_peak_m3s": 332.694,
+            "obs_peak_time": "2019-08-08 09:00:00",
+            "sim_peak_at_obs_times_m3s": 147.6196472215358,
+            "peak_ratio": 0.44370997740126306,
+            "sim_peak_hourly_m3s": 236.91453872574635,
+            "sim_peak_hourly_time": "2019-08-08 17:00:00",
+            "peak_timing_error_h": 8.0,
+            "leak_share": 0.002369828557712763
+          },
+          "stage": {
+            "n": 479,
+            "pearson_r": 0.8209889726705514,
+            "obs_peak_time": "2019-08-08 22:00:00",
+            "sim_peak_time": "2019-08-08 21:00:00",
+            "peak_timing_error_h": -1.0,
+            "obs_rise_m": 7.1,
+            "sim_depth_range_m": 3.4585920939813093
+          }
+        },
+        "THOTTATHINKADAVU": {
+          "discharge": {
+            "kge": -0.21542326024025638,
+            "r": 0.5122425736809764,
+            "alpha": 0.2056455246426553,
+            "beta": 0.2200337429840608,
+            "nse": -0.41543186978527036,
+            "pbias_pct": -77.99662570159391,
+            "n_obs": 12,
+            "obs_peak_m3s": 573.227,
+            "obs_peak_time": "2019-08-07 08:00:00",
+            "sim_peak_at_obs_times_m3s": 140.76973959000665,
+            "peak_ratio": 0.2455741610042909,
+            "sim_peak_hourly_m3s": 205.38845888941316,
+            "sim_peak_hourly_time": "2019-08-08 17:00:00",
+            "peak_timing_error_h": 33.0,
+            "leak_share": 0.012005654496562376
+          },
+          "stage": {
+            "n": 479,
+            "pearson_r": 0.6270186604967497,
+            "obs_peak_time": "2019-08-09 19:00:00",
+            "sim_peak_time": "2019-08-09 18:00:00",
+            "peak_timing_error_h": -1.0,
+            "obs_rise_m": 129.01,
+            "sim_depth_range_m": 3.0265609990734053
+          }
+        }
+      },
+      "sar": {
+        "tp": 283,
+        "fp": 20192,
+        "fn": 27,
+        "csi": 0.013803531362793874,
+        "pod_hit_rate": 0.9129032258064517,
+        "far_false_alarm_ratio": 0.9861782661782662,
+        "frequency_bias": 66.04838709677419,
+        "predicted_km2": 18.4275,
+        "observed_km2": 0.27899999999999997,
+        "false_alarm_km2": 18.1728,
+        "missed_km2": 0.0243
+      },
+      "sar_bootstrap95": {
+        "blocks_5km": 24,
+        "resamples": 1000,
+        "csi": [
+          0.00025866110808772164,
+          0.027970360214176464
+        ],
+        "pod_hit_rate": [
+          0.5,
+          1.0
+        ],
+        "far_false_alarm_ratio": [
+          0.9719554947838389,
+          0.9997413045992105
+        ]
+      }
+    }
+  },
+  "reference_existing": {
+    "solver_flood_calibration_v1_csi": 0.019,
+    "ksdma_25yr_csi": 0.023,
+    "existing_run": "s2019_c090_n160"
+  }
+}

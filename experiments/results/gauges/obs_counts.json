@@ -1,0 +1,18 @@
+{
+  "discharge_2018": {
+    "KUNIYIL": 16,
+    "KUTTYADI": 11
+  },
+  "stage_2018": {
+    "KUTTYADI": 525
+  },
+  "discharge_2019": {
+    "KUNIYIL": 15,
+    "KUTTYADI": 15,
+    "THOTTATHINKADAVU": 12
+  },
+  "stage_2019": {
+    "KUTTYADI": 480,
+    "THOTTATHINKADAVU": 480
+  }
+}

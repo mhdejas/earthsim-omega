@@ -1,0 +1,674 @@
+{
+  "grid": [
+    {
+      "tag": "g2018_f090_n080",
+      "season": "2018",
+      "factor": 0.9,
+      "n_land": 0.08,
+      "mass_relative_residual": 4.510752238692698e-15,
+      "gauges": {
+        "KUNIYIL": {
+          "discharge": {
+            "kge": 0.23210207923418136,
+            "r": 0.8917806537629598,
+            "alpha": 0.5619869501934834,
+            "beta": 0.37863025659782157,
+            "nse": 0.09000841770670653,
+            "pbias_pct": -62.13697434021784,
+            "n_obs": 16,
+            "obs_peak_m3s": 3236.002,
+            "obs_peak_time": "2018-08-16 09:00:00",
+            "sim_peak_at_obs_times_m3s": 1928.5266915417724,
+            "peak_ratio": 0.5959596723184264,
+            "sim_peak_hourly_m3s": 2020.304969203097,
+            "sim_peak_hourly_time": "2018-08-17 00:00:00",
+            "peak_timing_error_h": 15.0,
+            "leak_share": 0.00026941489629706103
+          }
+        },
+        "KUTTYADI": {
+          "discharge": {
+            "kge": -0.238719000474638,
+            "r": 0.9319877609970163,
+            "alpha": 0.16801185220678233,
+            "beta": 0.08479793519993714,
+            "nse": -2.2453152464305774,
+            "pbias_pct": -91.5202064800063,
+            "n_obs": 11,
+            "obs_peak_m3s": 480.0,
+            "obs_peak_time": "2018-08-09 08:00:00",
+            "sim_peak_at_obs_times_m3s": 60.17166194821786,
+            "peak_ratio": 0.1253576290587872,
+            "sim_peak_hourly_m3s": 275.2427324798221,
+            "sim_peak_hourly_time": "2018-08-16 17:00:00",
+            "peak_timing_error_h": 177.0,
+            "leak_share": 0.002450676654880266
+          },
+          "stage": {
+            "n": 479,
+            "pearson_r": 0.8324083229861564,
+            "obs_peak_time": "2018-08-16 07:00:00",
+            "sim_peak_time": "2018-08-16 19:00:00",
+            "peak_timing_error_h": 12.0,
+            "obs_rise_m": 5.989999999999999,
+            "sim_depth_range_m": 4.216382136090488
+          }
+        },
+        "THOTTATHINKADAVU": {}
+      },
+      "mean_kge": -0.003308460620228326
+    },
+    {
+      "tag": "g2018_f090_n160",
+      "season": "2018",
+      "factor": 0.9,
+      "n_land": 0.16,
+      "mass_relative_residual": 1.4441988260016208e-14,
+      "gauges": {
+        "KUNIYIL": {
+          "discharge": {
+            "kge": 0.21291947323436033,
+            "r": 0.8777063873159117,
+            "alpha": 0.5572898770027068,
+            "beta": 0.36082257947728436,
+            "nse": 0.03652150492425188,
+            "pbias_pct": -63.91774205227157,
+            "n_obs": 16,
+            "obs_peak_m3s": 3236.002,
+            "obs_peak_time": "2018-08-16 09:00:00",
+            "sim_peak_at_obs_times_m3s": 1802.3914604178317,
+            "peak_ratio": 0.5569809476069025,
+            "sim_peak_hourly_m3s": 1868.9660648608565,
+            "sim_peak_hourly_time": "2018-08-17 03:00:00",
+            "peak_timing_error_h": 18.0,
+            "leak_share": 0.0002756945501326605
+          }
+        },
+        "KUTTYADI": {
+          "discharge": {
+            "kge": -0.2658364080396305,
+            "r": 0.910150985865061,
+            "alpha": 0.1416669499784762,
+            "beta": 0.07396903841264489,
+            "nse": -2.3526816382735505,
+            "pbias_pct": -92.60309615873553,
+            "n_obs": 11,
+            "obs_peak_m3s": 480.0,
+            "obs_peak_time": "2018-08-09 08:00:00",
+            "sim_peak_at_obs_times_m3s": 51.03818652058638,
+            "peak_ratio": 0.10632955525122162,
+            "sim_peak_hourly_m3s": 255.98765707015872,
+            "sim_peak_hourly_time": "2018-08-16 18:00:00",
+            "peak_timing_error_h": 178.0,
+            "leak_share": 0.0025619732628183903
+          },
+          "stage": {
+            "n": 479,
+            "pearson_r": 0.7579441588683721,
+            "obs_peak_time": "2018-08-16 07:00:00",
+            "sim_peak_time": "2018-08-16 22:00:00",
+            "peak_timing_error_h": 15.0,
+            "obs_rise_m": 5.989999999999999,
+            "sim_depth_range_m": 5.17222439459815
+          }
+        },
+        "THOTTATHINKADAVU": {}
+      },
+      "mean_kge": -0.026458467402635077
+    },
+    {
+      "tag": "g2018_f125_n080",
+      "season": "2018",
+      "factor": 1.25,
+      "n_land": 0.08,
+      "mass_relative_residual": 1.8858734905835105e-14,
+      "gauges": {
+        "KUNIYIL": {
+          "discharge": {
+            "kge": 0.4732986191095162,
+            "r": 0.8841817810197431,
+            "alpha": 0.7823055929006485,
+            "beta": 0.5345866032204857,
+            "nse": 0.43675060013826195,
+            "pbias_pct": -46.54133967795143,
+            "n_obs": 16,
+            "obs_peak_m3s": 3236.002,
+            "obs_peak_time": "2018-08-16 09:00:00",
+            "sim_peak_at_obs_times_m3s": 2757.4848493929467,
+            "peak_ratio": 0.8521270535039678,
+            "sim_peak_hourly_m3s": 2843.5629361274728,
+            "sim_peak_hourly_time": "2018-08-16 23:00:00",
+            "peak_timing_error_h": 14.0,
+            "leak_share": 0.00024058310873906506
+          }
+        },
+        "KUTTYADI": {
+          "discharge": {
+            "kge": -0.14914420248884963,
+            "r": 0.9278497052177811,
+            "alpha": 0.25626417624047027,
+            "beta": 0.12696863886037488,
+            "nse": -1.8925729805216185,
+            "pbias_pct": -87.30313611396252,
+            "n_obs": 11,
+            "obs_peak_m3s": 480.0,
+            "obs_peak_time": "2018-08-09 08:00:00",
+            "sim_peak_at_obs_times_m3s": 96.4380486155596,
+            "peak_ratio": 0.2009126012824158,
+            "sim_peak_hourly_m3s": 398.0825834049047,
+            "sim_peak_hourly_time": "2018-08-16 02:00:00",
+            "peak_timing_error_h": 162.0,
+            "leak_share": 0.0024280496736462905
+          },
+          "stage": {
+            "n": 479,
+            "pearson_r": 0.843732886615731,
+            "obs_peak_time": "2018-08-16 07:00:00",
+            "sim_peak_time": "2018-08-16 19:00:00",
+            "peak_timing_error_h": 12.0,
+            "obs_rise_m": 5.989999999999999,
+            "sim_depth_range_m": 5.078860176691111
+          }
+        },
+        "THOTTATHINKADAVU": {}
+      },
+      "mean_kge": 0.1620772083103333
+    },
+    {
+      "tag": "g2018_f125_n160",
+      "season": "2018",
+      "factor": 1.25,
+      "n_land": 0.16,
+      "mass_relative_residual": 5.049010068856038e-16,
+      "gauges": {
+        "KUNIYIL": {
+          "discharge": {
+            "kge": 0.44937128199294774,
+            "r": 0.8857642190973171,
+            "alpha": 0.7687100371988738,
+            "beta": 0.5135361014801841,
+            "nse": 0.40527185491796747,
+            "pbias_pct": -48.64638985198159,
+            "n_obs": 16,
+            "obs_peak_m3s": 3236.002,
+            "obs_peak_time": "2018-08-16 09:00:00",
+            "sim_peak_at_obs_times_m3s": 2480.210558602752,
+            "peak_ratio": 0.7664428386023099,
+            "sim_peak_hourly_m3s": 2602.2314488560355,
+            "sim_peak_hourly_time": "2018-08-17 02:00:00",
+            "peak_timing_error_h": 17.0,
+            "leak_share": 0.00026791895221906566
+          }
+        },
+        "KUTTYADI": {
+          "discharge": {
+            "kge": -0.19238331437064882,
+            "r": 0.9207251607554101,
+            "alpha": 0.21069651637004624,
+            "beta": 0.10977897183795005,
+            "nse": -2.0504182327783913,
+            "pbias_pct": -89.022102816205,
+            "n_obs": 11,
+            "obs_peak_m3s": 480.0,
+            "obs_peak_time": "2018-08-09 08:00:00",
+            "sim_peak_at_obs_times_m3s": 77.5109510062693,
+            "peak_ratio": 0.1614811479297277,
+            "sim_peak_hourly_m3s": 365.39093102266844,
+            "sim_peak_hourly_time": "2018-08-16 18:00:00",
+            "peak_timing_error_h": 178.0,
+            "leak_share": 0.0025258194961786306
+          },
+          "stage": {
+            "n": 479,
+            "pearson_r": 0.7719810821403295,
+            "obs_peak_time": "2018-08-16 07:00:00",
+            "sim_peak_time": "2018-08-16 21:00:00",
+            "peak_timing_error_h": 14.0,
+            "obs_rise_m": 5.989999999999999,
+            "sim_depth_range_m": 6.234743414945537
+          }
+        },
+        "THOTTATHINKADAVU": {}
+      },
+      "mean_kge": 0.12849398381114946
+    },
+    {
+      "tag": "g2018_f175_n080",
+      "season": "2018",
+      "factor": 1.75,
+      "n_land": 0.08,
+      "mass_relative_residual": 1.7856730591013146e-14,
+      "gauges": {
+        "KUNIYIL": {
+          "discharge": {
+            "kge": 0.7112638707307131,
+            "r": 0.8750613596134595,
+            "alpha": 1.0887273750963848,
+            "beta": 0.7552831403595606,
+            "nse": 0.6275586386822485,
+            "pbias_pct": -24.47168596404394,
+            "n_obs": 16,
+            "obs_peak_m3s": 3236.002,
+            "obs_peak_time": "2018-08-16 09:00:00",
+            "sim_peak_at_obs_times_m3s": 3888.9041829130438,
+            "peak_ratio": 1.201761983741989,
+            "sim_peak_hourly_m3s": 4005.0691376318596,
+            "sim_peak_hourly_time": "2018-08-16 22:00:00",
+            "peak_timing_error_h": 13.0,
+            "leak_share": 0.00022297479164873007
+          }
+        },
+        "KUTTYADI": {
+          "discharge": {
+            "kge": -0.01785658643850674,
+            "r": 0.9153788094166591,
+            "alpha": 0.38565870130694657,
+            "beta": 0.1928717243333377,
+            "nse": -1.4106429953774806,
+            "pbias_pct": -80.71282756666623,
+            "n_obs": 11,
+            "obs_peak_m3s": 480.0,
+            "obs_peak_time": "2018-08-09 08:00:00",
+            "sim_peak_at_obs_times_m3s": 153.97818719273744,
+            "peak_ratio": 0.3207878899848697,
+            "sim_peak_hourly_m3s": 571.215365790651,
+            "sim_peak_hourly_time": "2018-08-16 02:00:00",
+            "peak_timing_error_h": 162.0,
+            "leak_share": 0.002289021776555178
+          },
+          "stage": {
+            "n": 479,
+            "pearson_r": 0.8516175848879376,
+            "obs_peak_time": "2018-08-16 07:00:00",
+            "sim_peak_time": "2018-08-16 18:00:00",
+            "peak_timing_error_h": 11.0,
+            "obs_rise_m": 5.989999999999999,
+            "sim_depth_range_m": 6.113360079658961
+          }
+        },
+        "THOTTATHINKADAVU": {}
+      },
+      "mean_kge": 0.34670364214610316
+    },
+    {
+      "tag": "g2018_f175_n160",
+      "season": "2018",
+      "factor": 1.75,
+      "n_land": 0.16,
+      "mass_relative_residual": 2.0663902212306873e-15,
+      "gauges": {
+        "KUNIYIL": {
+          "discharge": {
+            "kge": 0.7039590127349145,
+            "r": 0.8868073438017832,
+            "alpha": 1.0665549733778688,
+            "beta": 0.7346735515589333,
+            "nse": 0.6453574423281625,
+            "pbias_pct": -26.532644844106663,
+            "n_obs": 16,
+            "obs_peak_m3s": 3236.002,
+            "obs_peak_time": "2018-08-16 09:00:00",
+            "sim_peak_at_obs_times_m3s": 3431.0462412169036,
+            "peak_ratio": 1.0602732140514448,
+            "sim_peak_hourly_m3s": 3619.8711055723516,
+            "sim_peak_hourly_time": "2018-08-17 01:00:00",
+            "peak_timing_error_h": 16.0,
+            "leak_share": 0.00022769160710422784
+          }
+        },
+        "KUTTYADI": {
+          "discharge": {
+            "kge": -0.07492603755170246,
+            "r": 0.9320221359214065,
+            "alpha": 0.3259785375465999,
+            "beta": 0.16541024188281825,
+            "nse": -1.6027740638616677,
+            "pbias_pct": -83.45897581171818,
+            "n_obs": 11,
+            "obs_peak_m3s": 480.0,
+            "obs_peak_time": "2018-08-09 08:00:00",
+            "sim_peak_at_obs_times_m3s": 119.50139995818196,
+            "peak_ratio": 0.2489612499128791,
+            "sim_peak_hourly_m3s": 524.0665455912077,
+            "sim_peak_hourly_time": "2018-08-16 03:00:00",
+            "peak_timing_error_h": 163.0,
+            "leak_share": 0.011035365534338294
+          },
+          "stage": {
+            "n": 479,
+            "pearson_r": 0.7837775319614179,
+            "obs_peak_time": "2018-08-16 07:00:00",
+            "sim_peak_time": "2018-08-16 20:00:00",
+            "peak_timing_error_h": 13.0,
+            "obs_rise_m": 5.989999999999999,
+            "sim_depth_range_m": 7.47993036998883
+          }
+        },
+        "THOTTATHINKADAVU": {}
+      },
+      "mean_kge": 0.314516487591606
+    },
+    {
+      "tag": "g2018_f250_n080",
+      "season": "2018",
+      "factor": 2.5,
+      "n_land": 0.08,
+      "mass_relative_residual": 1.0773495809086133e-14,
+      "gauges": {
+        "KUNIYIL": {
+          "discharge": {
+            "kge": 0.4382217099921034,
+            "r": 0.8678136089159939,
+            "alpha": 1.5407997384486578,
+            "beta": 1.0752146796193793,
+            "nse": 0.2914500418574687,
+            "pbias_pct": 7.521467961937936,
+            "n_obs": 16,
+            "obs_peak_m3s": 3236.002,
+            "obs_peak_time": "2018-08-16 09:00:00",
+            "sim_peak_at_obs_times_m3s": 5504.01800890414,
+            "peak_ratio": 1.7008697797171137,
+            "sim_peak_hourly_m3s": 5715.7035380270245,
+            "sim_peak_hourly_time": "2018-08-16 21:00:00",
+            "peak_timing_error_h": 12.0,
+            "leak_share": 0.00021145120861885012
+          }
+        },
+        "KUTTYADI": {
+          "discharge": {
+            "kge": 0.18841643636432748,
+            "r": 0.8687423739721515,
+            "alpha": 0.6046051476494635,
+            "beta": 0.3035071952217966,
+            "nse": -0.7804813987684671,
+            "pbias_pct": -69.64928047782034,
+            "n_obs": 11,
+            "obs_peak_m3s": 480.0,
+            "obs_peak_time": "2018-08-09 08:00:00",
+            "sim_peak_at_obs_times_m3s": 264.32517901726015,
+            "peak_ratio": 0.5506774562859587,
+            "sim_peak_hourly_m3s": 836.5230737943948,
+            "sim_peak_hourly_time": "2018-08-16 02:00:00",
+            "peak_timing_error_h": 162.0,
+            "leak_share": 0.00507979274054784
+          },
+          "stage": {
+            "n": 479,
+            "pearson_r": 0.8559519534469301,
+            "obs_peak_time": "2018-08-16 07:00:00",
+            "sim_peak_time": "2018-08-16 17:00:00",
+            "peak_timing_error_h": 10.0,
+            "obs_rise_m": 5.989999999999999,
+            "sim_depth_range_m": 7.398140079418511
+          }
+        },
+        "THOTTATHINKADAVU": {}
+      },
+      "mean_kge": 0.31331907317821545
+    },
+    {
+      "tag": "g2018_f250_n160",
+      "season": "2018",
+      "factor": 2.5,
+      "n_land": 0.16,
+      "mass_relative_residual": 4.107437920880269e-15,
+      "gauges": {
+        "KUNIYIL": {
+          "discharge": {
+            "kge": 0.48118406823922044,
+            "r": 0.8828384470973794,
+            "alpha": 1.5009763543706336,
+            "beta": 1.0668268952724997,
+            "nse": 0.3904098226465835,
+            "pbias_pct": 6.682689527249966,
+            "n_obs": 16,
+            "obs_peak_m3s": 3236.002,
+            "obs_peak_time": "2018-08-16 09:00:00",
+            "sim_peak_at_obs_times_m3s": 4834.19786089504,
+            "peak_ratio": 1.4938797506599317,
+            "sim_peak_hourly_m3s": 5089.841038007086,
+            "sim_peak_hourly_time": "2018-08-17 01:00:00",
+            "peak_timing_error_h": 16.0,
+            "leak_share": 0.00021093796845910056
+          }
+        },
+        "KUTTYADI": {
+          "discharge": {
+            "kge": 0.11067322237667299,
+            "r": 0.9308906324313796,
+            "alpha": 0.5163809886783212,
+            "beta": 0.2568723766401912,
+            "nse": -0.9734969352545286,
+            "pbias_pct": -74.31276233598088,
+            "n_obs": 11,
+            "obs_peak_m3s": 480.0,
+            "obs_peak_time": "2018-08-09 08:00:00",
+            "sim_peak_at_obs_times_m3s": 193.10579600544105,
+            "peak_ratio": 0.4023037416780022,
+            "sim_peak_hourly_m3s": 751.7135916024359,
+            "sim_peak_hourly_time": "2018-08-16 03:00:00",
+            "peak_timing_error_h": 163.0,
+            "leak_share": 0.03158829150725726
+          },
+          "stage": {
+            "n": 479,
+            "pearson_r": 0.798107222585354,
+            "obs_peak_time": "2018-08-16 07:00:00",
+            "sim_peak_time": "2018-08-16 19:00:00",
+            "peak_timing_error_h": 12.0,
+            "obs_rise_m": 5.989999999999999,
+            "sim_depth_range_m": 9.029051682019688
+          }
+        },
+        "THOTTATHINKADAVU": {}
+      },
+      "mean_kge": 0.2959286453079467
+    }
+  ],
+  "chosen": {
+    "tag": "g2018_f175_n080",
+    "factor": 1.75,
+    "n_land": 0.08,
+    "threshold_m": 2.0,
+    "mean_kge_2018": 0.34670364214610316
+  },
+  "chosen_sar_2018_08_14": {
+    "threshold_m": 2.0,
+    "tp": 811,
+    "fp": 37155,
+    "fn": 1699,
+    "csi": 0.02044623723685869,
+    "pod_hit_rate": 0.32310756972111554,
+    "far_false_alarm_ratio": 0.9786387820681662,
+    "frequency_bias": 15.125896414342629,
+    "predicted_km2": 34.169399999999996,
+    "observed_km2": 2.259,
+    "false_alarm_km2": 33.4395,
+    "missed_km2": 1.5291
+  },
+  "sar_threshold_rows": [
+    {
+      "threshold_m": 0.05,
+      "tp": 2187,
+      "fp": 581764,
+      "fn": 323,
+      "csi": 0.003743106830014685,
+      "pod_hit_rate": 0.8713147410358566,
+      "far_false_alarm_ratio": 0.996254822750539,
+      "frequency_bias": 232.64980079681274,
+      "predicted_km2": 525.5559,
+      "observed_km2": 2.259,
+      "false_alarm_km2": 523.5876,
+      "missed_km2": 0.2907
+    },
+    {
+      "threshold_m": 0.1,
+      "tp": 2121,
+      "fp": 451366,
+      "fn": 389,
+      "csi": 0.004673082515929461,
+      "pod_hit_rate": 0.8450199203187251,
+      "far_false_alarm_ratio": 0.9953229089257244,
+      "frequency_bias": 180.67211155378487,
+      "predicted_km2": 408.1383,
+      "observed_km2": 2.259,
+      "false_alarm_km2": 406.2294,
+      "missed_km2": 0.35009999999999997
+    },
+    {
+      "threshold_m": 0.2,
+      "tp": 1839,
+      "fp": 331585,
+      "fn": 671,
+      "csi": 0.005504422394827818,
+      "pod_hit_rate": 0.7326693227091633,
+      "far_false_alarm_ratio": 0.9944845002159413,
+      "frequency_bias": 132.8382470119522,
+      "predicted_km2": 300.0816,
+      "observed_km2": 2.259,
+      "false_alarm_km2": 298.4265,
+      "missed_km2": 0.6039
+    },
+    {
+      "threshold_m": 0.3,
+      "tp": 1761,
+      "fp": 267654,
+      "fn": 749,
+      "csi": 0.006518262981004131,
+      "pod_hit_rate": 0.701593625498008,
+      "far_false_alarm_ratio": 0.9934636156116029,
+      "frequency_bias": 107.33665338645419,
+      "predicted_km2": 242.4735,
+      "observed_km2": 2.259,
+      "false_alarm_km2": 240.8886,
+      "missed_km2": 0.6741
+    },
+    {
+      "threshold_m": 0.5,
+      "tp": 1576,
+      "fp": 195743,
+      "fn": 934,
+      "csi": 0.007949438343934266,
+      "pod_hit_rate": 0.6278884462151394,
+      "far_false_alarm_ratio": 0.9920129333718496,
+      "frequency_bias": 78.61314741035856,
+      "predicted_km2": 177.5871,
+      "observed_km2": 2.259,
+      "false_alarm_km2": 176.1687,
+      "missed_km2": 0.8406
+    },
+    {
+      "threshold_m": 0.75,
+      "tp": 1420,
+      "fp": 141604,
+      "fn": 1090,
+      "csi": 0.009853310573573698,
+      "pod_hit_rate": 0.5657370517928287,
+      "far_false_alarm_ratio": 0.9900715963754335,
+      "frequency_bias": 56.98167330677291,
+      "predicted_km2": 128.7216,
+      "observed_km2": 2.259,
+      "false_alarm_km2": 127.4436,
+      "missed_km2": 0.981
+    },
+    {
+      "threshold_m": 1.0,
+      "tp": 1351,
+      "fp": 109313,
+      "fn": 1159,
+      "csi": 0.012081593232161542,
+      "pod_hit_rate": 0.5382470119521913,
+      "far_false_alarm_ratio": 0.9877918745030001,
+      "frequency_bias": 44.08924302788844,
+      "predicted_km2": 99.5976,
+      "observed_km2": 2.259,
+      "false_alarm_km2": 98.3817,
+      "missed_km2": 1.0431
+    },
+    {
+      "threshold_m": 1.5,
+      "tp": 1099,
+      "fp": 66416,
+      "fn": 1411,
+      "csi": 0.015944636276586484,
+      "pod_hit_rate": 0.43784860557768923,
+      "far_false_alarm_ratio": 0.9837221358216692,
+      "frequency_bias": 26.89840637450199,
+      "predicted_km2": 60.7635,
+      "observed_km2": 2.259,
+      "false_alarm_km2": 59.7744,
+      "missed_km2": 1.2699
+    },
+    {
+      "threshold_m": 2.0,
+      "tp": 811,
+      "fp": 37155,
+      "fn": 1699,
+      "csi": 0.02044623723685869,
+      "pod_hit_rate": 0.32310756972111554,
+      "far_false_alarm_ratio": 0.9786387820681662,
+      "frequency_bias": 15.125896414342629,
+      "predicted_km2": 34.169399999999996,
+      "observed_km2": 2.259,
+      "false_alarm_km2": 33.4395,
+      "missed_km2": 1.5291
+    }
+  ],
+  "prior_2018": {
+    "tag": "g2018_f070_n080",
+    "season": "2018",
+    "factor": 0.7,
+    "n_land": 0.08,
+    "mass_relative_residual": 3.326205957523478e-15,
+    "gauges": {
+      "KUNIYIL": {
+        "discharge": {
+          "kge": 0.08681437124110769,
+          "r": 0.8942280001927005,
+          "alpha": 0.43649569760404305,
+          "beta": 0.28923760805049353,
+          "nse": -0.1903509364528615,
+          "pbias_pct": -71.07623919495065,
+          "n_obs": 16,
+          "obs_peak_m3s": 3236.002,
+          "obs_peak_time": "2018-08-16 09:00:00",
+          "sim_peak_at_obs_times_m3s": 1452.3300386889177,
+          "peak_ratio": 0.4488038136839587,
+          "sim_peak_hourly_m3s": 1554.0492831823103,
+          "sim_peak_hourly_time": "2018-08-17 01:00:00",
+          "peak_timing_error_h": 16.0,
+          "leak_share": 0.0002766044769151811
+        }
+      },
+      "KUTTYADI": {
+        "discharge": {
+          "kge": -0.28549982058240153,
+          "r": 0.9241162932720666,
+          "alpha": 0.12312681066152238,
+          "beta": 0.06306624482304925,
+          "nse": -2.439440240835045,
+          "pbias_pct": -93.69337551769509,
+          "n_obs": 11,
+          "obs_peak_m3s": 480.0,
+          "obs_peak_time": "2018-08-09 08:00:00",
+          "sim_peak_at_obs_times_m3s": 43.74145953573329,
+          "peak_ratio": 0.09112804069944436,
+          "sim_peak_hourly_m3s": 208.29391348444534,
+          "sim_peak_hourly_time": "2018-08-16 17:00:00",
+          "peak_timing_error_h": 177.0,
+          "leak_share": 0.002546233833000901
+        },
+        "stage": {
+          "n": 479,
+          "pearson_r": 0.8213655170381589,
+          "obs_peak_time": "2018-08-16 07:00:00",
+          "sim_peak_time": "2018-08-16 20:00:00",
+          "peak_timing_error_h": 13.0,
+          "obs_rise_m": 5.989999999999999,
+          "sim_depth_range_m": 3.640548945987642
+        }
+      },
+      "THOTTATHINKADAVU": {}
+    }
+  }
+}
